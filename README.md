@@ -7,5 +7,5 @@ Language courses available at the moment: Finnish-English
 2. Run `npm start` on project folder
 3. Open app on your phone using expo app
 
-Icons made by Freepik from www.flaticon.com.
+Icons made by **Freepik** from www.flaticon.com.
 
