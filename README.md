@@ -13,6 +13,7 @@ Icons used in this app are made by various artists from flaticon.com including:
 **Darius Dan** https://www.flaticon.com/authors/darius-dan  
 **Eucalyp** https://www.flaticon.com/authors/eucalyp  
 **Flat Icons** https://www.flaticon.com/authors/flat-icons  
+**Freepik** https://www.flaticon.com/authors/freepik  
 **Hight Quality Icons** https://www.flaticon.com/authors/hight-quality-icons  
 **Konkapp** https://www.flaticon.com/authors/konkapp  
 **justicon** https://www.flaticon.com/authors/justicon  
