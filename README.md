@@ -3,7 +3,7 @@
 **Language learning app created using expo-create-app**  
 Language courses available at the moment: Finnish-English
 
-<br><br>
+<br>
 
 1. Run `npm install` on project folder
 2. Run `npm start` on project folder
