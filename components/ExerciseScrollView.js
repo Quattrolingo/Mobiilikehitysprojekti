@@ -1,63 +1,87 @@
-import { ScrollView, StyleSheet, Text, View, Image } from 'react-native'
+import { ScrollView, StyleSheet, Text, View, Image, Animated, TouchableOpacity } from 'react-native'
 import { useState, useEffect } from 'react'
 
 export default function ExerciseScrollView(props) { //
 
-
   const [propsData, setPropsData] = useState(null)
+
+  const animation = new Animated.Value(0)
+  const inputRange = [0, 1]
+  const outputRange = [1, 0.8]
+  const scale = animation.interpolate({inputRange, outputRange})
 
   useEffect(() => {
     setPropsData(props.languageData)
-  }, [])
+  }, [])  
+
+  const onPressIn = () => {
+    Animated.spring(animation, {
+      toValue: 0.5,
+      useNativeDriver: true,
+    }).start();
+  };
+  const onPressOut = () => {
+    Animated.spring(animation, {
+      toValue: 0,
+      useNativeDriver: true,
+    }).start();
+  };
 
   return (
-    <ScrollView contentContainerStyle={ExerciseScrollViewStyles.container}>
+    <ScrollView>
       <Text>This is ExerciseScrollView</Text>
       { propsData ? 
         propsData.map((topicItem, index) => { return(
-          <View key={index} style={ExerciseScrollViewStyles.topicContainer}>
-            <View style={ExerciseScrollViewStyles.topicHeader}>
-              <Text>{topicItem.TOPIC}</Text>
+          <View key={index} style={ESWStyles.topicContainer}>
+            <View style={ESWStyles.topicHeader}>
+              <Text style={ESWStyles.topicHeaderTitle}>{topicItem.TOPIC}</Text>
             </View>
-            <View style={ExerciseScrollViewStyles.subtopicsContainer}>
+            <View style={ESWStyles.subtopicsContainer}>
             { topicItem.SUBTOPICDATA.map((subtopicItem, index) => {
               return(
-              <View key={index}>
-                <Image
-                  style={ExerciseScrollViewStyles.subtopicItemImage}
-                  source={subtopicItem.IMAGE}
-                />
-                <Text>{subtopicItem.SUBTOPIC}</Text>
-              </View>
+              <Animated.View
+                key={index}
+                style={[ESWStyles.subtopicBtn, {transform: [{scale}]}]}
+                ref={ref => subtopic_ref[subtopicItem.SUBTOPIC] = ref }>
+                <TouchableOpacity
+                  activeOpacity={1}
+                  onPressIn={onPressIn}
+                  onPressOut={onPressOut} >
+                  <View style={ESWStyles.subtopicItemImageContainer}>
+                    <Image
+                      style={ESWStyles.subtopicItemImage}
+                      source={subtopicItem.IMAGE}
+                    />
+                  </View>
+                  <Text style={ESWStyles.subtopicItemTitle} >{subtopicItem.SUBTOPIC}</Text>
+                </TouchableOpacity>
+              </Animated.View>
             )})}
             </View>
           </View>
-        )}) : <Text style={ExerciseScrollViewStyles.loadingMessage}>Loading data..</Text>}
+        )}) : <Text style={ESWStyles.loadingMessage}>Loading data..</Text>}
     </ScrollView>
   );
 }
 
-const ExerciseScrollViewStyles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const ESWStyles = StyleSheet.create({
   loadingMessage: {
     backgroundColor: 'white',
     width: '100%',
     textAlign: 'center',
   },
   topicContainer: {
-    minHeight: 20,    
     width: '100%',
     marginBottom: 30,
   },
   topicHeader: {
     padding: 20,
-    backgroundColor: 'yellow',
+    backgroundColor: '#FCC201',
+  },
+  topicHeaderTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#5b4217'
   },
   subtopicsContainer: {
     display: 'flex',
@@ -68,8 +92,25 @@ const ExerciseScrollViewStyles = StyleSheet.create({
   subtopicBtn: {
     padding: 20,
   },
+  subtopicItemImageContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 110,
+    width: 110,
+    backgroundColor: '#FCC201',
+    borderRadius: 100,
+  },
   subtopicItemImage: {
-    height: 100,
-    width: 100
+    height: 80,
+    width: 80,
+  },
+  subtopicItemTitle: {
+    marginTop: -13,
+    textAlign: 'center',
+    backgroundColor: '#FCC201',
+    padding: 10,
+    borderRadius: 15,
+    fontSize: 15,
   }
 });

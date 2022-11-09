@@ -6,7 +6,7 @@ export default function Achievements() {
   
     return (
       <View style={AchievementStyles.container}>
-        <Text>This is Achievements</Text>
+        <Text>This is ACHIEVEMENTS</Text>
       </View>
     );
   }
@@ -15,7 +15,7 @@ export default function Achievements() {
     container: {
       flex: 1,
       width: "100%",
-      backgroundColor: 'lightgreen',
+      backgroundColor: 'lightblue',
       alignItems: 'center',
       justifyContent: 'center',
     },

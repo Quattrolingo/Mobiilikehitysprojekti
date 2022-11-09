@@ -3,7 +3,8 @@ import { useState } from 'react'
 import ExerciseScrollView from './ExerciseScrollView.js'
 import Achievements from './Achievements.js'
 import Profile from './Profile.js'
-import ViewSwitch from './ViewSwitch.js'
+import Dictionary from './Dictionary.js'
+import NavigationBar from './NavigationBar.js'
 import LanguageData from '../data/translations/fin_eng'
 
 export default function MainView(props) {
@@ -14,7 +15,7 @@ export default function MainView(props) {
         return (
             <View style={MainViewStyles.container}>
               <ExerciseScrollView languageData={LanguageData} />
-              <ViewSwitch view={setCurrentView}/>
+              <NavigationBar view={setCurrentView}/>
             </View>
           )
     } else if(currentView == "Achievements"){
@@ -22,22 +23,29 @@ export default function MainView(props) {
             <View style={MainViewStyles.container}>
 
               <Achievements />
-              <ViewSwitch view={setCurrentView}/>
+              <NavigationBar view={setCurrentView}/>
             </View>
           )
     } else if(currentView == "Profile"){
         return (
             <View style={MainViewStyles.container}>
               <Profile />
-              <ViewSwitch view={setCurrentView}/>
+              <NavigationBar view={setCurrentView}/>
             </View>
           )
-    }
+    } else if(currentView == "Dictionary"){
+      return (
+          <View style={MainViewStyles.container}>
+            <Dictionary />
+            <NavigationBar view={setCurrentView}/>
+          </View>
+        )
   }
+}
   
-  const MainViewStyles = StyleSheet.create({
-    container: {
-      flex: 1,
-      width: "100%",
-    },
-  });
+const MainViewStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+  },
+});

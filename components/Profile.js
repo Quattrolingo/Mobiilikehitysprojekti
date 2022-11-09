@@ -5,7 +5,7 @@ export default function Profile() {
   
     return (
       <View style={ProfileStyles.container}>
-        <Text>This is Profile</Text>
+        <Text>This is PROFILE</Text>
       </View>
     );
   }
