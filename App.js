@@ -6,12 +6,12 @@ import Exercise from './components/Exercise'
 
 export default function App() {
 
-  const[exercise, setExercise] = useState(false) 
+  const[exercise, setExercise] = useState(false)
 
   return (
     <View style={AppStyles.container}>
       {
-        exercise ?  <Exercise /> : <MainView/>
+        exercise ?  <Exercise /> : <MainView />
       }
     </View>
   );

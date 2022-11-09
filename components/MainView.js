@@ -4,16 +4,16 @@ import ExerciseScrollView from './ExerciseScrollView.js'
 import Achievements from './Achievements.js'
 import Profile from './Profile.js'
 import ViewSwitch from './ViewSwitch.js'
-import LanguageData from './../data/translations/fin_eng.json'
+import LanguageData from '../data/translations/fin_eng'
 
-export default function MainView() {
+export default function MainView(props) {
 
     const [currentView, setCurrentView] = useState("ExerciseScrollView")
 
     if(currentView == "ExerciseScrollView"){
         return (
             <View style={MainViewStyles.container}>
-              <ExerciseScrollView languageData={LanguageData}/>
+              <ExerciseScrollView languageData={LanguageData} />
               <ViewSwitch view={setCurrentView}/>
             </View>
           )
