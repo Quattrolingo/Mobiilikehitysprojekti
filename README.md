@@ -19,6 +19,7 @@ Icons used in this app are made by various artists from flaticon.com including:
 **Flat Icons** https://www.flaticon.com/authors/flat-icons  
 **Freepik** https://www.flaticon.com/authors/freepik  
 **Hight Quality Icons** https://www.flaticon.com/authors/hight-quality-icons  
+**Icon.doit** https://www.flaticon.com/authors/icondoit  
 **Konkapp** https://www.flaticon.com/authors/konkapp  
 **justicon** https://www.flaticon.com/authors/justicon  
 **monkik** https://www.flaticon.com/authors/monkik  
