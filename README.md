@@ -11,7 +11,7 @@ Language courses available at the moment: Finnish-English
 
 <br><br>
 
-Icons used in this app are made by various artists from flaticon.com including: 
+Icons used in this app are made by various artists from flaticon.com including:  
 **Aficons studio** https://www.flaticon.com/authors/aficons-studio  
 **Culmbio** https://www.flaticon.com/authors/culmbio  
 **Darius Dan** https://www.flaticon.com/authors/darius-dan  
