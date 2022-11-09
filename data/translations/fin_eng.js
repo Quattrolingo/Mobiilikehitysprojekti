@@ -369,12 +369,12 @@ const fin_eng = [
             {
                 SUBTOPIC:"Ruoka-ainekset",
                 DESCRIPTION:"Opi ruokien nimiä",
-                IMAGE: require("./../images/animal_bear.png")
+                IMAGE: require("./../images/subtopic_icon_food.png")
             },
             {
                 SUBTOPIC:"Ateria-ajat",
                 DESCRIPTION:"Opi tärkeimmät ateria-ajat",
-                IMAGE: require("./../images/animal_bear.png")
+                IMAGE: require("./../images/subtopic_icon_meal_times.png")
             }
         ],
         COURSEDATA: [
