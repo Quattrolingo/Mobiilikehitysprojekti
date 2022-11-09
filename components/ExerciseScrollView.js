@@ -41,8 +41,7 @@ export default function ExerciseScrollView(props) { //
               return(
               <Animated.View
                 key={index}
-                style={[ESWStyles.subtopicBtn, {transform: [{scale}]}]}
-                ref={ref => subtopic_ref[subtopicItem.SUBTOPIC] = ref }>
+                style={[ESWStyles.subtopicBtn, {transform: [{scale}]}]} >
                 <TouchableOpacity
                   activeOpacity={1}
                   onPressIn={onPressIn}
