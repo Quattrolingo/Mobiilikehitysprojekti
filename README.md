@@ -7,7 +7,7 @@ Language courses available at the moment: Finnish-English
 2. Run `npm start` on project folder
 3. Open app on your phone using expo app
 
-Icons used in this app are made by various artists from flaticon.com including:
+Icons used in this app are made by various artists from flaticon.com including:  
 **Culmbio** https://www.flaticon.com/authors/culmbio  
 **photo3idea_studio** https://www.flaticon.com/authors/photo3idea-studio  
 **monkik** https://www.flaticon.com/authors/monkik  
