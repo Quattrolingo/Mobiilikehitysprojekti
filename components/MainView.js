@@ -3,7 +3,7 @@ import { useState } from 'react'
 import ExerciseScrollView from './ExerciseScrollView.js'
 import Achievements from './Achievements.js'
 import Profile from './Profile.js'
-import Dictionary from './Dictionary.js'
+import Dictionary from './dictionary/Dictionary.js'
 import NavigationBar from './NavigationBar.js'
 import LanguageData from '../data/translations/fin_eng'
 
