@@ -7,40 +7,28 @@ import Dictionary from './dictionary/Dictionary.js'
 import NavigationBar from './NavigationBar.js'
 import LanguageData from '../data/translations/fin_eng'
 
-export default function MainView(props) {
+export default function MainView() {
 
-    const [currentView, setCurrentView] = useState("ExerciseScrollView")
+  const [currentView, setCurrentView] = useState("ExerciseScrollView")
 
-    if(currentView == "ExerciseScrollView"){
-        return (
-            <View style={MainViewStyles.container}>
-              <ExerciseScrollView languageData={LanguageData} />
-              <NavigationBar view={setCurrentView}/>
-            </View>
-          )
-    } else if(currentView == "Achievements"){
-        return (
-            <View style={MainViewStyles.container}>
+  let data = <></>
 
-              <Achievements />
-              <NavigationBar view={setCurrentView}/>
-            </View>
-          )
-    } else if(currentView == "Profile"){
-        return (
-            <View style={MainViewStyles.container}>
-              <Profile />
-              <NavigationBar view={setCurrentView}/>
-            </View>
-          )
-    } else if(currentView == "Dictionary"){
-      return (
-          <View style={MainViewStyles.container}>
-            <Dictionary />
-            <NavigationBar view={setCurrentView}/>
-          </View>
-        )
+  if(currentView == "ExerciseScrollView"){
+    data = <ExerciseScrollView languageData={LanguageData} />
+  } else if(currentView == "Achievements"){
+    data = <Achievements />
+  } else if(currentView == "Profile"){          
+    data = <Profile />
+  } else if(currentView == "Dictionary"){
+    data = <Dictionary />
   }
+
+  return(
+    <View style={MainViewStyles.container}>
+      { data }
+      <NavigationBar setView={setCurrentView} view={currentView}/>
+    </View>
+  )
 }
   
 const MainViewStyles = StyleSheet.create({
