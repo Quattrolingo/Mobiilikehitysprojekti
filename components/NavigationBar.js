@@ -82,7 +82,8 @@ export default function NavigationBar({setView, view}) {
       alignItems: 'center',
       height: 70,
       borderTopWidth: 2,
-      borderTopColor: 'lightgrey'
+      borderTopColor: 'lightgrey',
+      backgroundColor: 'white'
     },
     navbarBtn: {
       height: 35,
@@ -92,13 +93,13 @@ export default function NavigationBar({setView, view}) {
       backgroundColor: '#f5e6c4',
       padding: 5,
       borderRadius: 15,
-      borderWidth: 1,
+      borderWidth: 2,
       borderColor: '#fad47d' 
     },
     navbarBtnInactive: {
       backgroundColor: 'white',
       padding: 5,
-      borderWidth: 1,
+      borderWidth: 2,
       borderColor: 'white' 
     }
   });

@@ -1,17 +1,24 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { useState } from 'react'
 import MainView from './components/MainView'
-import Exercise from './components/Exercise'
+import Exercise from './components/Exercises/Exercise'
 
 export default function App() {
 
-  const[exercise, setExercise] = useState(false)
+  const[exercise, setExercise] = useState(null)
 
   return (
     <View style={AppStyles.container}>
       {
-        exercise ?  <Exercise /> : <MainView />
+        exercise ? 
+        <Exercise
+          exercise={exercise}
+          setExercise={setExercise}
+        />
+        : <MainView
+          exercise={exercise}
+          setExercise={setExercise}
+        />
       }
     </View>
   );
