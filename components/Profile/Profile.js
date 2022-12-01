@@ -31,7 +31,7 @@ export default function Profile(props) {
           :
           <View style={{paddingTop: 55}}>
             <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White}, ProfileStyles.header]}>
-              <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.Black}, ProfileStyles.headerText]}>
+              <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.DarkerGrey}, ProfileStyles.headerText]}>
                 {props.UiTranslations.profile.heading}
               </Text>
               <TouchableOpacity style={ProfileStyles.settingsIconContainer} onPress={() => setSettingsVisible(!settingsVisible)}>

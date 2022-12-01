@@ -6,7 +6,12 @@
     "foreignLanguage": "English",
     "ui_translations": {
       "exercise": {
-          "startingExercise": "Käynnistetään harjoitus"
+          "startingExercise": "Käynnistetään harjoitus",
+          "checkAnswer": "TARKISTA VASTAUS",
+          "correct": "Oikein!",
+          "continue": "JATKA",
+          "notQuite": "Ei aivan..",
+          "correctAnswer": "Oikea vastaus olisi:"
       },
       "home": {
           "loadingExerciseScrollViewData": "Ladataan tietoja..."
@@ -19,10 +24,11 @@
       },
       "settings": {
           "heading": "Asetukset",
-          "save": "TALLENNA",
+          "save": "OK",
           "general": "Yleiset",
           "theme": "Teemaväri",
-          "languageCourse": "Kielikurssi"
+          "languageCourse": "Kielikurssi",
+          "cancel": "PERUUTA"
       },
       "dictionary": {
   

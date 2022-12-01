@@ -45,9 +45,10 @@ export default function Profile(props) {
       </DialogContent>
       <DialogActions>
         <Button
-          title="Cancel"
+          title={props.UiTranslations.settings.cancel}
           compact
           variant="text"
+          color={props.appSettings.themeColorOptions.background}
           onPress={() => {setDialogVisible(false), setDialogContent(null)}} />
       </DialogActions>
     </>)
@@ -58,13 +59,13 @@ export default function Profile(props) {
     setDialogContent(<>
       <DialogHeader title={props.UiTranslations.settings.languageCourse} />
       <DialogContent>
-
+        <Text>nothing here ¯\_(ツ)_/¯</Text>
       </DialogContent>
       <DialogActions>
-        <Button
-          title="Cancel"
+        <Button title={props.UiTranslations.settings.cancel}
           compact
           variant="text"
+          color={props.appSettings.themeColorOptions.background}
           onPress={() => {setDialogVisible(false), setDialogContent(null)}} />
       </DialogActions>
     </>)
@@ -77,7 +78,7 @@ export default function Profile(props) {
           { dialogContent }
         </Dialog>
             <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.DarkThemeSecondary : Colors.White}, ProfileStyles.header]}>
-              <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.Black}, ProfileStyles.headerText]}>
+              <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.DarkerGrey}, ProfileStyles.headerText]}>
                 {props.UiTranslations.settings.heading}
               </Text>
               <TouchableOpacity style={ProfileStyles.settingsIconContainer} onPress={() => props.setSettingsVisible(false)}>

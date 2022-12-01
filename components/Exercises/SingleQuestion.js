@@ -97,10 +97,16 @@ export default function SingleQuestion(props) {
     return (
       <View style={QuestionStyles.container}>
         <View>
-            <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.Black}, QuestionStyles.questionTask]}>{props.questionData.task}</Text>
+            <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.Black},
+                           QuestionStyles.questionTask]}>
+                            {props.questionData.task}
+            </Text>
             {
                 props.questionData.sentence &&
-                <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.Black}, QuestionStyles.questionSentence]}>{props.questionData.sentence.replace('*', '_____')}</Text>
+                <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.Black},
+                      QuestionStyles.questionSentence]}>
+                    {props.questionData.sentence.replace('*', '_____')}
+                </Text>
             }
         </View>
         <View style={{paddingLeft: 25, paddingRight: 25}}>
@@ -109,33 +115,33 @@ export default function SingleQuestion(props) {
         <View style={QuestionStyles.confirmAnswerContainer}>
             { 
                 confirmAnswerBtnVisible &&
-                <View style={QuestionStyles.confirmAnswerInnerContainer}>
+                <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.LightGrey : props.appSettings.themeColorOptions.background}, QuestionStyles.confirmAnswerInnerContainer]}>
                     <TouchableOpacity style={QuestionStyles.confirmAnswerBtnContainer} activeOpacity={0.5} onPress={() => checkAnswer()}>
-                        <Text style={QuestionStyles.btnText}>TARKISTA VASTAUS</Text>
+                        <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.Black : Colors.White}, QuestionStyles.btnText]}>{props.UiTranslations.checkAnswer}</Text>
                     </TouchableOpacity>
                 </View>
             }
             { 
                 (resultVisible && userAnswer) &&
                 <><Animated.View style={[QuestionStyles.feedbackCorrectBackground, {opacity: feedbackAnimation}]}>
-                    <Text style={QuestionStyles.feedbackTextCorrect}>Oikein!</Text>
+                    <Text style={QuestionStyles.feedbackTextCorrect}>{props.UiTranslations.correct}</Text>
                 </Animated.View>
                 <View style={QuestionStyles.feedbackCorrectBtn}>
                     <TouchableOpacity style={QuestionStyles.feedbackCorrect} activeOpacity={0.5} onPress={() => nextQuestion()}>
-                        <Text style={QuestionStyles.btnText}>JATKA</Text>
+                        <Text style={QuestionStyles.btnText}>{props.UiTranslations.continue}</Text>
                     </TouchableOpacity>
                 </View></>
             }
             {
                 (resultVisible && !userAnswer) &&
                 <><Animated.View style={[QuestionStyles.feedbackIncorrectBackground, {opacity: feedbackAnimation}]}>
-                    <Text style={QuestionStyles.feedbackTextIncorrect}>Ei aivan..</Text>
-                    <Text style={QuestionStyles.feedbackTextIncorrect}>Oikea vastaus olisi:</Text>
+                    <Text style={QuestionStyles.feedbackTextIncorrect}>{props.UiTranslations.notQuite}</Text>
+                    <Text style={QuestionStyles.feedbackTextIncorrect}>{props.UiTranslations.correctAnswer}</Text>
                     <Text style={QuestionStyles.feedbackTextAnswer}>{props.questionData.answer}</Text>                    
                 </Animated.View>
                 <View style={QuestionStyles.feedbackIncorrectBtn}>
                     <TouchableOpacity style={QuestionStyles.feedbackIncorrect} activeOpacity={0.5} onPress={() => nextQuestion()}>
-                        <Text style={QuestionStyles.btnText}>JATKA</Text>
+                        <Text style={QuestionStyles.btnText}>{props.UiTranslations.continue}</Text>
                     </TouchableOpacity>
                 </View></>
             }
@@ -168,8 +174,7 @@ const QuestionStyles = StyleSheet.create({
         marginBottom: 20,
     },
     confirmAnswerInnerContainer: {
-        height: 50,
-        backgroundColor: Colors.DarkYellow,        
+        height: 50,      
         borderRadius: 15,
         width: '90%',
     },
@@ -209,7 +214,6 @@ const QuestionStyles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         fontWeight: 'bold',
-        color: Colors.White
     },
     feedbackCorrectBackground: {
         position: 'absolute',

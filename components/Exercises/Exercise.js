@@ -77,12 +77,14 @@ export default function Exercise(props) {
                 {
                     progressBar.currentState < progressBar.maxState?
                     <SingleQuestion 
-                    questionCompleted={() => setQuestionsDone(questionsDone + 1)}
-                    correctlyAnswered={() => setQuestionsCorrectlyAnswered(questionsCorrectlyAnswered + 1)}
-                    incorrectAnswer={() => setQuestionsCorrectlyAnswered(0)}
-                    questionData={currentQuestion} 
-                    appSettings={props.appSettings} />
-                    : <Text>done</Text>
+                        questionCompleted={() => setQuestionsDone(questionsDone + 1)}
+                        correctlyAnswered={() => setQuestionsCorrectlyAnswered(questionsCorrectlyAnswered + 1)}
+                        incorrectAnswer={() => setQuestionsCorrectlyAnswered(0)}
+                        questionData={currentQuestion} 
+                        appSettings={props.appSettings}
+                        UiTranslations={props.UiTranslations.exercise}/>
+                    :
+                    <Text>done</Text>
                 }
                 
             </View>

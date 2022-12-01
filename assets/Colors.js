@@ -10,6 +10,7 @@ const Colors = {
   LightPeach: '#FCDDCD',
   ExtremeLightGrey: '#fafafa',
   LightGrey: 'lightgrey',
+  DarkerGrey: '#b8b8b8',
   LightPink: '#FFCDB2',
   SummerSky: '#2ECBE9',
   DarkTheme: '#121212',

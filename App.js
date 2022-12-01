@@ -14,7 +14,7 @@ export default function App() {
     {
       background: Colors.DarkYellow,
     },
-    soundsOn: true
+    soundOn: true
   })
   const [UiTranslations, setUiTranslations] = useState(LanguageData.courseData.ui_translations)
 

@@ -34,7 +34,12 @@ export default function MainView(props) {
   } else if(currentView == "Achievements"){
     data = <Achievements UiTranslations={props.UiTranslations} />
   } else if(currentView == "Profile"){          
-    data = <Profile languageData={props.languageData.courseData} appSettings={props.appSettings} modifyAppSettings={props.modifyAppSettings} UiTranslations={props.UiTranslations} navBarVisibility={setNavBarVisible}/>
+    data = <Profile 
+              languageData={props.languageData.courseData}
+              appSettings={props.appSettings}
+              modifyAppSettings={props.modifyAppSettings}
+              UiTranslations={props.UiTranslations}
+              navBarVisibility={setNavBarVisible}/>
   } else if(currentView == "Dictionary"){
     data = <Dictionary UiTranslations={props.UiTranslations} />
   }
