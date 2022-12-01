@@ -1,8 +1,9 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, StatusBar } from 'react-native'
 import { useState, useEffect } from 'react'
 import MainView from './components/MainView'
 import Exercise from './components/Exercises/Exercise'
 import LanguageData from './data/translations/fin_eng.json'
+import * as NavigationBar from 'expo-navigation-bar'
 import Colors from './assets/Colors'
 
 export default function App() {
@@ -18,8 +19,17 @@ export default function App() {
   })
   const [UiTranslations, setUiTranslations] = useState(LanguageData.courseData.ui_translations)
 
+  useEffect(() => {
+    if(appSettings.themeColorOptions.background == Colors.DarkTheme){
+      NavigationBar.setBackgroundColorAsync(Colors.DarkTheme)
+    } else {
+      NavigationBar.setBackgroundColorAsync("white")
+    }
+  }, [appSettings.themeColorOptions.background])
+
   return (
     <View style={AppStyles.container}>
+      <StatusBar backgroundColor={(appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}/>
       {
         exercise ? 
         <Exercise
@@ -44,7 +54,6 @@ export default function App() {
 
 const AppStyles = StyleSheet.create({
   container: {
-    marginTop: 50,
     flex: 1,
     backgroundColor: Colors.White,
     alignItems: 'center',

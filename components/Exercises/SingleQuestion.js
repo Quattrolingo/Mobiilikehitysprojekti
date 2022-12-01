@@ -28,7 +28,7 @@ export default function SingleQuestion(props) {
             props.correctlyAnswered()
             setConfirmAnswerBtnVisible(false)
             setResultVisible(true)
-            fadeView()
+            fadeView()        
         } else {
             //props.questionCompleted()
             setConfirmAnswerBtnVisible(false)
@@ -40,7 +40,7 @@ export default function SingleQuestion(props) {
     const nextQuestion = () => {
         props.questionCompleted()
         setResultVisible(false)
-
+        
         Animated.timing( // reset feedback fade animation
             feedbackAnimation, {
                 toValue: 0,

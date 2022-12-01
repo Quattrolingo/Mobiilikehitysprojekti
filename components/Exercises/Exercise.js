@@ -19,14 +19,16 @@ export default function Exercise(props) {
         const fadeIn = () => {
         Animated.timing(fadeAnimation, {
             toValue: 1,
-            duration: 2000,
+            duration: 1000,
             useNativeDriver: true
         }).start()
     }
 
     const [contentToRender, setContentToRender] = useState(
-        <View style={ExerciseStyles.startUpScreen} >
-            <Animated.Text style={{opacity: fadeAnimation}}>{props.UiTranslations.exercise.startingExercise}</Animated.Text>
+        <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White}, ExerciseStyles.startUpScreen]} >
+            <Animated.Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.Black, opacity: fadeAnimation, fontSize: 20}]}>
+                {props.UiTranslations.exercise.startingExercise}
+            </Animated.Text>
         </View>
     )
 
@@ -55,7 +57,7 @@ export default function Exercise(props) {
         fadeIn()
         setTimeout(() => {
             setContentToRender(<></>)
-        }, 500)
+        }, 2000)
 
         BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick)
         return () => {
@@ -109,8 +111,7 @@ const ExerciseStyles = StyleSheet.create({
         position: 'absolute',
         zIndex: 1000,
         width: '100%',
-        height: '100%',
-        backgroundColor: Colors.White,
+        height: '100%'
     },
     exerciseHeader: {
         display: 'flex',
