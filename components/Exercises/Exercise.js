@@ -1,12 +1,32 @@
-import { StyleSheet, Text, View, BackHandler } from 'react-native'
-import { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, BackHandler, Animated } from 'react-native'
+import { useEffect, useState, useRef } from 'react'
+import ProgressBar from './ProgressBar'
+import SingleQuestion from './SingleQuestion'
+import Colors from './../../assets/Colors'
 
 export default function Exercise(props) {
 
-    console.log(props.exercise)
+    const [questionsDone, setQuestionsDone] = useState(0)
+    const [currentQuestion, setCurrentQuestion] = useState(props.exercise.questions[questionsDone])    
+    const [questionsCorrectlyAnswered, setQuestionsCorrectlyAnswered] = useState(0)
+    const [progressBar, setProgressBar] = useState({
+        maxState: props.exercise.questions.length,
+        currentState : questionsDone,
+        correctAnswers: questionsCorrectlyAnswered
+    })
+
+    const fadeAnimation = useRef(new Animated.Value(0)).current
+        const fadeIn = () => {
+        Animated.timing(fadeAnimation, {
+            toValue: 1,
+            duration: 2000,
+            useNativeDriver: true
+        }).start()
+    }
+
     const [contentToRender, setContentToRender] = useState(
-        <View>
-            <Text>Starting exercise</Text>
+        <View style={ExerciseStyles.startUpScreen} >
+            <Animated.Text style={{opacity: fadeAnimation}}>{props.UiTranslations.exercise.startingExercise}</Animated.Text>
         </View>
     )
 
@@ -16,30 +36,93 @@ export default function Exercise(props) {
     }
 
     useEffect(() => {
-        setTimeout(() => {
-            setContentToRender(
-                <View style={AchievementStyles.container}>
-                    <Text>This is Exercise</Text>
-                    <Text onPress={() => props.setExercise(null)} style={{marginTop: 100}}>End</Text>
-                </View>                
-            )
-          }, 3000)
+        setProgressBar(prevState => ({
+            ...prevState, // do not update maxState value
+            currentState : questionsDone,
+            correctAnswers: questionsCorrectlyAnswered
+        }))
+        setCurrentQuestion(props.exercise.questions[questionsDone])
+        if(questionsDone == props.exercise.questions.length){
+            console.log("exercise completed")
+            setTimeout(() => {
+                setQuestionsDone(0)
+                setQuestionsCorrectlyAnswered(0)
+            }, 3000)            
+        }
+    }, [questionsDone, questionsCorrectlyAnswered])
 
-          BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick)
-          return () => {
+    useEffect(() => {
+        fadeIn()
+        setTimeout(() => {
+            setContentToRender(<></>)
+        }, 500)
+
+        BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick)
+        return () => {
             BackHandler.removeEventListener("hardwareBackPress", handleBackButtonClick)
-          }
+        }             
     }, [])
+    
+    return (<>
+        { contentToRender }
+        <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White}, ExerciseStyles.container]}>            
+            <View style={ExerciseStyles.exerciseHeader}>
+                <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.Black}, ExerciseStyles.returnBtn]} onPress={() => props.setExercise(null)}>X</Text>
+                <View style={ExerciseStyles.progressBar}>
+                    <ProgressBar data={progressBar}/>
+                </View>                
+                <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.Black}, ExerciseStyles.returnBtn]}>X</Text>
+            </View>
+            <View style={ExerciseStyles.exerciseContainer}>
+                {
+                    progressBar.currentState < progressBar.maxState?
+                    <SingleQuestion 
+                    questionCompleted={() => setQuestionsDone(questionsDone + 1)}
+                    correctlyAnswered={() => setQuestionsCorrectlyAnswered(questionsCorrectlyAnswered + 1)}
+                    incorrectAnswer={() => setQuestionsCorrectlyAnswered(0)}
+                    questionData={currentQuestion} 
+                    appSettings={props.appSettings} />
+                    : <Text>done</Text>
+                }
+                
+            </View>
+        </View>
+    </>)
+}
   
-    return ( <>{contentToRender}</> )
-  }
-  
-  const AchievementStyles = StyleSheet.create({
+const ExerciseStyles = StyleSheet.create({
     container: {
       flex: 1,
       width: "100%",
-      backgroundColor: 'lightblue',
-      alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
+      paddingTop: 15,
+      paddingBottom: 30, //ongelmallinen ???????      
+      paddingLeft: 25,
+      paddingRight: 25
     },
-  });
+    startUpScreen: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        zIndex: 1000,
+        width: '100%',
+        height: '100%',
+        backgroundColor: Colors.White,
+    },
+    exerciseHeader: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    returnBtn: {
+        fontSize: 20
+    },
+    progressBar: {
+        width: '75%',
+        height: 30
+    },
+    exerciseContainer: {
+        marginTop: 30
+    }
+})
