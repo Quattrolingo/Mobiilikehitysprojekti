@@ -37,9 +37,7 @@ export default function Dictionary() {
         setWord(result.word);
         setDefinition(result.results[0].definition);
       },
-      (error) => {
-        alert(error);
-      }
+ 
     )
     }, [])
 
@@ -49,34 +47,40 @@ export default function Dictionary() {
     <View style={StyleSheet.dictContainer}>
       <Text style={StyleSheet.headline}>Opi lisää sanastoa</Text>
       <View style={StyleSheet.mainContainer}>
-        <View style={StyleSheet.rndContainer}>
-        <Text style={StyleSheet.random}>Satunnainen sana</Text>
-        <Text style={StyleSheet.DictText}>Opi lisää opiskeltavan kielen sanoja ja niiden merkityksiä</Text>
+        <View style={StyleSheet.topContainer}>
+          <Text style={StyleSheet.random}>Satunnainen sana</Text>
+          <Text style={StyleSheet.dictText}>Opi lisää opiskeltavan kielen sanoja ja niiden merkityksiä</Text>
 
-        <View style={StyleSheet.container}>
-          <Modal
-            visible={modalVisible}
-            onRequestClose={close}
-          >
-            <View style={StyleSheet.modal}>
-              <Text>Satunnainen sana</Text>
-              <Text>{word}</Text>
-              <Text>Sanan määritelmä</Text>
-              <Text>{definition}</Text>
-              <Pressable onPress={() => {
-                setModalVisible(false);
-              }}>
-                <Text style={StyleSheet.close}>Sulje</Text>
-              </Pressable>
-            </View>
-          </Modal>
+          <View style={StyleSheet.pushContainer}>
+            <Modal
+              visible={modalVisible}
+              onRequestClose={close}
+            >
+              <View style={StyleSheet.modal}>
+                <Text>Satunnainen sana</Text>
+                <Text>{word}</Text>
+                <Text>Sanan määritelmä</Text>
+                <Text>{definition}</Text>
+                <Pressable onPress={() => {
+                  setModalVisible(false);
+                }}>
+                  <Text style={StyleSheet.close}>Sulje</Text>
+                </Pressable>
+              </View>
+            </Modal>
 
-          <Pressable onPress={() => {
-            setModalVisible(true);
-          }}>
-            <Text style={StyleSheet.push}>PAINA TÄSTÄ SANA</Text>
-          </Pressable>
+            <Pressable onPress={() => {
+              setModalVisible(true);
+            }}>
+              <Text style={StyleSheet.push}>PAINA TÄSTÄ SANA</Text>
+            </Pressable>
+          </View>
         </View>
+        <View style={StyleSheet.middleContainer}>
+            <Text style={StyleSheet.dictText}>Seuraava komponentti</Text>
+        </View>
+        <View style={StyleSheet.bottomContainer}>
+          <Text style={StyleSheet.dictText}>Kolmas komponentti</Text>
         </View>
       </View>
     </View>

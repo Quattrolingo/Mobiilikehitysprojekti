@@ -7,7 +7,6 @@ export default StyleSheet.create({
       width: "100%",
       backgroundColor: 'orange',   
       alignItems: 'center',
-      
     },
     headline: {
       marginTop: 20,
@@ -16,7 +15,7 @@ export default StyleSheet.create({
       fontFamily: 'monospace',
       backgroundColor: "darkorange",
     },
-    DictText: {
+    dictText: {
       fontFamily: 'monospace',
       fontSize: 15,
       fontWeight: 'bold',
@@ -25,27 +24,25 @@ export default StyleSheet.create({
       textAlign: 'center',
     },
     random: {
-      marginTop: 50,
-      fontSize: 20,
+      marginTop: 30,
+      fontSize: 25,
       fontWeight: 'bold',
       fontFamily: 'monospace',
       textDecorationLine: "underline",
     },
-    BtnContainer: {
+    /*BtnContainer: {
       width: "60%",
       height: "10%",
       backgroundColor: 'black',
       alignItems: "center",
       justifyContent: "space-around",
-    },
+    },*/
 
 
-    container: {
+    pushContainer: {
       marginTop: 20,
-      backgroundColor: 'orange',
       alignItems: 'center',
       justifyContent: 'center',
-      
     },
     mainContainer: {
       flex: 1,
@@ -53,13 +50,25 @@ export default StyleSheet.create({
       padding: 20,
       margin: 10,
     },
-    rndContainer: {
+    topContainer: {
       flex: 0.35,
       backgroundColor: 'beige',
       borderWidth: 5,
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
       alignItems: 'center',
+    },
+    middleContainer: {
+      flex: 0.3,
+      backgroundColor: "pink",
+      borderWidth: 5,
+    },
+    bottomContainer: {
+      flex: 0.3,
+      backgroundColor: "peachpuff",
+      borderWidth: 5,
+      borderBottomLeftRadius: 20,
+      borderBottomRightRadius: 20,
     },
     modal: {
       marginTop: 100,
