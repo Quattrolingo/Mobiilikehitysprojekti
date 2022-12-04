@@ -1,9 +1,10 @@
 import { StyleSheet, View, Image, Pressable } from 'react-native'
+import Colors from '../assets/Colors'
 
-export default function NavigationBar({setView, view}) {
+export default function NavigationBar({setView, view, appSettings}) {
   
     return (
-      <View style={NavBarStyles.container}>
+      <View style={[{backgroundColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White}, NavBarStyles.container]}>
         <Pressable onPress={() => setView("ExerciseScrollView")}>
           {
             (view == "ExerciseScrollView") ?
@@ -13,7 +14,11 @@ export default function NavigationBar({setView, view}) {
               source={require('./../data/images/navigation_bar_home.png')} />
             </View>
             :
-            <View style={NavBarStyles.navbarBtnInactive}>
+            <View style={[
+                    {backgroundColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
+                    {borderColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
+                    NavBarStyles.navbarBtnInactive
+                  ]}>
               <Image   
               style={NavBarStyles.navbarBtn}           
               source={require('./../data/images/navigation_bar_home.png')} />
@@ -29,7 +34,11 @@ export default function NavigationBar({setView, view}) {
               source={require('./../data/images/navigation_bar_achievements.png')} />
             </View>
             :
-            <View style={NavBarStyles.navbarBtnInactive}>
+            <View style={[
+                    {backgroundColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
+                    {borderColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
+                    NavBarStyles.navbarBtnInactive
+                  ]}>
               <Image
               style={NavBarStyles.navbarBtn}
               source={require('./../data/images/navigation_bar_achievements.png')} />
@@ -45,7 +54,11 @@ export default function NavigationBar({setView, view}) {
               source={require('./../data/images/navigation_bar_profile.png')} />
             </View>
             :
-            <View style={NavBarStyles.navbarBtnInactive}>
+            <View style={[
+                    {backgroundColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
+                    {borderColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
+                    NavBarStyles.navbarBtnInactive
+                  ]}>
               <Image
               style={NavBarStyles.navbarBtn}
               source={require('./../data/images/navigation_bar_profile.png')} />
@@ -61,7 +74,11 @@ export default function NavigationBar({setView, view}) {
               source={require('./../data/images/navigation_bar_dictionary.png')} />
             </View>
             :
-            <View style={NavBarStyles.navbarBtnInactive}>
+            <View style={[
+                    {backgroundColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
+                    {borderColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
+                    NavBarStyles.navbarBtnInactive
+                  ]}>
               <Image
               style={NavBarStyles.navbarBtn}
               source={require('./../data/images/navigation_bar_dictionary.png')} />
@@ -82,7 +99,7 @@ export default function NavigationBar({setView, view}) {
       alignItems: 'center',
       height: 70,
       borderTopWidth: 2,
-      borderTopColor: 'lightgrey'
+      borderTopColor: Colors.LightGrey,
     },
     navbarBtn: {
       height: 35,
@@ -92,13 +109,11 @@ export default function NavigationBar({setView, view}) {
       backgroundColor: '#f5e6c4',
       padding: 5,
       borderRadius: 15,
-      borderWidth: 1,
+      borderWidth: 2,
       borderColor: '#fad47d' 
     },
     navbarBtnInactive: {
-      backgroundColor: 'white',
       padding: 5,
-      borderWidth: 1,
-      borderColor: 'white' 
+      borderWidth: 2,
     }
   });
