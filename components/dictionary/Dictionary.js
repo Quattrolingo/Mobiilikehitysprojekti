@@ -10,6 +10,7 @@ const API_URL = 'X-RapidAPI-Host';
 export default function Dictionary() {
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
   const [word, setWord] = useState('');
   const [definition, setDefinition] = useState('');
   const [searchWord, setSearchWord] = useState('');
@@ -20,6 +21,10 @@ export default function Dictionary() {
     setModalVisible(false);
   }
 
+  function close2() {
+    setModalVisible2(false);
+  }
+
   const options = {
     method: 'GET',
     headers: {
@@ -28,7 +33,7 @@ export default function Dictionary() {
     }
   };
 
-    //random word function
+    //random word function 
 
     useEffect(() => {
       const url = API_URL +
@@ -38,11 +43,13 @@ export default function Dictionary() {
     .then(
       (result) => {
         setWord(result.word);
-        setDefinition(result.results[0].definition);
+        setDefinition(result.results[0].definition); 
+    
       },
  
     )
     }, [])
+
 
    
     //pronunciation function
@@ -63,6 +70,8 @@ export default function Dictionary() {
       )
       }, [])
 
+
+    
 
 
   
@@ -106,8 +115,8 @@ export default function Dictionary() {
             <TextInput style={StyleSheet.textInPut} placeholder='Syötä tähän sana' value={searchWord} onChangeText={text => setSearchWord(text)}/>
             <View style={StyleSheet.pushContainer}>
             <Modal
-              visible={modalVisible}
-              onRequestClose={close}
+              visible={modalVisible2}
+              onRequestClose={close2}
             >
               <View style={StyleSheet.modal}>
                 <Text>Haettu sana</Text>
@@ -117,7 +126,7 @@ export default function Dictionary() {
                 <Text>Ääntäminen / verbi</Text>
                 <Text>{searchWordV}</Text>
                 <Pressable onPress={() => {
-                  setModalVisible(false);
+                  setModalVisible2(false);
                 }}>
                   <Text style={StyleSheet.close}>Sulje</Text>
                 </Pressable>
@@ -125,7 +134,7 @@ export default function Dictionary() {
             </Modal>
 
             <Pressable onPress={() => {
-              setModalVisible(true);
+              setModalVisible2(true);
             }}>
               <Text style={StyleSheet.push}>PAINA TÄSTÄ</Text>
             </Pressable>
