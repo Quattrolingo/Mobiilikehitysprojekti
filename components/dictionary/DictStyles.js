@@ -51,17 +51,20 @@ export default StyleSheet.create({
       margin: 10,
     },
     topContainer: {
-      flex: 0.35,
+      flex: 0.3,
       backgroundColor: 'beige',
       borderWidth: 5,
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
       alignItems: 'center',
+      paddingBottom: 15,
     },
     middleContainer: {
       flex: 0.3,
       backgroundColor: "pink",
       borderWidth: 5,
+      alignItems: 'center',
+      paddingBottom: 30,
     },
     bottomContainer: {
       flex: 0.3,
@@ -69,6 +72,7 @@ export default StyleSheet.create({
       borderWidth: 5,
       borderBottomLeftRadius: 20,
       borderBottomRightRadius: 20,
+      alignItems: 'center',
     },
     modal: {
       marginTop: 100,
@@ -93,7 +97,20 @@ export default StyleSheet.create({
       textShadowColor: 'indianred',
       textShadowOffset: {width: 5, height: 5},
       textShadowRadius: 5,
-     
-    }
+    },
+    searchBox: {
+      marginBottom: 20,
+      borderColor: '#333',
+      borderWidth: 1,
+      padding: 5,
+    },
+    textInPut: {
+      borderColor: 'black',
+      borderWidth: 1,
+      borderRadius: 10,
+      width: 170,
+      height: 40,
+      textAlign: 'center',
+    },
 
 });
