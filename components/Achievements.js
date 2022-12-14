@@ -8,11 +8,13 @@ export default function Achievements() {
 
 const [first, setfirst] = useState([{nimi:'', pisteet:''}])
 const [second, setsecond] = useState(0)
+const [third, setthird] = useState(0)
 
 useEffect (() => {
 
 getFirstfivepoints()
 getTotalpoints()
+getTotalExer()
 
 }, [])
 
@@ -30,6 +32,15 @@ const getTotalpoints = async () => {
     const data = await AsyncStorage.getItem('@Totalpoints')
     if (data != null){
       setsecond(JSON.parse(data)) 
+    }
+  } catch (e) {}
+}
+
+const getTotalExer = async () => {
+  try{
+    const data = await AsyncStorage.getItem('@completed_exercises')
+    if (data != null){
+      setthird(JSON.parse(data).length)
     }
   } catch (e) {}
 }
@@ -60,6 +71,11 @@ return (
             </View>
           )})
         }
+        
+        <View style={AchievementStyles.headline3}>
+          <Text style={AchievementStyles.text3}> Harjoituksia tehty yhteensä: {third}</Text>
+        </View>
+
       </View>
     );
   }
@@ -79,6 +95,7 @@ return (
       height: 70,
       width: "100%",
       textAlignVertical: 'center',
+      fontFamily: 'monospace',
     },
     text: {
       fontSize: 20,
@@ -99,6 +116,7 @@ return (
       fontFamily: 'monospace',
       width: "100%",
       marginTop: 5,
+      textAlignVertical: 'center',
     },
     text2: {
       fontSize: 20,
@@ -113,6 +131,7 @@ return (
       width: "100%",
       display: 'flex',
       flexDirection: "row",
+      fontFamily: 'monospace',
     },
     headline2: {
       marginTop: 10,
@@ -121,8 +140,27 @@ return (
       width: "100%",
       backgroundColor: '#fcc201',
       height: 55,
+      fontFamily: 'monospace',
     },
     inputWrap: {
       flex: 1,
+    },
+    headline3: {
+      marginTop: 10,
+      fontSize: 25,
+      textAlign: 'center',
+      width: "100%",
+      backgroundColor: '#fcc201',
+      height: 30,
+      fontFamily: 'monospace',
+
+    },
+    text3: {
+      fontSize: 18,
+      fontFamily: 'monospace',
+      width: "100%",
+      marginTop: 0,
+      textAlign: 'left',
+
     },
   });
