@@ -2,46 +2,52 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { useEffect, useState } from 'react'
 import { Provider } from '@react-native-material/core'
 import Settings from './../Settings/Settings'
-import Colors from '../../assets/Colors';
+import CreateProfile from './CreateProfile'
+import Colors from '../../assets/Colors'
 
 export default function Profile(props) {
 
-  const [settingsVisible, setSettingsVisible] = useState(false)
+  const [currentProfileView, setCurrentProfileView] = useState("profile")
 
   useEffect(() => {
-    if(settingsVisible){
+    if(currentProfileView == "settings" || currentProfileView == "createProfile"){
       props.navBarVisibility(false)
     } else {
       props.navBarVisibility(true)
     }
-  }, [settingsVisible])
+  }, [currentProfileView])
   
   return (
     <Provider>
-      <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White}, ProfileStyles.container]}>
+      <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, ProfileStyles.container]}>
         {
-          settingsVisible ? 
+          currentProfileView == "settings" ? 
           <Settings
             languageData={props.languageData}
             appSettings={props.appSettings}
             modifyAppSettings={props.modifyAppSettings}
             UiTranslations={props.UiTranslations}
             navBarVisibility={props.navBarVisibility}
-            setSettingsVisible={setSettingsVisible}/>
-          :
+            setCurrentProfileView={setCurrentProfileView}
+            currentProfileView={currentProfileView}
+            setCurrentView={props.setCurrentView} />
+          : currentProfileView == "profile" ?
           <View style={{paddingTop: 55}}>
-            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White}, ProfileStyles.header]}>
-              <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.DarkerGrey}, ProfileStyles.headerText]}>
+            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, ProfileStyles.header]}>
+              <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkerGrey}, ProfileStyles.headerText]}>
                 {props.UiTranslations.profile.heading}
               </Text>
-              <TouchableOpacity style={ProfileStyles.settingsIconContainer} onPress={() => setSettingsVisible(!settingsVisible)}>
+              <TouchableOpacity style={ProfileStyles.settingsIconContainer} activeOpacity={0.5} onPress={() => setCurrentProfileView((currentProfileView !== "settings" ? "settings" : "profile"))}>
                 <Image style={ProfileStyles.settingsIcon} source={require('./../../data/images/settings_icon.png')} />
               </TouchableOpacity>
             </View>
             <Text>This is PROFILE</Text>
-          </View>
-        }
-        
+          </View> 
+          : 
+          <View style={{paddingTop: 55}}>
+            <Text>This is CREATE PROFILE</Text>
+          </View> 
+        }        
       </View>
     </Provider>
   )

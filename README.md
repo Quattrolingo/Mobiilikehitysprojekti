@@ -15,6 +15,7 @@ Icons used in this app are made by various artists from flaticon.com including:
 **Aficons studio** https://www.flaticon.com/authors/aficons-studio  
 **Culmbio** https://www.flaticon.com/authors/culmbio  
 **Darius Dan** https://www.flaticon.com/authors/darius-dan  
+**DInosoftLabs** https://www.flaticon.com/authors/dinosoftlabs
 **Eucalyp** https://www.flaticon.com/authors/eucalyp  
 **Flat Icons** https://www.flaticon.com/authors/flat-icons  
 **Freepik** https://www.flaticon.com/authors/freepik  

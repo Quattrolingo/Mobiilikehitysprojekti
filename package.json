@@ -9,15 +9,21 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@jamsch/react-native-duo-drag-drop": "^1.1.1",
+    "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-material/core": "^1.3.7",
+    "add": "^2.0.6",
     "axios": "^1.1.3",
     "dotenv": "^16.0.3",
-    "expo": "~46.0.16",
-    "expo-status-bar": "~1.4.0",
-    "react": "18.0.0",
-    "react-native": "0.69.6",
+    "expo": "^47.0.8",
+    "expo-navigation-bar": "^2.0.1",
+    "expo-status-bar": "^1.4.2",
+    "react-native": "0.70.5",
+    "react-native-circular-progress-indicator": "^4.4.2",
     "react-native-dotenv": "^3.4.2",
-    "expo-navigation-bar": "~1.3.0"
+    "react-native-gesture-handler": "~2.8.0",
+    "react-native-reanimated": "~2.12.0",
+    "react-native-svg": "13.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

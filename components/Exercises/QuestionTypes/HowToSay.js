@@ -38,7 +38,7 @@ const HowToSayStyles = StyleSheet.create({
     container: {
         display: 'flex',
         width: "100%",
-        alignItems: 'center',
+        alignItems: 'center'
     },
     inactiveBtn: {
         display: 'flex',
@@ -50,7 +50,7 @@ const HowToSayStyles = StyleSheet.create({
         backgroundColor: Colors.ExtremeLightGrey,        
         borderWidth: 3,
         borderColor: Colors.LightGrey,
-        borderRadius: 15,
+        borderRadius: 15
     },
     activeBtn: {
         display: 'flex',
@@ -62,11 +62,11 @@ const HowToSayStyles = StyleSheet.create({
         backgroundColor: Colors.LightMint,
         borderWidth: 3,
         borderColor: Colors.RicherMint,
-        borderRadius: 15,
+        borderRadius: 15
         
     },
     itemText: {
         fontSize: 20,
-        textAlign: 'center',
+        textAlign: 'center'
     }
 })

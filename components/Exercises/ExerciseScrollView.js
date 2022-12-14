@@ -1,16 +1,46 @@
-import { StyleSheet, Text, View, Image, FlatList, SafeAreaView, TouchableOpacity, Pressable } from 'react-native'
-import { useState, useEffect } from 'react'
+import { StyleSheet, Text, View, Image, FlatList, SafeAreaView, TouchableOpacity } from 'react-native'
+import { useState, useEffect, useRef } from 'react'
 import Colors from './../../assets/Colors'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import CircularProgressBar from 'react-native-circular-progress-indicator'
 
 export default function ExerciseScrollView(props) {
   
-  const [completedExercises, setCompletedExercises] = useState(["8932489he","89eryu9he","8ertute"])
-  let FlatListRef = null
+  const [completedExercises, setCompletedExercises] = useState([])
+  const FlatListRef = useRef()
   const [x, setX] = useState({ // this useState controls which subtopic's exercises are visible
     isOpen: false,
     parentName: null
   })
   const [themeColor, setThemeColor] = useState(props.appSettings.themeColorOptions)
+
+  const getCompletedExercises = async () => {
+    const exercises = await AsyncStorage.getItem('@completed_exercises')
+    if(exercises !== null){
+      setCompletedExercises(JSON.parse(exercises))
+    } else {
+      setCompletedExercises([])
+    }
+  }
+
+  const getCircularProgressBarStatus = (exercises) => {
+    let exerciseArray = exercises.map(item => item.uniqueID)
+    let count = 0
+    for(let i = 0; i < exerciseArray.length; i++){
+      try {
+        if(completedExercises.includes(exerciseArray[i])){
+          count = count + 1
+        }
+      } catch(e) {
+        //console.log(e)
+      }
+    }
+    return count
+  }
+
+  useEffect(() => {
+    getCompletedExercises()
+  }, [props])
 
   useEffect(() => {
     setThemeColor(props.appSettings.themeColorOptions)
@@ -70,7 +100,7 @@ export default function ExerciseScrollView(props) {
     }    
   }
 
-  const renderSubtopic = ({ item }) => {
+  const renderSubtopic = ({ item, index }) => {
     const { data } = item
     return (
       <View style={{backgroundColor: (themeColor.background == '#121212') ? Colors.DarkThemeSecondary : Colors.White}}>
@@ -79,21 +109,40 @@ export default function ExerciseScrollView(props) {
           <Text style={[{color: (themeColor.background == '#121212') ? Colors.White : Colors.Brown}, ESWStyles.topicHeaderDescription]}>{item.description}</Text>
         </View>      
         {data.map((tier) => {
-          const url = "https://raw.githubusercontent.com/Quattrolingo/Mobiilikehitysprojekti/main/data/images/" + 
-          tier.picture
+          const url = "https://raw.githubusercontent.com/Quattrolingo/Mobiilikehitysprojekti/main/data/images/" + tier.picture
           return (
             <View key={tier.tier} style={ESWStyles.subtopicsContainer}>
-              <TouchableOpacity
-                onPress={() => onPressExercise(tier)}
-                style={ESWStyles.subtopicItem}>
-                <View style={[{backgroundColor: themeColor.background}, ESWStyles.subtopicItemImageContainer]}>
-                  <Image
-                    style={ESWStyles.subtopicItemImage}
-                    source={{ uri: url }}
-                    resizeMode="cover"
+              <TouchableOpacity onPress={() => onPressExercise(tier)} style={ESWStyles.subtopicItem} activeOpacity={0.5}>
+                <View style={ESWStyles.circularProgressBar}>
+                  <CircularProgressBar                   
+                    value={getCircularProgressBarStatus(tier.exercises)}
+                    maxValue={tier.exercises.length}
+                    initialValue={0}
+                    radius={56}
+                    activeStrokeColor={(themeColor.background == '#121212') ? Colors.RicherMint : Colors.CircularProgressGreen}
+                    inActiveStrokeColor={"transparent"}
+                    activeStrokeWidth={20}
+                    rotation={180}
+                    progressValueColor={'transparent'}
+                    duration={150}
                   />
                 </View>
-                <Text style={[{color: (themeColor.background == '#121212') ? Colors.White : Colors.Black}, {backgroundColor: themeColor.background}, ESWStyles.subtopicItemTitle]}>{tier.name}</Text>         
+                <View style={[{backgroundColor: "transparent",
+                               borderWidth: 4,
+                               borderColor: (themeColor.background == '#121212') ? Colors.DarkTheme : themeColor.background}, 
+                               ESWStyles.subtopicItemImageContainer]}>
+                  <View style={[{borderColor: (themeColor.background == '#121212') ? Colors.DarkTheme : themeColor.background}, ESWStyles.subtopicImageInnerContainer]}>
+                    <Image
+                    style={ESWStyles.subtopicItemImage}
+                    source={{ uri: url }}
+                    resizeMode="cover" />
+                  </View>
+                </View>
+                <Text style={[{color: (themeColor.background == '#121212') ? Colors.White : Colors.Black},
+                              {backgroundColor: themeColor.background},
+                              ESWStyles.subtopicItemTitle]}>
+                  {tier.name}
+                </Text>                
               </TouchableOpacity>
               <View style={ESWStyles.singleExerciseContainer}>
                 {
@@ -101,6 +150,7 @@ export default function ExerciseScrollView(props) {
                     tier.exercises.map((itm) => {
                       return(
                         <TouchableOpacity
+                          activeOpacity={0.5}
                           key={itm.id}
                           style={[{backgroundColor: (themeColor.background == '#121212') ? Colors.DarkGrey : Colors.White}, {borderColor: themeColor.background}, ESWStyles.singleExerciseBtn]}
                           onPress={() => props.setExercise(itm)} >
@@ -120,15 +170,15 @@ export default function ExerciseScrollView(props) {
 
   return (
     <SafeAreaView>
-      <Pressable onPress={() => FlatListRef.scrollToEnd()} style={ESWStyles.scrollToBottomBtn}>
+      <TouchableOpacity activeOpacity={0.5} onPress={() => FlatListRef.current?.scrollToEnd()} style={ESWStyles.scrollToBottomBtn}>
         <Image
           style={{height: 50, width: 50}}
           source={require('./../../data/images/black_white_arrow.png')}
           resizeMode="cover"/>
-      </Pressable>
+      </TouchableOpacity>
       { props.languageData ?
         <FlatList
-          ref={ref => FlatListRef = ref}
+          ref={FlatListRef}
           data={props.languageData.sections}
           renderItem={renderSubtopic}
           keyExtractor={(item) => item.id}
@@ -181,12 +231,22 @@ const ESWStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  circularProgressBar: {
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: 34
+  },
   subtopicItemImageContainer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',    
-    height: 110,
-    width: 110,
+    height: 115,
+    width: 115,
+    zIndex: 10,
+    borderRadius: 100
+  },
+  subtopicImageInnerContainer: {
+    borderWidth: 4,
     borderRadius: 100
   },
   subtopicItemImage: {
@@ -199,6 +259,7 @@ const ESWStyles = StyleSheet.create({
     padding: 10,
     borderRadius: 15,
     fontSize: 20,
+    zIndex: 20
   },
   singleExerciseContainer: {
     marginT: 10,
