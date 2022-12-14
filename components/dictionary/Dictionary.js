@@ -8,12 +8,17 @@ export default function Dictionary() {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
+  const [modalVisible3, setModalVisible3] = useState(false);
   const [word, setWord] = useState('');
   const [definition, setDefinition] = useState('');
   const [searchWord, setSearchWord] = useState('');
   const [searchWordN, setSearchWordN] = useState('');
   const [searchWordV, setSearchWordV] = useState('');
   const [searchWordA, setSearchWordA] = useState('');
+  const [searchWord2, setSearchWord2] = useState('');
+  const [example, setExample] = useState('');
+  const [example2, setExample2] = useState('');
+  const [example3, setExample3] = useState('');
 
 
   const options = {
@@ -25,6 +30,8 @@ export default function Dictionary() {
   };
 
 
+  //random word function
+  
   function close() {
 
     setModalVisible(false);
@@ -40,8 +47,6 @@ export default function Dictionary() {
          })
          */
   }
-
-
 
   function open() {
 
@@ -64,16 +69,7 @@ export default function Dictionary() {
   }
 
 
-  function close2() {
-    setModalVisible2(false);
-  }
-
-
-
-
-
-
-  //random word function 
+ 
   /*
     useEffect(() => {
       const url = 'https://wordsapiv1.p.rapidapi.com/words/?random=true';
@@ -115,6 +111,10 @@ export default function Dictionary() {
 
   //pronunciation function
 
+  function close2() {
+    setModalVisible2(false);
+  }
+
 
   useEffect(() => {
     const url2 = 'https://wordsapiv1.p.rapidapi.com/' +
@@ -132,6 +132,34 @@ export default function Dictionary() {
 
       )
   }, [modalVisible2])
+
+
+  //examples function
+
+  function close3() {
+    setModalVisible3(false);
+  }
+
+
+  useEffect(() => {
+    const url3 = 'https://wordsapiv1.p.rapidapi.com/' +
+      'words/' +
+      searchWord2 +
+      '/examples';
+    fetch(url3, options)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setExample(result.examples[0]);
+          setExample2(result.examples[1]);
+          setExample3(result.examples[2]);
+        
+        },
+
+      )
+  }, [modalVisible3])
+
+
 
 
 
@@ -206,8 +234,40 @@ export default function Dictionary() {
           </View>
 
           <View style={StyleSheet.bottomContainer}>
-            <Text style={StyleSheet.dictText}>Kolmas komponentti</Text>
+          <Text style={StyleSheet.random}>Esimerkit</Text>
+            <Text style={StyleSheet.dictText}>Opi esimerkkilauseita</Text>
+            <TextInput style={StyleSheet.textInPut} placeholder='Syötä tähän sana' value={searchWord2} onChangeText={text => setSearchWord2(text)} />
+            <View style={StyleSheet.pushContainer}>
+              <Modal
+                visible={modalVisible3}
+                onRequestClose={close3}
+              >
+                <View style={StyleSheet.modal}>
+                  <Text>Haettu sana</Text>
+                  <Text>{searchWord2}</Text>
+                  <Text>Esimerkkilauseita</Text>
+                  <Text>{example}</Text>
+                  <Text>{example2}</Text>
+                  <Text>{example3}</Text>
+                 
+                  <Pressable onPress={() => {
+                    setModalVisible3(false);
+                  }}>
+                    <Text style={StyleSheet.close}>Sulje</Text>
+                  </Pressable>
+                </View>
+              </Modal>
+
+              <Pressable onPress={() => {
+                setModalVisible3(true);
+              }}>
+                <Text style={StyleSheet.push}>PAINA TÄSTÄ</Text>
+              </Pressable>
+            </View>
           </View>
+
+
+       
         </ScrollView>
       </View>
 
