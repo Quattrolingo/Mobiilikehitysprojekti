@@ -1,21 +1,42 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Achievements() {
   
-var yhtpisteet = 200;
-var pisteet = 100;
-var pisteet1 = 50;
-var pisteet2 = 75;
-var pisteet3 = 30;
-var pisteet4 = 60;
-var tehtävä = 'Eläimet';
-var tehtävä1 = 'Perusteet';
-var tehtävä2 = 'Ruoka';
-var tehtävä3= 'Ympäristö';
-var tehtävä4 = 'Ihmiset';
+
+let yhtpisteet = [{nimi:'Ruoka', pisteet:'100'},{nimi:'Perusteet', pisteet:'200'},{nimi:'Ruoka', pisteet:'300'},{nimi:'Ruoka', pisteet:'300'},{nimi:'Ruoka', pisteet:'300'}];
+
+const [first, setfirst] = useState([{nimi:'', pisteet:''}])
+
+useEffect (() => {
+
+setFirstfivepoints()
+getFirstfivepoints()
+
+}, [])
+
+const setFirstfivepoints = async () => {
+  try{
+    await AsyncStorage.setItem('@Firstfivepoints', JSON.stringify(yhtpisteet))
+  } catch (e) {}
+}
+
+
+
+const getFirstfivepoints = async () => {
+  try{
+    const data = await AsyncStorage.getItem('@Firstfivepoints')
+    setfirst(JSON.parse(data)) 
+  } catch (e) {}
+}
+
+const getTotalpoints = async () => {
+  try{
+    await AsyncStorage.getItem('@Totalpoints') 
+  } catch (e) {}
+}
 
 
 
@@ -23,31 +44,26 @@ return (
       <View style={AchievementStyles.container}>
         <Text style={AchievementStyles.headline}> Saavutukset</Text>
         <Text style={AchievementStyles.text}>Hienoa! Olet saanut pisteitä yhteensä:</Text>
-        <Text style={AchievementStyles.points}>{yhtpisteet}</Text>
+        <Text style={AchievementStyles.points}></Text>
 
         <View style={AchievementStyles.headline2}>
           <Text style={AchievementStyles.text2}> Viimeiset 5 tehtävää</Text>
           <Text style={AchievementStyles.text2}> Tehtävä:          Pisteet:</Text>
         </View>
 
-        <View style={AchievementStyles.headline1}>
-          <View style={AchievementStyles.inputWrap}>
-            <Text style={AchievementStyles.text1}> {tehtävä}</Text>           
-            <Text style={AchievementStyles.text1}> {tehtävä1}</Text>
-            <Text style={AchievementStyles.text1}> {tehtävä2}</Text>
-            <Text style={AchievementStyles.text1}> {tehtävä3}</Text>
-            <Text style={AchievementStyles.text1}> {tehtävä4}</Text>
-          </View>
-
-          <View style={AchievementStyles.inputWrap}>
-            <Text style={AchievementStyles.text1}>    {pisteet}</Text>           
-            <Text style={AchievementStyles.text1}>    {pisteet1}</Text>
-            <Text style={AchievementStyles.text1}>    {pisteet2}</Text>
-            <Text style={AchievementStyles.text1}>    {pisteet3}</Text>
-            <Text style={AchievementStyles.text1}>    {pisteet4}</Text>
-          </View>
-        </View>
-
+        {
+          first.map((item, index) => {
+            return (
+            <View key={index} style={AchievementStyles.headline1}>
+              <View style={AchievementStyles.inputWrap}>
+              <Text style={AchievementStyles.text1}> {item.nimi}</Text>
+              </View>
+              <View style={AchievementStyles.inputWrap}>         
+              <Text style={AchievementStyles.text1}>    {item.pisteet}</Text>
+              </View>
+            </View>
+          )})
+        }
       </View>
     );
   }
