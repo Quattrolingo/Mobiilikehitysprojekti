@@ -5,48 +5,34 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Achievements() {
   
-let pisteita = '500';
-let yhtpisteet = [{nimi:'Perusteet', pisteet:'200'},{nimi:'Ruoka', pisteet:'200'},{nimi:'Ruoka', pisteet:'500'},{nimi:'Ruoka', pisteet:'400'},{nimi:'Ruoka', pisteet:'400'}];
 
 const [first, setfirst] = useState([{nimi:'', pisteet:''}])
 const [second, setsecond] = useState(0)
 
 useEffect (() => {
 
-setTotalpoints()
-setFirstfivepoints()
 getFirstfivepoints()
 getTotalpoints()
 
 }, [])
 
-const setFirstfivepoints = async () => {
-  try{
-    await AsyncStorage.setItem('@Firstfivepoints', JSON.stringify(yhtpisteet))
-  } catch (e) {}
-}
-
-
 const getFirstfivepoints = async () => {
   try{
     const data = await AsyncStorage.getItem('@Firstfivepoints')
-    setfirst(JSON.parse(data)) 
+    if (data != null){
+      setfirst(JSON.parse(data)) 
+    }
   } catch (e) {}
 }
 
 const getTotalpoints = async () => {
   try{
     const data = await AsyncStorage.getItem('@Totalpoints')
-    setsecond(JSON.parse(data)) 
+    if (data != null){
+      setsecond(JSON.parse(data)) 
+    }
   } catch (e) {}
 }
-
-const setTotalpoints = async () => {
-  try{
-    await AsyncStorage.setItem('@Totalpoints', pisteita) 
-  } catch (e) {}
-}
-
 
 
 return (
