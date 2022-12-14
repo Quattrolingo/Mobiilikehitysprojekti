@@ -5,15 +5,18 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Achievements() {
   
-
-let yhtpisteet = [{nimi:'Ruoka', pisteet:'100'},{nimi:'Perusteet', pisteet:'200'},{nimi:'Ruoka', pisteet:'300'},{nimi:'Ruoka', pisteet:'300'},{nimi:'Ruoka', pisteet:'300'}];
+let pisteita = '500';
+let yhtpisteet = [{nimi:'Perusteet', pisteet:'200'},{nimi:'Ruoka', pisteet:'200'},{nimi:'Ruoka', pisteet:'500'},{nimi:'Ruoka', pisteet:'400'},{nimi:'Ruoka', pisteet:'400'}];
 
 const [first, setfirst] = useState([{nimi:'', pisteet:''}])
+const [second, setsecond] = useState(0)
 
 useEffect (() => {
 
+setTotalpoints()
 setFirstfivepoints()
 getFirstfivepoints()
+getTotalpoints()
 
 }, [])
 
@@ -22,7 +25,6 @@ const setFirstfivepoints = async () => {
     await AsyncStorage.setItem('@Firstfivepoints', JSON.stringify(yhtpisteet))
   } catch (e) {}
 }
-
 
 
 const getFirstfivepoints = async () => {
@@ -34,17 +36,25 @@ const getFirstfivepoints = async () => {
 
 const getTotalpoints = async () => {
   try{
-    await AsyncStorage.getItem('@Totalpoints') 
+    const data = await AsyncStorage.getItem('@Totalpoints')
+    setsecond(JSON.parse(data)) 
+  } catch (e) {}
+}
+
+const setTotalpoints = async () => {
+  try{
+    await AsyncStorage.setItem('@Totalpoints', pisteita) 
   } catch (e) {}
 }
 
 
 
 return (
+      
       <View style={AchievementStyles.container}>
         <Text style={AchievementStyles.headline}> Saavutukset</Text>
         <Text style={AchievementStyles.text}>Hienoa! Olet saanut pisteitä yhteensä:</Text>
-        <Text style={AchievementStyles.points}></Text>
+        <Text style={AchievementStyles.points}>{second}</Text>
 
         <View style={AchievementStyles.headline2}>
           <Text style={AchievementStyles.text2}> Viimeiset 5 tehtävää</Text>
@@ -112,11 +122,10 @@ return (
       textAlign: 'left',
     },
     headline1: {
-      marginTop: 10,
       fontSize: 25,
       textAlign: 'center',
       width: "100%",
-      flex: 1,
+      display: 'flex',
       flexDirection: "row",
     },
     headline2: {
