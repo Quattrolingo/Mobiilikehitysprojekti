@@ -35,7 +35,7 @@ export default function Exercise(props) {
                 {props.UiTranslations.exercise.startingExercise}
             </Animated.Text>
         </View>
-    )    
+    )
 
     const handleBackButtonClick = (boolean) => {
         if(boolean == true){
@@ -76,11 +76,10 @@ export default function Exercise(props) {
         }
     }
 
-    const getCollectedXP = () => {
+    const getCollectedXP = () => {        
         if(parseInt(parseFloat(getSuccessRate()).toFixed(2) / 100) == 1){ // if success rate 100%, return points equal to 2x the amount of questions completed
             return props.exercise.questions.length * 2
         } else { // If success rate lower than 100%, return the sum of the amount of questions and the success rate converted to a hundredth part
-
             return parseInt(props.exercise.questions.length + (parseFloat(getSuccessRate()).toFixed(2) / 10))        
         }
     }
@@ -92,8 +91,13 @@ export default function Exercise(props) {
             correctAnswers: strikeStatus
         }))
         setCurrentQuestion(props.exercise.questions[questionsDone])
-
     }, [questionsDone, strikeStatus])
+
+    useEffect(() => {
+        if(progressBar.currentState == progressBar.maxState){
+            props.setPointsFromLastExercise(getCollectedXP())
+        }
+    }, [progressBar])
 
     useEffect(() => {
         const interval = setInterval(() => {setSeconds(seconds => seconds + 1)}, 1000)

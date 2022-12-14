@@ -76,6 +76,8 @@ export default function Profile(props) {
       await AsyncStorage.setItem('@theme_backgroundColor', Colors.DarkYellow)      
       await AsyncStorage.removeItem('@soundSettings')
       await AsyncStorage.removeItem('@completed_exercises')
+      await AsyncStorage.removeItem('@Totalpoints')
+      await AsyncStorage.removeItem('@Firstfivepoints')
       props.modifyAppSettings(prevState => ({
         ...prevState,
         themeColorOptions: {

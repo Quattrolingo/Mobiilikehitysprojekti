@@ -109,9 +109,9 @@ return (
     },
     headline1: {
       fontSize: 25,
+      display: 'flex',
       textAlign: 'center',
       width: "100%",
-      display: 'flex',
       flexDirection: "row",
     },
     headline2: {

@@ -14,6 +14,7 @@ export default function App() {
   const [appSettings, setAppSettings] = useState({ themeColorOptions: { background: Colors.DarkYellow }, soundOn: true })
   const [UiTranslations, setUiTranslations] = useState(LanguageData.courseData.ui_translations)
   const [loaded, setLoaded] = useState(false)
+  const [pointsFromLastExercise, setPointsFromLastExercise] = useState(0)
 
   const getAppSettings = async () => {
     try {
@@ -59,19 +60,31 @@ export default function App() {
 
   const exerciseCompleted = async () => {
     try {
+        const totalPoints = await AsyncStorage.getItem('@Totalpoints')
         const previousExerciseData = await AsyncStorage.getItem('@completed_exercises')
+
+        if(totalPoints != null){      
+          try {
+            let newTotalPoints = JSON.parse(totalPoints) + pointsFromLastExercise
+            await AsyncStorage.setItem('@Totalpoints', JSON.stringify(newTotalPoints))            
+          } catch (e) {}
+        } else {
+          try {
+            await AsyncStorage.setItem('@Totalpoints', JSON.stringify(pointsFromLastExercise))
+          } catch(e) {} 
+        }
+
         if(previousExerciseData !== null) {
             let modifiablePreviousExerciseData = JSON.parse(previousExerciseData)
             if(modifiablePreviousExerciseData.includes(exercise.uniqueID)){
                 // do nothing
             } else {
-                modifiablePreviousExerciseData.push(exercise.uniqueID)
-                try {
-                    await AsyncStorage.setItem('@completed_exercises', JSON.stringify(modifiablePreviousExerciseData))
-                    console.log("add to array")
-                } catch(e) {
-                    ToastAndroid.show(e, ToastAndroid.SHORT)
-                }                    
+              modifiablePreviousExerciseData.push(exercise.uniqueID)
+              try {
+                  await AsyncStorage.setItem('@completed_exercises', JSON.stringify(modifiablePreviousExerciseData))
+              } catch(e) {
+                  ToastAndroid.show(e, ToastAndroid.SHORT)
+              }                    
             }                
         } else {
             try {
@@ -90,7 +103,9 @@ export default function App() {
       {
         loaded ?
         <>
-          <StatusBar barStyle={'dark-content'} backgroundColor={(appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : appSettings.themeColorOptions.background}/>
+          <StatusBar
+            barStyle={(appSettings.themeColorOptions.background == Colors.DarkTheme) ? 'light-content' : 'dark-content'}
+            backgroundColor={(appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : appSettings.themeColorOptions.background}/>
           {
             exercise ? 
             <Exercise
@@ -99,6 +114,7 @@ export default function App() {
               appSettings={appSettings}
               UiTranslations={UiTranslations}
               exerciseCompleted={exerciseCompleted}
+              setPointsFromLastExercise={setPointsFromLastExercise}
             />
             :
             <MainView
