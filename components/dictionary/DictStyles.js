@@ -7,7 +7,6 @@ export default StyleSheet.create({
       width: "100%",
       backgroundColor: 'orange',   
       alignItems: 'center',
-      
     },
     headline: {
       marginTop: 20,
@@ -16,7 +15,7 @@ export default StyleSheet.create({
       fontFamily: 'monospace',
       backgroundColor: "darkorange",
     },
-    DictText: {
+    dictText: {
       fontFamily: 'monospace',
       fontSize: 15,
       fontWeight: 'bold',
@@ -25,27 +24,25 @@ export default StyleSheet.create({
       textAlign: 'center',
     },
     random: {
-      marginTop: 50,
-      fontSize: 20,
+      marginTop: 30,
+      fontSize: 25,
       fontWeight: 'bold',
       fontFamily: 'monospace',
       textDecorationLine: "underline",
     },
-    BtnContainer: {
+    /*BtnContainer: {
       width: "60%",
       height: "10%",
       backgroundColor: 'black',
       alignItems: "center",
       justifyContent: "space-around",
-    },
+    },*/
 
 
-    container: {
+    pushContainer: {
       marginTop: 20,
-      backgroundColor: 'orange',
       alignItems: 'center',
       justifyContent: 'center',
-      
     },
     mainContainer: {
       flex: 1,
@@ -53,12 +50,28 @@ export default StyleSheet.create({
       padding: 20,
       margin: 10,
     },
-    rndContainer: {
-      flex: 0.35,
+    topContainer: {
+      flex: 0.3,
       backgroundColor: 'beige',
       borderWidth: 5,
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
+      alignItems: 'center',
+      paddingBottom: 15,
+    },
+    middleContainer: {
+      flex: 0.3,
+      backgroundColor: "pink",
+      borderWidth: 5,
+      alignItems: 'center',
+      paddingBottom: 30,
+    },
+    bottomContainer: {
+      flex: 0.3,
+      backgroundColor: "peachpuff",
+      borderWidth: 5,
+      borderBottomLeftRadius: 20,
+      borderBottomRightRadius: 20,
       alignItems: 'center',
     },
     modal: {
@@ -84,7 +97,20 @@ export default StyleSheet.create({
       textShadowColor: 'indianred',
       textShadowOffset: {width: 5, height: 5},
       textShadowRadius: 5,
-     
-    }
+    },
+    searchBox: {
+      marginBottom: 20,
+      borderColor: '#333',
+      borderWidth: 1,
+      padding: 5,
+    },
+    textInPut: {
+      borderColor: 'black',
+      borderWidth: 1,
+      borderRadius: 10,
+      width: 170,
+      height: 40,
+      textAlign: 'center',
+    },
 
 });
