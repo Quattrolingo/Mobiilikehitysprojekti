@@ -18,7 +18,7 @@ export default function Profile(props) {
   
   return (
     <Provider>
-      <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White}, ProfileStyles.container]}>
+      <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, ProfileStyles.container]}>
         {
           settingsVisible ? 
           <Settings
@@ -27,14 +27,15 @@ export default function Profile(props) {
             modifyAppSettings={props.modifyAppSettings}
             UiTranslations={props.UiTranslations}
             navBarVisibility={props.navBarVisibility}
-            setSettingsVisible={setSettingsVisible}/>
+            setSettingsVisible={setSettingsVisible}
+            setCurrentView={props.setCurrentView} />
           :
           <View style={{paddingTop: 55}}>
-            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White}, ProfileStyles.header]}>
-              <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.DarkerGrey}, ProfileStyles.headerText]}>
+            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, ProfileStyles.header]}>
+              <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkerGrey}, ProfileStyles.headerText]}>
                 {props.UiTranslations.profile.heading}
               </Text>
-              <TouchableOpacity style={ProfileStyles.settingsIconContainer} onPress={() => setSettingsVisible(!settingsVisible)}>
+              <TouchableOpacity style={ProfileStyles.settingsIconContainer} activeOpacity={0.5} onPress={() => setSettingsVisible(!settingsVisible)}>
                 <Image style={ProfileStyles.settingsIcon} source={require('./../../data/images/settings_icon.png')} />
               </TouchableOpacity>
             </View>

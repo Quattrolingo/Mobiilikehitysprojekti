@@ -39,7 +39,8 @@ export default function MainView(props) {
               appSettings={props.appSettings}
               modifyAppSettings={props.modifyAppSettings}
               UiTranslations={props.UiTranslations}
-              navBarVisibility={setNavBarVisible}/>
+              navBarVisibility={setNavBarVisible}
+              setCurrentView={setCurrentView}/>
   } else if(currentView == "Dictionary"){
     data = <Dictionary UiTranslations={props.UiTranslations} />
   }

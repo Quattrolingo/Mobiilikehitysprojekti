@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity, Animated } from 'react-native'
 import { useState, useEffect, useRef } from 'react'
-import TranslateSentence from './QuestionTypes/TranslateSentence'
+import TranslateSentenceDrag from './QuestionTypes/TranslateSentenceDrag'
 import SelectMissingWord from './QuestionTypes/SelectMissingWord'
 import HowToSay from './QuestionTypes/HowToSay'
 import SelectPairs from './QuestionTypes/SelectPairs'
@@ -8,6 +8,8 @@ import SelectCorrectWord from './QuestionTypes/SelectCorrectWord'
 import Colors from './../../assets/Colors'
 
 export default function SingleQuestion(props) {
+
+    // KNOWN BUG: CAN'T SET select_pairs AS FIRST EXERCISE OF AN EXERCISE SET => PROGRESS WONT BE RECOGNIZED CORRECTLY IN checkAnswer() FUNCTION
 
     const [componentToDisplay, setComponentToDisplay] = useState(null)
     const [confirmAnswerBtnVisible, setConfirmAnswerBtnVisible] = useState(false)
@@ -20,17 +22,19 @@ export default function SingleQuestion(props) {
         feedbackAnimation, {
             toValue: 1,
             duration: 300,
-            useNativeDriver: false,
+            useNativeDriver: true,
         }).start()
     }
+
     const checkAnswer = () => {
         if(userAnswer == true){            
             props.correctlyAnswered()
+            props.incrementCorrectAnswers() 
             setConfirmAnswerBtnVisible(false)
             setResultVisible(true)
-            fadeView()        
+            fadeView()             
         } else {
-            //props.questionCompleted()
+            props.incorrectAnswer()
             setConfirmAnswerBtnVisible(false)
             setResultVisible(true)
             fadeView()
@@ -45,20 +49,20 @@ export default function SingleQuestion(props) {
             feedbackAnimation, {
                 toValue: 0,
                 duration: 0,
-                useNativeDriver: false,
-            }).start()
+                useNativeDriver: true,
+            }
+        ).start()
     }
 
     useEffect(() => {
-        if(props.questionData.type == "translate_sentence"){
+        if(props.questionData.type == "translate_sentence_drag"){
             setComponentToDisplay(
-                <TranslateSentence
+                <TranslateSentenceDrag
                     data={props.questionData}
-                    showCheckAnswer={() => setConfirmAnswerBtnVisible(true)}
+                    showCheckAnswer={setConfirmAnswerBtnVisible}
                     submittedAnswerIsCorrect={setUserAnswer}
                     canContinueExercise={resultVisible} />
             )
-            nextQuestion()
         } else if(props.questionData.type == "select_missing_word"){
             setComponentToDisplay(
                 <SelectMissingWord
@@ -79,7 +83,7 @@ export default function SingleQuestion(props) {
             setComponentToDisplay(
                 <SelectPairs
                     data={props.questionData}
-                    showCheckAnswer={() => setConfirmAnswerBtnVisible(true)}
+                    checkAnswer={() => checkAnswer()}
                     submittedAnswerIsCorrect={setUserAnswer}
                     canContinueExercise={resultVisible} />
             )
@@ -97,38 +101,49 @@ export default function SingleQuestion(props) {
     return (
       <View style={QuestionStyles.container}>
         <View>
-            <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.Black},
+            <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black},
                            QuestionStyles.questionTask]}>
                             {props.questionData.task}
             </Text>
             {
                 props.questionData.sentence &&
-                <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.White : Colors.Black},
+                <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black},
                       QuestionStyles.questionSentence]}>
                     {props.questionData.sentence.replace('*', '_____')}
                 </Text>
             }
         </View>
-        <View style={{paddingLeft: 25, paddingRight: 25}}>
+        <View style={{paddingLeft: 20, paddingRight: 20}}>
             { componentToDisplay }
         </View>
         <View style={QuestionStyles.confirmAnswerContainer}>
             { 
                 confirmAnswerBtnVisible &&
-                <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.LightGrey : props.appSettings.themeColorOptions.background}, QuestionStyles.confirmAnswerInnerContainer]}>
+                <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.LightGrey : props.appSettings.themeColorOptions.background}, QuestionStyles.confirmAnswerInnerContainer]}>
                     <TouchableOpacity style={QuestionStyles.confirmAnswerBtnContainer} activeOpacity={0.5} onPress={() => checkAnswer()}>
-                        <Text style={[{color: (props.appSettings.themeColorOptions.background == '#121212') ? Colors.Black : Colors.White}, QuestionStyles.btnText]}>{props.UiTranslations.checkAnswer}</Text>
+                        <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.Black : Colors.White}, QuestionStyles.btnText]}>{props.UiTranslations.checkAnswer}</Text>
                     </TouchableOpacity>
                 </View>
             }
-            { 
+            {
+                (resultVisible && userAnswer) && props.questionData.type == "select_missing_word" ?                
+                <><Animated.View style={[QuestionStyles.feedbackCorrectBackground, {opacity: feedbackAnimation}]}>
+                    <Text style={QuestionStyles.feedbackTextCorrect}>{props.UiTranslations.correct_and_meaning}</Text>
+                    <Text style={QuestionStyles.meaning}>{props.questionData.meaning}</Text>
+                </Animated.View>
+                <View style={QuestionStyles.feedbackCorrectBtn}>
+                    <TouchableOpacity style={QuestionStyles.feedbackCorrect} activeOpacity={0.5} onPress={() => nextQuestion()}>
+                        <Text style={[{color: Colors.White}, QuestionStyles.btnText]}>{props.UiTranslations.continue}</Text>
+                    </TouchableOpacity>
+                </View></>
+                :
                 (resultVisible && userAnswer) &&
                 <><Animated.View style={[QuestionStyles.feedbackCorrectBackground, {opacity: feedbackAnimation}]}>
                     <Text style={QuestionStyles.feedbackTextCorrect}>{props.UiTranslations.correct}</Text>
                 </Animated.View>
                 <View style={QuestionStyles.feedbackCorrectBtn}>
                     <TouchableOpacity style={QuestionStyles.feedbackCorrect} activeOpacity={0.5} onPress={() => nextQuestion()}>
-                        <Text style={QuestionStyles.btnText}>{props.UiTranslations.continue}</Text>
+                        <Text style={[{color: Colors.White}, QuestionStyles.btnText]}>{props.UiTranslations.continue}</Text>
                     </TouchableOpacity>
                 </View></>
             }
@@ -137,11 +152,16 @@ export default function SingleQuestion(props) {
                 <><Animated.View style={[QuestionStyles.feedbackIncorrectBackground, {opacity: feedbackAnimation}]}>
                     <Text style={QuestionStyles.feedbackTextIncorrect}>{props.UiTranslations.notQuite}</Text>
                     <Text style={QuestionStyles.feedbackTextIncorrect}>{props.UiTranslations.correctAnswer}</Text>
-                    <Text style={QuestionStyles.feedbackTextAnswer}>{props.questionData.answer}</Text>                    
+                    {
+                        props.questionData.type == "translate_sentence_drag" ?
+                        <Text style={QuestionStyles.feedbackTextAnswer}>{props.questionData.answer.join(' ')}</Text>
+                        :
+                        <Text style={QuestionStyles.feedbackTextAnswer}>{props.questionData.answer}</Text>
+                    }                   
                 </Animated.View>
                 <View style={QuestionStyles.feedbackIncorrectBtn}>
                     <TouchableOpacity style={QuestionStyles.feedbackIncorrect} activeOpacity={0.5} onPress={() => nextQuestion()}>
-                        <Text style={QuestionStyles.btnText}>{props.UiTranslations.continue}</Text>
+                        <Text style={[{color: Colors.White}, QuestionStyles.btnText]}>{props.UiTranslations.continue}</Text>
                     </TouchableOpacity>
                 </View></>
             }
@@ -156,7 +176,7 @@ const QuestionStyles = StyleSheet.create({
       flexDirection: 'column',
       width: '100%',
       height: '100%',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
     },
     questionTask: {
         fontWeight: 'bold',
@@ -251,5 +271,10 @@ const QuestionStyles = StyleSheet.create({
         fontSize: 20,
         marginLeft: 40,
         color: Colors.Black
+    },
+    meaning: {
+        fontSize: 20,
+        marginLeft: 40,
+        marginRight: 40,
     }
 })

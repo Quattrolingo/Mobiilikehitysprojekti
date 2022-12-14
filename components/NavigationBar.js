@@ -4,7 +4,7 @@ import Colors from '../assets/Colors'
 export default function NavigationBar({setView, view, appSettings}) {
   
     return (
-      <View style={[{backgroundColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White}, NavBarStyles.container]}>
+      <View style={[{backgroundColor: (appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, NavBarStyles.container]}>
         <Pressable onPress={() => setView("ExerciseScrollView")}>
           {
             (view == "ExerciseScrollView") ?
@@ -15,8 +15,8 @@ export default function NavigationBar({setView, view, appSettings}) {
             </View>
             :
             <View style={[
-                    {backgroundColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
-                    {borderColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
+                    {backgroundColor: (appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White},
+                    {borderColor: (appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White},
                     NavBarStyles.navbarBtnInactive
                   ]}>
               <Image   
@@ -35,8 +35,8 @@ export default function NavigationBar({setView, view, appSettings}) {
             </View>
             :
             <View style={[
-                    {backgroundColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
-                    {borderColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
+                    {backgroundColor: (appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White},
+                    {borderColor: (appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White},
                     NavBarStyles.navbarBtnInactive
                   ]}>
               <Image
@@ -55,8 +55,8 @@ export default function NavigationBar({setView, view, appSettings}) {
             </View>
             :
             <View style={[
-                    {backgroundColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
-                    {borderColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
+                    {backgroundColor: (appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White},
+                    {borderColor: (appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White},
                     NavBarStyles.navbarBtnInactive
                   ]}>
               <Image
@@ -75,8 +75,8 @@ export default function NavigationBar({setView, view, appSettings}) {
             </View>
             :
             <View style={[
-                    {backgroundColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
-                    {borderColor: (appSettings.themeColorOptions.background == '#121212') ? Colors.DarkTheme : Colors.White},
+                    {backgroundColor: (appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White},
+                    {borderColor: (appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White},
                     NavBarStyles.navbarBtnInactive
                   ]}>
               <Image

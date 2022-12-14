@@ -7,11 +7,20 @@
     "ui_translations": {
       "exercise": {
           "startingExercise": "Käynnistetään harjoitus",
+          "quitExerciseTitle": "Poistu harjoituksesta?",
+          "quitExerciseMessage": "Saavutuksiasi ei tallenneta..",
+          "quitExerciseBtn": "LOPETA HARJOITUS",
+          "stayInExerciseBtn": "JATKA HARJOITUSTA",
           "checkAnswer": "TARKISTA VASTAUS",
           "correct": "Oikein!",
+          "correct_and_meaning": "Oikein! Käännös:",
           "continue": "JATKA",
           "notQuite": "Ei aivan..",
-          "correctAnswer": "Oikea vastaus olisi:"
+          "correctAnswer": "Oikea vastaus olisi: ",
+          "exerciseCompleted": "Harjoitus suoritettu!",
+          "successRate": "ONNISTUMISPROSENTTI",
+          "timePassed": "KÄYTETTY AIKA",
+          "collectedXp": "SAADUT PISTEET"
       },
       "home": {
           "loadingExerciseScrollViewData": "Ladataan tietoja..."
@@ -28,7 +37,14 @@
           "general": "Yleiset",
           "theme": "Teemaväri",
           "languageCourse": "Kielikurssi",
-          "cancel": "PERUUTA"
+          "cancel": "PERUUTA",
+          "darkMode": "Tumma tila",
+          "deleteAppData": "Tyhjennä käyttäjätiedot",
+          "deleteAppDataDialogTitle": "Sovelluksen tietojen poistaminen",
+          "deleteAppDataDialogMessage": "Kaikki tietosi, mukaan lukien saavutuksesi poistetaan. Haluatko jatkaa?",
+          "yesBtn": "KYLLÄ",
+          "noBtn": "EI",
+          "userDataDeleted": "Tietosi poistettiin"
       },
       "dictionary": {
   
@@ -46,21 +62,22 @@
           "name": "Persoonapronominit",
           "levels": 2,
           "lessons": 2,
-          "picture":"subtopic_icon_people.png",
+          "picture": "subtopic_icon_people.png",
           "exercises": [
             {
               "id": "1",
               "uniqueID": "8932489he",
               "definition": {
                 "name": "Perusteet",
-                "picture":"subtopic_icon_people.png"
+                "picture": "subtopic_icon_people.png"
               },
-              "questions":[
+              "questions": [
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"Hi! * am Charles.",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "Hi! * am Charles.",
+                  "meaning": "Hei! Minä olen Charles",
+                  "words": [  
                     { "id": "1", "word": "I" },
                     { "id": "2", "word": "You" }
                   ],
@@ -68,9 +85,10 @@
                 },
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"* are Michael.",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "* are Michael.",
+                  "meaning": "Sinä olet Michael",
+                  "words": [  
                     { "id": "1", "word": "I" },
                     { "id": "2", "word": "You" },
                     { "id": "3", "word": "We" }
@@ -78,57 +96,58 @@
                   "answer": ["You"]
                 },
                 {
-                  "type": "translate_sentence",
-                  "task":"Käännä lause",
-                  "sentence":"Terve! Kuka sinä olet?",
-                  "words":[  
-                    { "id": "1", "word": "Hello!" },
-                    { "id": "2", "word": "Who" },
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "Terve! Kuka sinä olet?",
+                  "words": [  
+                    { "id": "1", "word": "Hello" },
+                    { "id": "2", "word": "who" },
                     { "id": "3", "word": "are" },
-                    { "id": "4", "word": "you?" },
+                    { "id": "4", "word": "you" },
                     { "id": "5", "word": "is" },
                     { "id": "6", "word": "Where" },
                     { "id": "7", "word": "were" }
                   ],
-                  "answer":["Hello!", "Who" ,"are","you?"]
+                  "answer": ["Hello", "who" ,"are","you"]
                 },
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana.",
-                  "sentence":"* are going to the store.",
-                  "words":[  
+                  "task": "Valitse puuttuva sana.",
+                  "sentence": "* are going to the store.",
+                  "meaning": "Me olemme menossa kauppaan",
+                  "words": [  
                     { "id": "1", "word": "I" },
                     { "id": "2", "word": "We" }
                   ],
-                  "answer":["We"]
+                  "answer": ["We"]
                 },
                 {
                   "type": "how_to_say",
-                  "task":"Kuinka sanotaan \"hän\" (miehestä)?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Kuinka sanotaan \"hän\" (miehestä)?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "He" },
                     { "id": "2", "word": "She" },
                     { "id": "3", "word": "We" }
                   ],
-                  "answer":["He"]
+                  "answer": ["He"]
                 },
                 {
-                  "type": "translate_sentence",
-                  "task":"Käännä lause",
-                  "sentence":"I am Rose.",
-                  "words":[  
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "I am Rose.",
+                  "words": [  
                     { "id": "1", "word": "I" },
                     { "id": "2", "word": "am" },
                     { "id": "3", "word": "Rose" }
                   ],
-                  "answer":["He"]
+                  "answer": ["I", "am", "Rose"]
                 },
                 {
-                  "type": "translate_sentence",
-                  "task":"Käännä lause",
-                  "sentence":"He ovat aina iloisia.",
-                  "words":[  
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "He ovat aina iloisia.",
+                  "words": [  
                     { "id": "1", "word": "They" },
                     { "id": "2", "word": "are" },
                     { "id": "3", "word": "We" },
@@ -138,18 +157,18 @@
                     { "id": "7", "word": "sad" },
                     { "id": "8", "word": "is" }
                   ],
-                  "answer":["They", "are", "always", "happy"]
+                  "answer": ["They", "are", "always", "happy"]
                 },
                 {
                   "type": "how_to_say",
-                  "task":"Kuinka sanotaan \"hän\" (naisesta)?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Kuinka sanotaan \"hän\" (naisesta)?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "He" },
                     { "id": "2", "word": "She" },
                     { "id": "3", "word": "We" }
                   ],
-                  "answer":["She"]
+                  "answer": ["She"]
                 }
               ]
             },
@@ -158,36 +177,14 @@
               "uniqueID": "8ertute",
               "definition": {
                 "name": "Omistusmuodot",
-                "picture":"subtopic_icon_people.png"
+                "picture": "subtopic_icon_people.png"
               },
-              "questions":[
+              "questions": [
                 {
-                  "type": "select_pairs",
-                  "task":"Valitse parit",
-                  "sentence":"",
-                  "words":{
-                    "national":[
-                      { "id": "1", "word": "minun" },
-                      { "id": "2", "word": "sinun" },
-                      { "id": "3", "word": "hänen (mies)" },
-                      { "id": "4", "word": "hänen (nainen)" },
-                      { "id": "5", "word": "heidän" }
-                    ],
-                    "foreign": [
-                      { "id": "1", "word": "my" },
-                      { "id": "2", "word": "your" },
-                      { "id": "3", "word": "her" },
-                      { "id": "4", "word": "his" },
-                      { "id": "5", "word": "their" }
-                    ]
-                  },
-                  "answer":[]
-                },
-                {
-                  "type": "translate_sentence",
-                  "task":"Käännä lause",
-                  "sentence":"This is my phone. ",
-                  "words":[  
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "This is my phone. ",
+                  "words": [  
                     { "id": "1", "word": "Tämä" },
                     { "id": "2", "word": "on" },
                     { "id": "3", "word": "minun" },
@@ -196,7 +193,7 @@
                     { "id": "6", "word": "hänen" },
                     { "id": "7", "word": "Tuo" }
                   ],
-                  "answer":["Tämä", "on" ,"minun","puhelin"]
+                  "answer": ["Tämä", "on" ,"minun","puhelin"]
                 }
               ]
             }
@@ -208,22 +205,34 @@
           "name": "Numerot",
           "levels": 1,
           "lessons": 1,
-          "picture":"subtopic_icon_numbers.png",
+          "picture": "subtopic_numbers.png",
           "exercises": [
             {
               "id": "1",
               "uniqueID": "34href89he",
               "definition": {
                 "name": "Numerot",
-                "picture":"subtopic_icon_numbers.png"
+                "picture": "subtopic_numbers.png"
               },
-              "questions":[
+              "questions": [
+                {
+                  "type": "select_missing_word",
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "The price is * euros",
+                  "meaning": "Hinta on sata euroa",
+                  "words": [  
+                  { "id": "1", "word": "hundred" },
+                  { "id": "2", "word": "hunger" },
+                  { "id": "3", "word": "hunted" }           
+                ],
+                "answer": ["hundred"]
+                },
                 {
                   "type": "select_pairs",
-                  "task":"Valitse parit",
-                  "sentence":"",
-                  "words":{  
-                    "national":[
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
                       { "id": "1", "word": "yksi" },
                       { "id": "2", "word": "kaksi" },
                       { "id": "3", "word": "kolme" },
@@ -238,25 +247,14 @@
                       { "id": "5", "word": "five" }
                     ]
                   },
-                  "answer":[]
-                },
-                {
-                  "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"The price is * euros",
-                  "words":[  
-                  { "id": "1", "word": "hundred" },
-                  { "id": "2", "word": "hunger" },
-                  { "id": "3", "word": "hunted" }           
-                ],
-                "answer":["hundred"]
+                  "answer": null
                 },
                 {
                   "type": "select_pairs",
-                  "task":"Valitse parit",
-                  "sentence":"",
-                  "words":{  
-                    "national":[
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
                       { "id": "1", "word": "kuusi" },
                       { "id": "2", "word": "seitsemän" },
                       { "id": "3", "word": "kahdeksan" },
@@ -271,7 +269,7 @@
                       { "id": "5", "word": "ten" }
                     ]
                   },
-                  "answer":[]
+                  "answer": null
                 }
               ]
             }
@@ -289,21 +287,21 @@
           "name": "Villieläimet",
           "levels": 1,
           "lessons": 1,
-          "picture":"subtopic_icon_wild_animals.png",
+          "picture": "subtopic_icon_wild_animals.png",
           "exercises": [
             {
               "id": "1",
               "uniqueID": "89eryu9he",
               "definition": {
                 "name": "Villieläimet",
-                "picture":"subtopic_icon_wild_animals.png"
+                "picture": "subtopic_icon_wild_animals.png"
               },
-              "questions":[
+              "questions": [
                 {
                   "type": "select_correct_word",
-                  "task":"Mikä näistä on \"karhu\"?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Mikä näistä on \"karhu\"?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "bear" },
                     { "id": "2", "word": "wolf" },
                     { "id": "3", "word": "sheep" },
@@ -312,13 +310,13 @@
                     { "id": "6", "word": "gulf" },
                     { "id": "7", "word": "spider" }
                   ],
-                  "answer":["bear"]
+                  "answer": ["bear"]
                 },
                 {
                   "type": "select_correct_word",
-                  "task":"Mikä näistä on \"susi\"?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Mikä näistä on \"susi\"?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "bear" },
                     { "id": "2", "word": "wolf" },
                     { "id": "3", "word": "sheep" },
@@ -327,13 +325,13 @@
                     { "id": "6", "word": "gulf" },
                     { "id": "7", "word": "spider" }
                   ],
-                  "answer":["wolf"]
+                  "answer": ["wolf"]
                 },
                 {
                   "type": "select_correct_word",
-                  "task":"Mikä näistä on \"elefantti\"?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Mikä näistä on \"elefantti\"?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "elephant" },
                     { "id": "2", "word": "wolf" },
                     { "id": "3", "word": "evident" },
@@ -342,14 +340,14 @@
                     { "id": "6", "word": "gulf" },
                     { "id": "7", "word": "spider" }
                   ],
-                  "answer":["elephant"]
+                  "answer": ["elephant"]
                 },
                 {
                   "type": "select_pairs",
-                  "task":"Valitse parit",
-                  "sentence":"",
-                  "words":{  
-                    "national":[
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
                       { "id": "1", "word": "leijona" },
                       { "id": "2", "word": "hirvi" },
                       { "id": "3", "word": "apina" },
@@ -362,7 +360,7 @@
                       { "id": "4", "word": "fox" }
                     ]
                   },
-                  "answer":[]
+                  "answer": null
                 }
               ]
             },
@@ -371,15 +369,28 @@
               "uniqueID": "8ryudfg9he",
               "definition": {
                 "name": "Villieläimet 2",
-                "picture":"subtopic_icon_wild_animals.png"
+                "picture": "subtopic_icon_wild_animals.png"
               },
-              "questions":[
+              "questions": [
+                {
+                  "type": "select_correct_word",
+                  "task": "Mikä näistä on \"tiikeri\"?",
+                  "sentence": "",
+                  "words": [  
+                    { "id": "1", "word": "elephant" },
+                    { "id": "2", "word": "wolf" },
+                    { "id": "3", "word": "tiger" },
+                    { "id": "4", "word": "bear" },
+                    { "id": "5", "word": "elefant" }
+                  ],
+                  "answer": ["tiger"]
+                },
                 {
                   "type": "select_pairs",
-                  "task":"Valitse parit",
-                  "sentence":"",
-                  "words":{  
-                    "national":[
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
                       { "id": "1", "word": "tiikeri" },
                       { "id": "2", "word": "kirahvi" },
                       { "id": "3", "word": "lepakko" },
@@ -394,7 +405,7 @@
                       { "id": "5", "word": "polar bear" }
                     ]
                   },
-                  "answer":[]
+                  "answer": null
                 }
               ]
             }
@@ -405,7 +416,7 @@
           "name": "Kotieläimet",
           "levels": 1,
           "lessons": 1,
-          "picture":"subtopic_icon_domestic_animals.png", 
+          "picture": "subtopic_icon_domestic_animals.png", 
           "uniqueID": "a8sd9g798",
           "exercises": [
             {
@@ -413,14 +424,14 @@
               "uniqueID": "89eryu9he",
               "definition": {
                 "name": "Kotieläimet",
-                "picture":"subtopic_icon_domestic_animals.png"
+                "picture": "subtopic_icon_domestic_animals.png"
               },
-              "questions":[
+              "questions": [
                 {
                   "type": "select_correct_word",
-                  "task":"Mikä näistä on \"koira\"?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Mikä näistä on \"koira\"?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "cat" },
                     { "id": "2", "word": "dog" },
                     { "id": "3", "word": "sheep" },
@@ -428,13 +439,13 @@
                     { "id": "5", "word": "bat" },
                     { "id": "6", "word": "frog" }
                   ],
-                  "answer":["dog"]
+                  "answer": ["dog"]
                 },
                 {
                   "type": "select_correct_word",
-                  "task":"Mikä näistä on \"kissa\"?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Mikä näistä on \"kissa\"?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "cat" },
                     { "id": "2", "word": "dog" },
                     { "id": "3", "word": "sheep" },
@@ -442,13 +453,13 @@
                     { "id": "5", "word": "bat" },
                     { "id": "6", "word": "frog" }
                   ],
-                  "answer":["cat"]
+                  "answer": ["cat"]
                 },
                 {
                   "type": "select_correct_word",
-                  "task":"Mikä näistä on \"hevonen\"?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Mikä näistä on \"hevonen\"?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "horse" },
                     { "id": "2", "word": "wolf" },
                     { "id": "3", "word": "dog" },
@@ -457,14 +468,14 @@
                     { "id": "6", "word": "gulf" },
                     { "id": "7", "word": "spider" }
                   ],
-                  "answer":["horse"]
+                  "answer": ["horse"]
                 },
                 {
                   "type": "select_pairs",
-                  "task":"Valitse parit",
-                  "sentence":"",
-                  "words":{  
-                    "national":[
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
                       { "id": "1", "word": "koira" },
                       { "id": "2", "word": "kissa" },
                       { "id": "3", "word": "hevonen" },
@@ -479,7 +490,7 @@
                       { "id": "5", "word": "donkey" }
                     ]
                   },
-                  "answer":[]
+                  "answer": null
                 }
               ]
             }
@@ -497,21 +508,21 @@
           "name": "Ruoka-ainekset",
           "levels": 1,
           "lessons": 1,
-          "picture":"subtopic_icon_food.png",
+          "picture": "subtopic_icon_food.png",
           "exercises": [
             {
               "id": "1",
               "uniqueID": "89eryu9he",
               "definition": {
                 "name": "Ruoka-ainekset",
-                "picture":"subtopic_icon_food.png"
+                "picture": "subtopic_icon_food.png"
               },
-              "questions":[
+              "questions": [
                 {
                   "type": "select_correct_word",
-                  "task":"Mikä näistä on \"peruna\"?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Mikä näistä on \"peruna\"?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "potato" },
                     { "id": "2", "word": "tomato" },
                     { "id": "3", "word": "rice" },
@@ -519,13 +530,13 @@
                     { "id": "5", "word": "milk" },
                     { "id": "6", "word": "pasta" }
                   ],
-                  "answer":["potato"]
+                  "answer": ["potato"]
                 },
                 {
-                  "type": "translate_sentence",
-                  "task":"Käännä lause",
-                  "sentence":"I don't like fish",
-                  "words":[  
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "I don't like fish",
+                  "words": [  
                     { "id": "1", "word": "Minä" },
                     { "id": "2", "word": "en" },
                     { "id": "3", "word": "pidä" },
@@ -533,24 +544,25 @@
                     { "id": "5", "word": "kalastaa" },
                     { "id": "6", "word": "pidän" }
                   ],
-                  "answer":["Minä", "en" ,"pidä","kalasta"]
+                  "answer": ["Minä", "en" ,"pidä","kalasta"]
                 },
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"Vegetables are *",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "Vegetables are *",
+                  "meaning": "Vihannekset ovat terveellisiä",
+                  "words": [  
                     { "id": "1", "word": "healthy" },
                     { "id": "2", "word": "unhealthy" }
                   ],
-                  "answer":["healthy"]
+                  "answer": ["healthy"]
                 },
                 {
                   "type": "select_pairs",
-                  "task":"Valitse parit",
-                  "sentence":"",
-                  "words":{  
-                    "national":[
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
                       { "id": "1", "word": "riisi" },
                       { "id": "2", "word": "makaroni" },
                       { "id": "3", "word": "maito" },
@@ -565,7 +577,7 @@
                       { "id": "5", "word": "cucumber" }
                     ]
                   },
-                  "answer":[]
+                  "answer": null
                 }
               ]
             }
@@ -577,46 +589,35 @@
           "name": "Ateria-ajat",
           "levels": 1,
           "lessons": 1,
-          "picture":"subtopic_icon_meal_times.png",
+          "picture": "food_breakfast.png",
           "exercises": [
             {
               "id": "1",
               "uniqueID": "sdug043rh",
               "definition": {
                 "name": "Ateria-ajat",
-                "picture":"subtopic_icon_meal_times.png"
+                "picture": "food_breakfast.png"
               },
-              "questions":[
+              "questions": [
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"In the morning we eat *",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "In the morning we eat *",
+                  "meaning": "Aamulla syömme aamupalaa",
+                  "words": [  
                     { "id": "1", "word": "breakfast" },
                     { "id": "2", "word": "lunch" },
                     { "id": "3", "word": "dinner" },
                     { "id": "4", "word": "evening snack" }
                   ],
-                  "answer":["breakfast"]
-                },
-                {
-                  "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"* is great to have before going to bed",
-                  "words":[  
-                    { "id": "1", "word": "breakfast" },
-                    { "id": "2", "word": "lunch" },
-                    { "id": "3", "word": "dinner" },
-                    { "id": "4", "word": "evening snack" }
-                  ],
-                  "answer":["evening snack"]
+                  "answer": ["breakfast"]
                 },
                 {
                   "type": "select_pairs",
-                  "task":"Valitse parit",
-                  "sentence":"",
-                  "words":{  
-                    "national":[
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
                       { "id": "1", "word": "ateria" },
                       { "id": "2", "word": "aamupala" },
                       { "id": "3", "word": "lounas" },
@@ -631,8 +632,22 @@
                       { "id": "5", "word": "evening snack" }
                     ]
                   },
-                  "answer":[]
+                  "answer": null
+                },
+                {
+                  "type": "select_missing_word",
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "* is good to have before going to sleep",
+                  "meaning": "Iltapalaa on hyvä ottaa ennen nukkumaanmenoa",
+                  "words": [  
+                    { "id": "1", "word": "breakfast" },
+                    { "id": "2", "word": "lunch" },
+                    { "id": "3", "word": "dinner" },
+                    { "id": "4", "word": "evening snack" }
+                  ],
+                  "answer": ["evening snack"]
                 }
+                
               ]
             }
           ]
@@ -649,21 +664,21 @@
           "name": "Avaruus",
           "levels": 1,
           "lessons": 1,
-          "picture":"subtopic_icon_space.png",
+          "picture": "subtopic_icon_space.png",
           "exercises": [
             {
               "id": "1",
               "uniqueID": "8sd8u7g87ue",
               "definition": {
                 "name": "Avaruus",
-                "picture":"subtopic_icon_space.png"
+                "picture": "subtopic_icon_space.png"
               },
-              "questions":[
+              "questions": [
                 {
-                  "type": "translate_sentence",
-                  "task":"Käännä lause",
-                  "sentence":"Aurinko lämmittää maapalloa",
-                  "words":[  
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "Aurinko lämmittää maapalloa",
+                  "words": [  
                     { "id": "1", "word": "The" },
                     { "id": "2", "word": "sun" },
                     { "id": "3", "word": "warms" },
@@ -672,26 +687,27 @@
                     { "id": "6", "word": "moon" },
                     { "id": "7", "word": "stars" }
                   ],
-                  "answer":["The", "sun", "warms", "the", "earth"]
+                  "answer": ["The", "sun", "warms", "the", "earth"]
                 },
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"The * gives light at night",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "The * gives light at night",
+                  "meaning": "Kuu antaa valoa yöllä",
+                  "words": [  
                     { "id": "1", "word": "moon" },
                     { "id": "2", "word": "sun" },
                     { "id": "3", "word": "planet" },
                     { "id": "4", "word": "space" }
                   ],
-                  "answer":["sun"]
+                  "answer": ["moon"]
                 },
                 {
                   "type": "select_pairs",
-                  "task":"Valitse parit",
-                  "sentence":"",
-                  "words":{  
-                    "national":[
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
                       { "id": "1", "word": "avaruus" },
                       { "id": "2", "word": "tähti" },
                       { "id": "3", "word": "planeetta" },
@@ -706,7 +722,7 @@
                       { "id": "5", "word": "moon" }
                     ]
                   },
-                  "answer":[]
+                  "answer": null
                 }
               ]
             }
@@ -718,21 +734,21 @@
           "name": "Luonto",
           "levels": 1,
           "lessons": 1,
-          "picture":"subtopic_icon_nature.png",
+          "picture": "subtopic_icon_nature.png",
           "exercises": [
             {
               "id": "1",
               "uniqueID": "dsw89usdhg",
               "definition": {
                 "name": "Luonto",
-                "picture":"subtopic_icon_nature.png"
+                "picture": "subtopic_icon_nature.png"
               },
-              "questions":[
+              "questions": [
                 {
                   "type": "select_correct_word",
-                  "task":"Minä näistä on \"luonto\"?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Minä näistä on \"luonto\"?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "nature" },
                     { "id": "2", "word": "mature" },
                     { "id": "3", "word": "natural" },
@@ -743,9 +759,10 @@
                 },
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"* are the Earth's lungs",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "* are the Earth's lungs",
+                  "meaning": "Metsät ovat maan keuhkot",
+                  "words": [  
                     { "id": "1", "word": "Forests" },
                     { "id": "2", "word": "Mountains" },
                     { "id": "3", "word": "Oceans" },
@@ -754,47 +771,48 @@
                   "answer": ["Forests"]
                 },
                 {
-                  "type": "translate_sentence",
-                  "task":"Käännä lause",
-                  "sentence":"Kasvit tuottavat happea",
-                  "words":[  
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "Kasvit tuottavat happea",
+                  "words": [  
                     { "id": "1", "word": "Plants" },
                     { "id": "2", "word": "produce" },
                     { "id": "3", "word": "ants" },
                     { "id": "4", "word": "oxygen" },
                     { "id": "5", "word": "reduce" }
                   ],
-                  "answer":["Plants", "produce" ,"oxygen"]
+                  "answer": ["Plants", "produce" ,"oxygen"]
                 },
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"* cover most of the Earth's surface",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "* cover most of the Earth's surface",
+                  "meaning": "Valtameret peittävät suurimman osan maapallon pinnasta",
+                  "words": [  
                     { "id": "1", "word": "Oceans" },
                     { "id": "2", "word": "Forests" },
                     { "id": "3", "word": "Mountains" }
                   ],
-                  "answer":["Oceans"]
+                  "answer": ["Oceans"]
                 },
                 {
                   "type": "how_to_say",
-                  "task":"Kuinka sanotaan \"tuuli\"?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Kuinka sanotaan \"tuuli\"?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "wind" },
                     { "id": "2", "word": "rain" },
                     { "id": "3", "word": "hail" },
                     { "id": "4", "word": "thunder" }
                   ],
-                  "answer":["wind"]
+                  "answer": ["wind"]
                 },
                 {
                   "type": "select_pairs",
-                  "task":"Valitse parit",
-                  "sentence":"",
-                  "words":{  
-                    "national":[
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
                       { "id": "1", "word": "vuori" },
                       { "id": "2", "word": "sade" },
                       { "id": "3", "word": "aaviiko" },
@@ -809,7 +827,7 @@
                       { "id": "5", "word": "soil" }
                     ]
                   },
-                  "answer":[]
+                  "answer": null
                 }
               ]
             }
@@ -821,21 +839,21 @@
           "name": "Kaupunki",
           "levels": 1,
           "lessons": 2,
-          "picture":"subtopic_icon_city.png",
+          "picture": "subtopic_icon_city.png",
           "exercises": [
             {
               "id": "1",
               "uniqueID": "09d8safu890e",
               "definition": {
                 "name": "Kaupunki",
-                "picture":"subtopic_icon_city.png"
+                "picture": "subtopic_icon_city.png"
               },
-              "questions":[
+              "questions": [
                 {
-                  "type": "translate_sentence",
-                  "task":"Käännä lause",
-                  "sentence":"Helsinki is the capital city of Finland",
-                  "words":[  
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "Helsinki is the capital city of Finland",
+                  "words": [  
                     { "id": "1", "word": "Helsinki" },
                     { "id": "2", "word": "on" },
                     { "id": "3", "word": "Suomen" },
@@ -848,9 +866,10 @@
                 },
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"* have lots of apartments for many people",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "* have lots of apartments for people",
+                  "meaning": "Kerrostaloissa on paljon asuntoja ihmisille",
+                  "words": [  
                     { "id": "1", "word": "Blocks of flats" },
                     { "id": "2", "word": "Houses" },
                     { "id": "3", "word": "Roads" }
@@ -859,28 +878,29 @@
                 },
                 {
                   "type": "how_to_say",
-                  "task":"Kuinka sanotaan \"rakennus\"?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Kuinka sanotaan \"rakennus\"?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "building" },
                     { "id": "2", "word": "build" },
                     { "id": "3", "word": "house" },
                     { "id": "4", "word": "rebuilding" },
                     { "id": "5", "word": "mouse" }
                   ],
-                  "answer":["building"]
+                  "answer": ["building"]
                 },
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"Cities are connected by large roads called *",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "Cities are connected by large roads called *",
+                  "meaning": "Kaupunkeja yhdistävät isot tiet joita kutsutaan valtateiksi",
+                  "words": [  
                     { "id": "1", "word": "highways" },
                     { "id": "2", "word": "streets" },
                     { "id": "3", "word": "boulevards" },
                     { "id": "4", "word": "dirt roads" }
                   ],
-                  "answer":["highways"]
+                  "answer": ["highways"]
                 }
               ]
             }
@@ -898,21 +918,21 @@
           "name": "Perhe",
           "levels": 1,
           "lessons": 1,
-          "picture":"subtopic_icon_family.png",
+          "picture": "subtopic_icon_family.png",
           "exercises": [
             {
               "id": "1",
               "uniqueID": "sd09mwfdsh",
               "definition": {
                 "name": "Perhe",
-                "picture":"subtopic_icon_family.png"
+                "picture": "subtopic_icon_family.png"
               },
-              "questions":[
+              "questions": [
                 {
-                  "type": "translate_sentence",
-                  "task":"Käännä lause",
-                  "sentence":"Minulla on iso perhe",
-                  "words":[  
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "Minulla on iso perhe",
+                  "words": [  
                     { "id": "1", "word": "I" },
                     { "id": "2", "word": "have" },
                     { "id": "3", "word": "a large" },
@@ -924,10 +944,10 @@
                 },
                 {
                   "type": "select_pairs",
-                  "task":"Valitse parit",
-                  "sentence":"",
-                  "words":{  
-                    "national":[
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
                       { "id": "1", "word": "perhe" },
                       { "id": "2", "word": "isä" },
                       { "id": "3", "word": "äiti" },
@@ -942,13 +962,14 @@
                       { "id": "5", "word": "sister" }
                     ]
                   },
-                  "answer":[]
+                  "answer": null
                 },
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"* means my parent's father",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "* means my parent's father",
+                  "meaning": "Isoisä tarkoittaa vanhempani isää",
+                  "words": [  
                     { "id": "1", "word": "Grandfather" },
                     { "id": "2", "word": "Grandmother" }
                   ],
@@ -956,28 +977,29 @@
                 },
                 {
                   "type": "how_to_say",
-                  "task":"Kuinka sanotaan \"isoäiti\"?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Kuinka sanotaan \"isoäiti\"?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "grandmother" },
                     { "id": "2", "word": "grandfather" },
                     { "id": "3", "word": "great uncle" },
                     { "id": "4", "word": "father" },
                     { "id": "5", "word": "mother" }
                   ],
-                  "answer":["grandmother"]
+                  "answer": ["grandmother"]
                 },
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"My parent's sibling's children are called *",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "My parent's sibling's children are called *",
+                  "meaning": "Vanhempani sisaruksia kutsutaan serkuiksi",
+                  "words": [  
                     { "id": "1", "word": "cousins" },
                     { "id": "2", "word": "siblings" },
                     { "id": "3", "word": "aunts" },
                     { "id": "4", "word": "uncles" }
                   ],
-                  "answer":["cousins"]
+                  "answer": ["cousins"]
                 }
               ]
             }
@@ -989,38 +1011,40 @@
           "name": "Ammatit",
           "levels": 1,
           "lessons": 1,
-          "picture":"subtopic_icon_profession.png",
+          "picture": "subtopic_icon_profession.png",
           "exercises": [
             {
               "id": "1",
               "uniqueID": "8dfhdfhe",
               "definition": {
                 "name": "Ammatit",
-                "picture":"subtopic_icon_profession.png"
+                "picture": "subtopic_icon_profession.png"
               },
-              "questions":[
+              "questions": [
                 {
-                  "type": "translate_sentence",
-                  "task":"Käännä lause",
-                  "sentence":"Käymällä koulua voi saada ammatin",
-                  "words":[  
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "Käymällä koulua voi saada ammatin",
+                  "words": [  
                     { "id": "1", "word": "By" },
                     { "id": "2", "word": "going" },
-                    { "id": "3", "word": "to school" },
-                    { "id": "4", "word": "to work" },
+                    { "id": "3", "word": "school" },
+                    { "id": "4", "word": "work" },
                     { "id": "5", "word": "you" },
                     { "id": "6", "word": "can" },
                     { "id": "7", "word": "gain" },
                     { "id": "8", "word": "a profession" },
-                    { "id": "9", "word": "a professor" }
+                    { "id": "9", "word": "a professor" },
+                    { "id": "10", "word": "to" }
                   ],
-                  "answer": ["By", "going", "to school", "you", "can", "gain", "a profession"]
+                  "answer": ["By", "going", "to", "school", "you", "can", "gain", "a profession"]
                 },
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"The * supervise public safety",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "The * supervise public safety",
+                  "meaning": "Poliiisi valvoo yleistä turvallisuutta",
+                  "words": [  
                     { "id": "1", "word": "police" },
                     { "id": "2", "word": "cleaners" },
                     { "id": "3", "word": "doctors" },
@@ -1030,34 +1054,35 @@
                 },
                 {
                   "type": "how_to_say",
-                  "task":"Kuinka sanotaan \"palomies\"?",
-                  "sentence":"",
-                  "words":[  
+                  "task": "Kuinka sanotaan \"palomies\"?",
+                  "sentence": "",
+                  "words": [  
                     { "id": "1", "word": "fireman" },
                     { "id": "2", "word": "salesperson" },
                     { "id": "3", "word": "firetruck" },
                     { "id": "4", "word": "doctor" }
                   ],
-                  "answer":["fireman"]
+                  "answer": ["fireman"]
                 },
                 {
                   "type": "select_missing_word",
-                  "task":"Valitse puuttuva sana",
-                  "sentence":"* tries to get people to buy things",
-                  "words":[  
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "* tries to get people to buy things",
+                  "meaning": "Myyjä yrittää saada ihmiset ostamaan asioita",
+                  "words": [  
                     { "id": "1", "word": "A salesperson" },
                     { "id": "2", "word": "A dentist" },
                     { "id": "3", "word": "A trucker" },
                     { "id": "4", "word": "A teacher" }
                   ],
-                  "answer":["A salesperson"]
+                  "answer": ["A salesperson"]
                 },
                 {
                   "type": "select_pairs",
-                  "task":"Valitse parit",
-                  "sentence":"",
-                  "words":{  
-                    "national":[
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
                       { "id": "1", "word": "opettaja" },
                       { "id": "2", "word": "lääkäri" },
                       { "id": "3", "word": "lentäjä" },
@@ -1072,7 +1097,7 @@
                       { "id": "5", "word": "nurse" }
                     ]
                   },
-                  "answer":[]
+                  "answer": null
                 }
               ]
             }
