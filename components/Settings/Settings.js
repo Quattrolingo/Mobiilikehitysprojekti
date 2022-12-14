@@ -142,7 +142,7 @@ export default function Profile(props) {
           <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkerGrey}, ProfileStyles.headerText]}>
             {props.UiTranslations.settings.heading}
           </Text>
-          <TouchableOpacity style={ProfileStyles.settingsIconContainer} activeOpacity={0.5} onPress={() => props.setSettingsVisible(false)}>
+          <TouchableOpacity style={ProfileStyles.settingsIconContainer} activeOpacity={0.5} onPress={() => props.setCurrentProfileView("profile")}>
             <Text style={[
                     {color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : props.appSettings.themeColorOptions.background},
                     ProfileStyles.settingsSaveBtn ]}>{props.UiTranslations.settings.save}</Text>
@@ -180,13 +180,30 @@ export default function Profile(props) {
               </View>
             </View>
 
-            <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, ProfileStyles.settingsGroupHeader]}>Muut</Text>
+            <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, ProfileStyles.settingsGroupHeader]}>
+              {props.UiTranslations.settings.account}
+            </Text>
 
             <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, ProfileStyles.settingsGroupContainer]}>
               <View style={ProfileStyles.settingsItem}>
-                <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, ProfileStyles.settingsItemText]} onPress={() => deleteAppDataWarningDialog()}>{props.UiTranslations.settings.deleteAppData}</Text>
+                <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, ProfileStyles.settingsItemText]}
+                      onPress={() => console.log("muuta")}>muuta</Text>
               </View>
-            </View>   
+            </View>
+
+            <TouchableOpacity style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, ProfileStyles.largeBtn]}
+                              activeOpacity={0.5} onPress={() => props.setCurrentProfileView("createProfile")}>
+              <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, ProfileStyles.largeBtnText]}>
+                {props.UiTranslations.settings.createAccount}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, ProfileStyles.largeBtn]}
+                              activeOpacity={0.5} onPress={() => deleteAppDataWarningDialog()}>
+              <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, ProfileStyles.largeBtnText]}>
+                {props.UiTranslations.settings.deleteAppData}
+              </Text>
+            </TouchableOpacity>
 
           </View>           
         </ScrollView>        
@@ -243,7 +260,7 @@ const ProfileStyles = StyleSheet.create({
     width: '100%',
     borderColor: Colors.LightGrey,
     borderWidth: 3,
-    borderRadius: 5,
+    borderRadius: 15,
     padding: 10,
     marginBottom: 20,
   },
@@ -270,7 +287,7 @@ const ProfileStyles = StyleSheet.create({
     height: 25,
     borderWidth: 1,
     borderColor: Colors.White,
-    borderRadius: 5
+    borderRadius: 7
   },
   singleThemeItem: {
     margin: 20,
@@ -281,5 +298,20 @@ const ProfileStyles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap'
+  },  
+  largeBtn: {
+    marginTop: 20,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,      
+    borderRadius: 15,
+    borderWidth: 3,
+    borderColor: Colors.LightGrey,
+    width: '100%'
+  },
+  largeBtnText: {
+    fontSize: 17,
+    fontWeight: 'bold'
   }
 })

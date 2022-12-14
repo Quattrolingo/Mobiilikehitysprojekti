@@ -17,7 +17,8 @@ const Colors = {
   SummerSky: '#2ECBE9',
   DarkTheme: '#121212',
   DarkThemeSecondary: '#2b2b2b',
-  DarkGrey: '#404040'  
+  DarkGrey: '#404040'  ,
+  CircularProgressGreen: '#7CFC00'
 }
 
 export default Colors

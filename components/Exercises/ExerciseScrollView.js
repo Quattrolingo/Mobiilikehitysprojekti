@@ -119,7 +119,7 @@ export default function ExerciseScrollView(props) {
                     maxValue={tier.exercises.length}
                     initialValue={0}
                     radius={56}
-                    activeStrokeColor={(themeColor.background == '#121212') ? Colors.LightGrey : "#a37e39"}
+                    activeStrokeColor={(themeColor.background == '#121212') ? Colors.RicherMint : Colors.CircularProgressGreen}
                     inActiveStrokeColor={"transparent"}
                     activeStrokeWidth={20}
                     rotation={180}

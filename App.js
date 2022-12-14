@@ -44,9 +44,9 @@ export default function App() {
     } catch (e) {}    
   }
 
+
   useEffect(() => {
     getAppSettings()
-    console.log("settings")
   }, [])
 
   useEffect(() => {
@@ -64,7 +64,6 @@ export default function App() {
             let modifiablePreviousExerciseData = JSON.parse(previousExerciseData)
             if(modifiablePreviousExerciseData.includes(exercise.uniqueID)){
                 // do nothing
-                console.log("already exists")
             } else {
                 modifiablePreviousExerciseData.push(exercise.uniqueID)
                 try {
@@ -77,7 +76,6 @@ export default function App() {
         } else {
             try {
                 await AsyncStorage.setItem('@completed_exercises', JSON.stringify([exercise.uniqueID]))
-                console.log("new")
             } catch(e) {
                 ToastAndroid.show(e, ToastAndroid.SHORT)
             }                
@@ -85,7 +83,6 @@ export default function App() {
     } catch(e) {
         ToastAndroid.show(e, ToastAndroid.SHORT)
     }
-    console.log(await AsyncStorage.getItem('@completed_exercises'))
   }
 
   return (
@@ -93,7 +90,7 @@ export default function App() {
       {
         loaded ?
         <>
-          <StatusBar backgroundColor={(appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}/>
+          <StatusBar barStyle={'dark-content'} backgroundColor={(appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : appSettings.themeColorOptions.background}/>
           {
             exercise ? 
             <Exercise

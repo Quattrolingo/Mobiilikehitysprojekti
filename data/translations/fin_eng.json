@@ -39,12 +39,14 @@
           "languageCourse": "Kielikurssi",
           "cancel": "PERUUTA",
           "darkMode": "Tumma tila",
-          "deleteAppData": "Tyhjennä käyttäjätiedot",
+          "deleteAppData": "KIRJAUDU ULOS",
           "deleteAppDataDialogTitle": "Sovelluksen tietojen poistaminen",
-          "deleteAppDataDialogMessage": "Kaikki tietosi, mukaan lukien saavutuksesi poistetaan. Haluatko jatkaa?",
+          "deleteAppDataDialogMessage": "Kaikki tietosi poistetaan sovelluksesta. Haluatko jatkaa?",
           "yesBtn": "KYLLÄ",
           "noBtn": "EI",
-          "userDataDeleted": "Tietosi poistettiin"
+          "userDataDeleted": "Tietosi poistettiin",
+          "account": "Profiili",
+          "createAccount" : "LISÄÄ PROFIILI"
       },
       "dictionary": {
   
