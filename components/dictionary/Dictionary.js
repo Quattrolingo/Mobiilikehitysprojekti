@@ -2,9 +2,6 @@ import { Button, Text, Pressable, View, Modal, TextInput, ScrollView } from 'rea
 import StyleSheet from './DictStyles';
 import { API_KEY } from '@env';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-
 
 
 export default function Dictionary() {
@@ -16,44 +13,8 @@ export default function Dictionary() {
   const [searchWord, setSearchWord] = useState('');
   const [searchWordN, setSearchWordN] = useState('');
   const [searchWordV, setSearchWordV] = useState('');
+  const [searchWordA, setSearchWordA] = useState('');
 
-  function close() {
-
-    setModalVisible(false);
-    const url = 'https://wordsapiv1.p.rapidapi.com/words/?random=true';
-    fetch(url, options)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setWord(result.word)
-          setDefinition(result.results[0].definition)
-        }, (error) => {
-          console.log(error)
-        })
-  }
-
-  function open() {
-
-    
-    const url = 'https://wordsapiv1.p.rapidapi.com/words/?random=true';
-    fetch(url, options)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setWord(result.word)
-          if (result.results&&result.results.lenght>0){
-          setDefinition(result.results[0].definition)
-          }
-          setModalVisible(true);
-        }, (error) => {
-          console.log(error)
-          setModalVisible(true);
-        })
-  }
-
-  function close2() {
-    setModalVisible2(false);
-  }
 
   const options = {
     method: 'GET',
@@ -63,21 +24,70 @@ export default function Dictionary() {
     }
   };
 
-  //random word function 
-/*
-  useEffect(() => {
+
+  function close() {
+
+    setModalVisible(false);
+    /* const url = 'https://wordsapiv1.p.rapidapi.com/words/?random=true';
+     fetch(url, options)
+       .then(res => res.json())
+       .then(
+         (result) => {
+           setWord(result.word)
+           setDefinition(result.results[0].definition)
+         }, (error) => {
+           console.log(error)
+         })
+         */
+  }
+
+
+
+  function open() {
+
     const url = 'https://wordsapiv1.p.rapidapi.com/words/?random=true';
     fetch(url, options)
       .then(res => res.json())
       .then(
         (result) => {
           setWord(result.word)
-          setDefinition(result.results[0].definition)
+          if (result.results && result.results.length > 0) {
+            setDefinition(result.results[0].definition)
+          } else {
+            setDefinition("Sanalle ei löydy määritelmää")
+          }
+          setModalVisible(true);
         }, (error) => {
           console.log(error)
+          setModalVisible(true);
         })
-  }, [])
-  */
+  }
+
+
+  function close2() {
+    setModalVisible2(false);
+  }
+
+
+
+
+
+
+  //random word function 
+  /*
+    useEffect(() => {
+      const url = 'https://wordsapiv1.p.rapidapi.com/words/?random=true';
+      fetch(url, options)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setWord(result.word)
+            setDefinition(result.results[0].definition)
+          }, (error) => {
+            console.log(error)
+          })
+    }, [])
+    */
 
 
   /*
@@ -102,7 +112,9 @@ export default function Dictionary() {
       */
 
 
+
   //pronunciation function
+
 
   useEffect(() => {
     const url2 = 'https://wordsapiv1.p.rapidapi.com/' +
@@ -113,6 +125,7 @@ export default function Dictionary() {
       .then(res => res.json())
       .then(
         (result) => {
+          setSearchWordA(result.pronunciation.all);
           setSearchWordN(result.pronunciation.noun);
           setSearchWordV(result.pronunciation.verb);
         },
@@ -127,10 +140,10 @@ export default function Dictionary() {
 
   return (
     <View style={StyleSheet.dictContainer}>
-      
-        <Text style={StyleSheet.headline}>Opi lisää sanastoa</Text>
 
-        <View style={StyleSheet.mainContainer}>
+      <Text style={StyleSheet.headline}>Opi lisää sanastoa</Text>
+
+      <View style={StyleSheet.mainContainer}>
         <ScrollView>
           <View style={StyleSheet.topContainer}>
             <Text style={StyleSheet.random}>Satunnainen sana</Text>
@@ -145,10 +158,8 @@ export default function Dictionary() {
                   <Text>{word}</Text>
                   <Text>Sanan määritelmä</Text>
                   <Text>{definition}</Text>
-                  <Pressable onPress={close}
+                  <Pressable onPress={close}>
 
-                    
-                  >
                     <Text style={StyleSheet.close}>Sulje</Text>
                   </Pressable>
                 </View>
@@ -172,7 +183,9 @@ export default function Dictionary() {
                 <View style={StyleSheet.modal}>
                   <Text>Haettu sana</Text>
                   <Text>{searchWord}</Text>
-                  <Text>Ääntäminen / subjekti</Text>
+                  <Text>Ääntäminen / yleinen</Text>
+                  <Text>{searchWordA}</Text>
+                  <Text>Ääntäminen / substantiivi</Text>
                   <Text>{searchWordN}</Text>
                   <Text>Ääntäminen / verbi</Text>
                   <Text>{searchWordV}</Text>
@@ -195,9 +208,9 @@ export default function Dictionary() {
           <View style={StyleSheet.bottomContainer}>
             <Text style={StyleSheet.dictText}>Kolmas komponentti</Text>
           </View>
-          </ScrollView>
-        </View>
-      
+        </ScrollView>
+      </View>
+
     </View>
   );
 }
