@@ -1,14 +1,17 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
 import { useState, useEffect } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import Colors from '../assets/Colors'
 
-export default function Achievements() {
+export default function Achievements(props) {
   
 
 const [first, setfirst] = useState([{nimi:'', pisteet:''}])
 const [second, setsecond] = useState(0)
 const [third, setthird] = useState(0)
+const [backgroundColor, setBackgroundColor] = useState(props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.DarkThemeSecondary : props.appSettings.themeColorOptions.background)
+const [textColor, setTextColor] = useState(props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.White : Colors.Black)
 
 useEffect (() => {
 
@@ -48,32 +51,32 @@ const getTotalExer = async () => {
 
 return (
       
-      <View style={AchievementStyles.container}>
-        <Text style={AchievementStyles.headline}> Saavutukset</Text>
-        <Text style={AchievementStyles.text}>Hienoa! Olet saanut pisteitä yhteensä:</Text>
+      <View style={[{backgroundColor: props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.DarkTheme : Colors.White},AchievementStyles.container]}>
+        <Text style={[{backgroundColor: backgroundColor, color: textColor}, AchievementStyles.headline]}> Saavutukset</Text>
+        <Text style={[{backgroundColor: backgroundColor, color: textColor}, AchievementStyles.text]}>Hienoa! Olet saanut pisteitä yhteensä:</Text>
         <Text style={AchievementStyles.points}>{second}</Text>
 
-        <View style={AchievementStyles.headline2}>
-          <Text style={AchievementStyles.text2}> Viimeiset 5 tehtävää</Text>
-          <Text style={AchievementStyles.text2}> Tehtävä:          Pisteet:</Text>
+        <View style={[{backgroundColor: backgroundColor}, AchievementStyles.headline2]}>
+          <Text style={[{color: textColor}, AchievementStyles.text2]}> Viimeiset 5 tehtävää</Text>
+          <Text style={[{color: textColor}, AchievementStyles.text2]}> Tehtävä:          Pisteet:</Text>
         </View>
 
         {
           first.map((item, index) => {
             return (
-            <View key={index} style={AchievementStyles.headline1}>
+            <View key={index} style={[{backgroundColor: backgroundColor}, AchievementStyles.headline1]}>
               <View style={AchievementStyles.inputWrap}>
-              <Text style={AchievementStyles.text1}> {item.nimi}</Text>
+              <Text style={[{color: textColor}, AchievementStyles.text1]}> {item.nimi}</Text>
               </View>
               <View style={AchievementStyles.inputWrap}>         
-              <Text style={AchievementStyles.text1}>    {item.pisteet}</Text>
+              <Text style={[{color: textColor}, AchievementStyles.text1]}>    {item.pisteet}</Text>
               </View>
             </View>
           )})
         }
         
-        <View style={AchievementStyles.headline3}>
-          <Text style={AchievementStyles.text3}> Harjoituksia tehty yhteensä: {third}</Text>
+        <View style={[{backgroundColor: backgroundColor}, AchievementStyles.headline3]}>
+          <Text style={[{color: textColor}, AchievementStyles.text3]}> Harjoituksia tehty yhteensä: {third}</Text>
         </View>
 
       </View>
@@ -84,13 +87,11 @@ return (
     container: {
       flex: 1,
       width: "100%",
-      backgroundColor: 'white',
       alignItems: 'center',
     },
     headline: {
       marginTop: 0,
       fontSize: 40,
-      backgroundColor: '#fcc201',
       textAlign: 'center',
       height: 70,
       width: "100%",
@@ -100,7 +101,6 @@ return (
     text: {
       fontSize: 20,
       fontFamily: 'monospace',
-      backgroundColor: '#fcc201',
       width: "100%",
       textAlign: 'center',
       marginTop: 40,
@@ -138,7 +138,6 @@ return (
       fontSize: 25,
       textAlign: 'center',
       width: "100%",
-      backgroundColor: '#fcc201',
       height: 55,
       fontFamily: 'monospace',
     },
@@ -150,7 +149,6 @@ return (
       fontSize: 25,
       textAlign: 'center',
       width: "100%",
-      backgroundColor: '#fcc201',
       height: 30,
       fontFamily: 'monospace',
 
