@@ -15,6 +15,7 @@ export default function SingleQuestion(props) {
     const [confirmAnswerBtnVisible, setConfirmAnswerBtnVisible] = useState(false)
     const [userAnswer, setUserAnswer] = useState(null)
     const [resultVisible, setResultVisible] = useState(false)
+    const [appColor, setAppColor] = useState(props.appSettings.themeColorOptions.background)
     const feedbackAnimation = useRef(new Animated.Value(0)).current
 
     const fadeView = () => {
@@ -101,13 +102,13 @@ export default function SingleQuestion(props) {
     return (
       <View style={QuestionStyles.container}>
         <View>
-            <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black},
+            <Text style={[{color: (appColor == Colors.DarkTheme) ? Colors.White : Colors.Black},
                            QuestionStyles.questionTask]}>
                             {props.questionData.task}
             </Text>
             {
                 props.questionData.sentence &&
-                <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black},
+                <Text style={[{color: (appColor == Colors.DarkTheme) ? Colors.White : Colors.Black},
                       QuestionStyles.questionSentence]}>
                     {props.questionData.sentence.replace('*', '_____')}
                 </Text>
@@ -119,9 +120,9 @@ export default function SingleQuestion(props) {
         <View style={QuestionStyles.confirmAnswerContainer}>
             { 
                 confirmAnswerBtnVisible &&
-                <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.LightGrey : props.appSettings.themeColorOptions.background}, QuestionStyles.confirmAnswerInnerContainer]}>
+                <View style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.LightGrey : appColor}, QuestionStyles.confirmAnswerInnerContainer]}>
                     <TouchableOpacity style={QuestionStyles.confirmAnswerBtnContainer} activeOpacity={0.5} onPress={() => checkAnswer()}>
-                        <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.Black : Colors.White}, QuestionStyles.btnText]}>{props.UiTranslations.checkAnswer}</Text>
+                        <Text style={[{color: (appColor == Colors.DarkTheme) ? Colors.Black : Colors.White}, QuestionStyles.btnText]}>{props.UiTranslations.checkAnswer}</Text>
                     </TouchableOpacity>
                 </View>
             }

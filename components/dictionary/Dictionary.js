@@ -20,9 +20,9 @@ export default function Dictionary(props) {
   const [example, setExample] = useState('');
   const [example2, setExample2] = useState('');
   const [example3, setExample3] = useState('');
-  const [backgroundColor, setBackgroundColor] = useState(props.appSettings.themeColorOptions.background);
-  const [textColor, setTextColor] = useState(backgroundColor == Colors.DarkTheme ? Colors.White : Colors.Black);
-  const [headlineColor, setHeadlineColor] = useState(backgroundColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : backgroundColor == Colors.DarkYellow ? "orange" : backgroundColor == Colors.LightPink ? "#fab691" : "#14acc9");
+  const [appColor, setBackgroundColor] = useState(props.appSettings.themeColorOptions.background);
+  const [textColor, setTextColor] = useState(appColor == Colors.DarkTheme ? Colors.White : Colors.Black);
+  const [headlineColor, setHeadlineColor] = useState(appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : appColor == Colors.DarkYellow ? "orange" : appColor == Colors.LightPink ? "#fab691" : "#14acc9");
   
   const options = {
     method: 'GET',
@@ -170,13 +170,13 @@ export default function Dictionary(props) {
 
 
   return (
-    <View style={[{backgroundColor: backgroundColor == Colors.DarkTheme ? Colors.DarkTheme : backgroundColor}, StyleSheet.dictContainer]}>
+    <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkTheme : appColor}, StyleSheet.dictContainer]}>
 
-      <Text style={[{color: textColor, backgroundColor: headlineColor}, StyleSheet.headline]}>Opi lisää sanastoa</Text>
+      <Text style={[{color: textColor, appColor: headlineColor}, StyleSheet.headline]}>Opi lisää sanastoa</Text>
 
       <View style={StyleSheet.mainContainer}>
         <ScrollView>
-          <View style={[{backgroundColor: backgroundColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : 'beige'}, StyleSheet.topContainer]}>
+          <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : 'beige'}, StyleSheet.topContainer]}>
             <Text style={[{color: textColor}, StyleSheet.random]}>Satunnainen sana</Text>
             <Text style={[{color: textColor}, StyleSheet.dictText]}>Opi lisää sanoja ja niiden merkityksiä</Text>
             <View style={StyleSheet.pushContainer}>
@@ -184,7 +184,7 @@ export default function Dictionary(props) {
                 visible={modalVisible}
                 onRequestClose={close}
               >
-                <View style={[{backgroundColor: backgroundColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : '#fafafa'}, StyleSheet.modal]}>
+                <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : '#fafafa'}, StyleSheet.modal]}>
                   <Text style={{color: textColor}}>Satunnainen sana</Text>
                   <Text style={{color: textColor}}>{word}</Text>
                   <Text style={{color: textColor}}>Sanan määritelmä</Text>
@@ -202,7 +202,7 @@ export default function Dictionary(props) {
             </View>
           </View>
 
-          <View style={[{backgroundColor: backgroundColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : 'pink'},  StyleSheet.middleContainer]}>
+          <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : 'pink'},  StyleSheet.middleContainer]}>
             <Text style={[{color: textColor}, StyleSheet.random]}>Ääntäminen</Text>
             <Text style={[{color: textColor}, StyleSheet.dictText]}>Opi ääntämään sanoja</Text>
             <TextInput style={[{color: textColor, borderColor: textColor}, StyleSheet.textInPut]} placeholder='Syötä tähän sana' placeholderTextColor={textColor} value={searchWord} onChangeText={text => setSearchWord(text)} />
@@ -211,7 +211,7 @@ export default function Dictionary(props) {
                 visible={modalVisible2}
                 onRequestClose={close2}
               >
-                <View style={[{backgroundColor: backgroundColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : '#fafafa'}, StyleSheet.modal]}>
+                <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : '#fafafa'}, StyleSheet.modal]}>
                   <Text style={{color: textColor}}>Haettu sana</Text>
                   <Text style={{color: textColor}}>{searchWord}</Text>
                   <Text style={{color: textColor}}>Ääntäminen / yleinen</Text>
@@ -236,7 +236,7 @@ export default function Dictionary(props) {
             </View>
           </View>
 
-          <View style={[{backgroundColor: backgroundColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : 'peachpuff'}, StyleSheet.bottomContainer]}>
+          <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : 'peachpuff'}, StyleSheet.bottomContainer]}>
           <Text style={[{color: textColor}, StyleSheet.random]}>Esimerkit</Text>
             <Text style={[{color: textColor}, StyleSheet.dictText]}>Opi esimerkkilauseita</Text>
             <TextInput style={[{color: textColor, borderColor: textColor}, StyleSheet.textInPut]} placeholder='Syötä tähän sana' placeholderTextColor={textColor} value={searchWord2} onChangeText={text => setSearchWord2(text)} />
@@ -245,7 +245,7 @@ export default function Dictionary(props) {
                 visible={modalVisible3}
                 onRequestClose={close3}
               >
-                <View style={[{backgroundColor: backgroundColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : '#fafafa'}, StyleSheet.modal]}>
+                <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : '#fafafa'}, StyleSheet.modal]}>
                   <Text style={{color: textColor}}>Haettu sana</Text>
                   <Text style={{color: textColor}}>{searchWord2}</Text>
                   <Text style={{color: textColor}}>Esimerkkilauseita</Text>

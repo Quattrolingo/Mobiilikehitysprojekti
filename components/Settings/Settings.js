@@ -24,8 +24,8 @@ export default function Profile(props) {
     setDialogContent(<>
       <DialogHeader title={props.UiTranslations.settings.theme} />
       <DialogContent>
-        <View style={ProfileStyles.colorThemeDialog}>
-          <TouchableOpacity style={[{backgroundColor: Colors.DarkYellow}, ProfileStyles.singleThemeItem]}
+        <View style={SettingsStyles.colorThemeDialog}>
+          <TouchableOpacity style={[{backgroundColor: Colors.DarkYellow}, SettingsStyles.singleThemeItem]}
                             activeOpacity={0.5}
                             onPress={() => {props.modifyAppSettings(prevState => ({
                               ...prevState,
@@ -33,7 +33,7 @@ export default function Profile(props) {
                                 background: Colors.DarkYellow
                               }
                             })), setAppBackgroundcolor(Colors.DarkYellow), setDialogVisible(false)}} />
-          <TouchableOpacity style={[{backgroundColor: Colors.LightPink}, ProfileStyles.singleThemeItem]}
+          <TouchableOpacity style={[{backgroundColor: Colors.LightPink}, SettingsStyles.singleThemeItem]}
                             activeOpacity={0.5}
                             onPress={() => {props.modifyAppSettings(prevState => ({
                               ...prevState,
@@ -41,7 +41,7 @@ export default function Profile(props) {
                                 background: Colors.LightPink
                               }
                             })), setAppBackgroundcolor(Colors.LightPink), setDialogVisible(false)}} />
-          <TouchableOpacity style={[{backgroundColor: Colors.SummerSky}, ProfileStyles.singleThemeItem]}
+          <TouchableOpacity style={[{backgroundColor: Colors.SummerSky}, SettingsStyles.singleThemeItem]}
                             activeOpacity={0.5}
                             onPress={() => {props.modifyAppSettings(prevState => ({
                               ...prevState,
@@ -49,7 +49,7 @@ export default function Profile(props) {
                                 background: Colors.SummerSky
                               }
                             })), setAppBackgroundcolor(Colors.SummerSky), setDialogVisible(false)}} />
-          <TouchableOpacity style={[{backgroundColor: Colors.DarkTheme}, ProfileStyles.singleThemeItem]}
+          <TouchableOpacity style={[{backgroundColor: Colors.DarkTheme}, SettingsStyles.singleThemeItem]}
                             activeOpacity={0.5}
                             onPress={() => {props.modifyAppSettings(prevState => ({
                               ...prevState,
@@ -71,27 +71,20 @@ export default function Profile(props) {
     setDialogVisible(!dialogVisible)
   }
 
-  const deleteAppData = async () => {
-    try {
-      await AsyncStorage.setItem('@theme_backgroundColor', Colors.DarkYellow)      
-      await AsyncStorage.removeItem('@soundSettings')
-      await AsyncStorage.removeItem('@completed_exercises')
-      await AsyncStorage.removeItem('@Totalpoints')
-      await AsyncStorage.removeItem('@Firstfivepoints')
-      props.modifyAppSettings(prevState => ({
-        ...prevState,
-        themeColorOptions: {
-          background: Colors.DarkYellow
-        }
-      }))
-      props.navBarVisibility(true)
-      props.setCurrentView("ExerciseScrollView")
-      ToastAndroid.show(
-        props.UiTranslations.settings.userDataDeleted,
-        ToastAndroid.LONG
-    )
-    } catch (e) {
-    }    
+  const deleteAppData = () => {
+    props.deleteAppData()
+    props.modifyAppSettings(prevState => ({
+      ...prevState,
+      themeColorOptions: {
+        background: Colors.DarkYellow
+      }
+    }))
+    props.navBarVisibility(true)
+    props.setCurrentView("ExerciseScrollView")
+    ToastAndroid.show(
+      props.UiTranslations.settings.userDataDeleted,
+      ToastAndroid.LONG
+    )       
   }
 
   const changeLanguageDialog = () => {
@@ -135,46 +128,45 @@ export default function Profile(props) {
 
   return (
     <Provider>
-      <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, ProfileStyles.container]}>
+      <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, SettingsStyles.container]}>
         <Dialog visible={dialogVisible} onDismiss={() => {setDialogVisible(false), setDialogContent(null)}}>
           { dialogContent }
         </Dialog>
 
-        <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, ProfileStyles.header]}>
-          <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkerGrey}, ProfileStyles.headerText]}>
+        <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, SettingsStyles.header]}>
+          <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkerGrey}, SettingsStyles.headerText]}>
             {props.UiTranslations.settings.heading}
           </Text>
-          <TouchableOpacity style={ProfileStyles.settingsIconContainer} activeOpacity={0.5} onPress={() => props.setCurrentProfileView("profile")}>
+          <TouchableOpacity style={SettingsStyles.settingsIconContainer} activeOpacity={0.5} onPress={() => props.setCurrentProfileView("profile")}>
             <Text style={[
                     {color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : props.appSettings.themeColorOptions.background},
-                    ProfileStyles.settingsSaveBtn ]}>{props.UiTranslations.settings.save}</Text>
+                    SettingsStyles.settingsSaveBtn ]}>{props.UiTranslations.settings.save}</Text>
           </TouchableOpacity>
         </View>
 
         <ScrollView>
-          <View style={ProfileStyles.settingsScrollView}>
-
-            <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, ProfileStyles.settingsGroupHeader]}>
+          <View style={SettingsStyles.settingsScrollView}>
+            <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, SettingsStyles.settingsGroupHeader]}>
               {props.UiTranslations.settings.general}
             </Text>
 
-            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, ProfileStyles.settingsGroupContainer]}>
-              <View style={ProfileStyles.settingsItem}>
-                <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, ProfileStyles.settingsItemText]}>
+            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, SettingsStyles.settingsGroupContainer]}>
+              <View style={SettingsStyles.settingsItem}>
+                <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, SettingsStyles.settingsItemText]}>
                   {props.UiTranslations.settings.theme}
                 </Text>
-                <TouchableOpacity style={[{backgroundColor: props.appSettings.themeColorOptions.background}, ProfileStyles.settingsThemeColorSquare]}
+                <TouchableOpacity style={[{backgroundColor: props.appSettings.themeColorOptions.background}, SettingsStyles.settingsThemeColorSquare]}
                                   activeOpacity={0.5}
                                   onPress={() => changeThemeDialog()}/>
               </View>
 
-              <View style={ProfileStyles.settingsItem}>
-                <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, ProfileStyles.settingsItemText]}>
+              <View style={SettingsStyles.settingsItem}>
+                <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, SettingsStyles.settingsItemText]}>
                   {props.UiTranslations.settings.languageCourse}
                 </Text>
                 <TouchableOpacity onPress={() => changeLanguageDialog()} activeOpacity={0.5}>
                   <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : props.appSettings.themeColorOptions.background},
-                                ProfileStyles.settingsItemValue]
+                                SettingsStyles.settingsItemValue]
                               }>
                     {props.languageData.nativeCourseName}
                   </Text>
@@ -182,39 +174,82 @@ export default function Profile(props) {
               </View>
             </View>
 
-            <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, ProfileStyles.settingsGroupHeader]}>
+            <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, SettingsStyles.settingsGroupHeader]}>
               {props.UiTranslations.settings.account}
             </Text>
 
-            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, ProfileStyles.settingsGroupContainer]}>
-              <View style={ProfileStyles.settingsItem}>
-                <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, ProfileStyles.settingsItemText]}
-                      onPress={() => console.log("muuta")}>muuta</Text>
-              </View>
+            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, SettingsStyles.settingsGroupContainer]}>
+              {
+                props.accountEmail.length < 1 ?
+                <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, SettingsStyles.settingsNoEmailFound]}>
+                  {props.UiTranslations.settings.noAccountFound}
+                </Text>
+                :
+                <>
+                  <View style={SettingsStyles.settingsItem}>
+                    <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, SettingsStyles.settingsItemText]}>
+                      {props.UiTranslations.settings.email}
+                    </Text>
+                    <TouchableOpacity onPress={() => changeLanguageDialog()} activeOpacity={0.5}>
+                      <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : props.appSettings.themeColorOptions.background},
+                                    SettingsStyles.settingsItemValue]
+                                  }>
+                        {props.accountEmail}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={SettingsStyles.settingsItem}>
+                    <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, SettingsStyles.settingsItemText]}>
+                      {props.UiTranslations.settings.accountType}
+                    </Text>
+                    <TouchableOpacity onPress={() => props.setCurrentProfileView("upgradeProfile")} activeOpacity={0.5}>
+                      <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : props.appSettings.themeColorOptions.background},
+                                    SettingsStyles.settingsItemValue]
+                                  }>
+                        {props.accountType == 'student' ? props.UiTranslations.settings.student : props.UiTranslations.settings.consumer}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </>
+              }      
             </View>
 
-            <TouchableOpacity style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, ProfileStyles.largeBtn]}
-                              activeOpacity={0.5} onPress={() => props.setCurrentProfileView("createProfile")}>
-              <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, ProfileStyles.largeBtnText]}>
-                {props.UiTranslations.settings.createAccount}
-              </Text>
-            </TouchableOpacity>
+            {
+              props.accountType == 'consumer' && props.accountEmail.length == 0 ?
+              <TouchableOpacity style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, SettingsStyles.largeBtn]}
+                                activeOpacity={0.5} onPress={() => props.setCurrentProfileView("createProfile")}>
+                <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, SettingsStyles.largeBtnText]}>
+                  {props.UiTranslations.settings.createAccount}
+                </Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, ProfileStyles.largeBtn]}
+                : props.accountType == 'consumer' ?
+                <TouchableOpacity style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, SettingsStyles.largeBtn]}
+                                activeOpacity={0.5} onPress={() => props.setCurrentProfileView("upgradeProfile")}>
+                <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, SettingsStyles.largeBtnText]}>
+                  {props.UiTranslations.settings.editAccount}
+                </Text>
+              </TouchableOpacity>
+
+              :
+              <></>
+            }            
+
+            <TouchableOpacity style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, SettingsStyles.largeBtn]}
                               activeOpacity={0.5} onPress={() => deleteAppDataWarningDialog()}>
-              <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, ProfileStyles.largeBtnText]}>
+              <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, SettingsStyles.largeBtnText]}>
                 {props.UiTranslations.settings.deleteAppData}
               </Text>
             </TouchableOpacity>
 
-          </View>           
+          </View>          
         </ScrollView>        
       </View>
     </Provider>
   )
 }
   
-const ProfileStyles = StyleSheet.create({
+const SettingsStyles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
@@ -315,5 +350,9 @@ const ProfileStyles = StyleSheet.create({
   largeBtnText: {
     fontSize: 17,
     fontWeight: 'bold'
+  },
+  settingsNoEmailFound: {
+    fontSize: 20,
+    padding: 5,
   }
 })

@@ -10,7 +10,7 @@ export default function Achievements(props) {
 const [first, setfirst] = useState([{nimi:'', pisteet:''}])
 const [second, setsecond] = useState(0)
 const [third, setthird] = useState(0)
-const [backgroundColor, setBackgroundColor] = useState(props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.DarkThemeSecondary : props.appSettings.themeColorOptions.background)
+const [appColor, setBackgroundColor] = useState(props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.DarkThemeSecondary : props.appSettings.themeColorOptions.background)
 const [textColor, setTextColor] = useState(props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.White : Colors.Black)
 
 useEffect (() => {
@@ -52,11 +52,11 @@ const getTotalExer = async () => {
 return (
       
       <View style={[{backgroundColor: props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.DarkTheme : Colors.White},AchievementStyles.container]}>
-        <Text style={[{backgroundColor: backgroundColor, color: textColor}, AchievementStyles.headline]}> Saavutukset</Text>
-        <Text style={[{backgroundColor: backgroundColor, color: textColor}, AchievementStyles.text]}>Hienoa! Olet saanut pisteitä yhteensä:</Text>
+        <Text style={[{backgroundColor: appColor, color: textColor}, AchievementStyles.headline]}> Saavutukset</Text>
+        <Text style={[{backgroundColor: appColor, color: textColor}, AchievementStyles.text]}>Hienoa! Olet saanut pisteitä yhteensä:</Text>
         <Text style={AchievementStyles.points}>{second}</Text>
 
-        <View style={[{backgroundColor: backgroundColor}, AchievementStyles.headline2]}>
+        <View style={[{backgroundColor: appColor}, AchievementStyles.headline2]}>
           <Text style={[{color: textColor}, AchievementStyles.text2]}> Viimeiset 5 tehtävää</Text>
           <Text style={[{color: textColor}, AchievementStyles.text2]}> Tehtävä:          Pisteet:</Text>
         </View>
@@ -64,7 +64,7 @@ return (
         {
           first.map((item, index) => {
             return (
-            <View key={index} style={[{backgroundColor: backgroundColor}, AchievementStyles.headline1]}>
+            <View key={index} style={[{backgroundColor: appColor}, AchievementStyles.headline1]}>
               <View style={AchievementStyles.inputWrap}>
               <Text style={[{color: textColor}, AchievementStyles.text1]}> {item.nimi}</Text>
               </View>
@@ -75,7 +75,7 @@ return (
           )})
         }
         
-        <View style={[{backgroundColor: backgroundColor}, AchievementStyles.headline3]}>
+        <View style={[{backgroundColor: appColor}, AchievementStyles.headline3]}>
           <Text style={[{color: textColor}, AchievementStyles.text3]}> Harjoituksia tehty yhteensä: {third}</Text>
         </View>
 

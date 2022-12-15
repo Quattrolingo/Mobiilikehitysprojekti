@@ -14,12 +14,13 @@ export default function Exercise(props) {
     const [correctAnswers, setCorrectAnswers] = useState(0)
     const intervalRef = useRef()
     const [seconds, setSeconds] = useState(0)
+    const [appColor, setAppCOlor] = useState(props.appSettings.themeColorOptions.background)
     const [progressBar, setProgressBar] = useState({
         maxState: props.exercise.questions.length,
         currentState : questionsDone,
         correctAnswers: strikeStatus
     })
-
+    
     const fadeAnimation = useRef(new Animated.Value(0)).current
         const fadeIn = () => {
         Animated.timing(fadeAnimation, {
@@ -30,8 +31,8 @@ export default function Exercise(props) {
     }
 
     const [contentToRender, setContentToRender] = useState(
-        <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, ExerciseStyles.startUpScreen]} >
-            <Animated.Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black, opacity: fadeAnimation, fontSize: 20}]}>
+        <View style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, ExerciseStyles.startUpScreen]} >
+            <Animated.Text style={[{color: (appColor == Colors.DarkTheme) ? Colors.White : Colors.Black, opacity: fadeAnimation, fontSize: 20}]}>
                 {props.UiTranslations.exercise.startingExercise}
             </Animated.Text>
         </View>
@@ -116,14 +117,14 @@ export default function Exercise(props) {
 
     return (<>
         {/* contentToRender */}
-        <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, ExerciseStyles.container]}>
+        <View style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, ExerciseStyles.container]}>
             {
                 (progressBar.currentState >= progressBar.maxState)?
                 <></>
                 :
                 <View style={ExerciseStyles.exerciseHeader}>
                     <TouchableOpacity activeOpacity={0.5} onPress={() => handleBackButtonClick()}>  
-                        <Text style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.LightGrey : Colors.White}, ExerciseStyles.returnBtn]}>X</Text>
+                        <Text style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.LightGrey : Colors.White}, ExerciseStyles.returnBtn]}>X</Text>
                     </TouchableOpacity>  
                     <View style={ExerciseStyles.progressBar}>
                         <ProgressBar data={progressBar}/>
@@ -146,63 +147,63 @@ export default function Exercise(props) {
                     :
 
                     <View style={ExerciseStyles.endScreen} onLayout={(e) => { clearInterval(intervalRef.current); props.exerciseCompleted() }}>
-                        <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : props.appSettings.themeColorOptions.background}, ExerciseStyles.completedText]}>
+                        <Text style={[{color: (appColor == Colors.DarkTheme) ? Colors.White : appColor}, ExerciseStyles.completedText]}>
                             {props.UiTranslations.exercise.exerciseCompleted}
                         </Text>
 
                         <View style={ExerciseStyles.feedbackContainer}>                            
-                            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White},
-                                          {borderColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.LightGrey : props.appSettings.themeColorOptions.background}, 
+                            <View style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White},
+                                          {borderColor: (appColor == Colors.DarkTheme) ? Colors.LightGrey : appColor}, 
                                           ExerciseStyles.feedbackContainerItem]}>                                
-                                <Text style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : props.appSettings.themeColorOptions.background},
-                                              {color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, 
+                                <Text style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.DarkThemeSecondary : appColor},
+                                              {color: (appColor == Colors.DarkTheme) ? Colors.White : Colors.Black}, 
                                               ExerciseStyles.feedbackItemHeading]}>
                                     {props.UiTranslations.exercise.successRate}
                                 </Text>
-                                <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkGrey : Colors.White}, ExerciseStyles.feedbackContainerItemInner]}>
+                                <View style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.DarkGrey : Colors.White}, ExerciseStyles.feedbackContainerItemInner]}>
                                     <Image style={ExerciseStyles.feedbackItemImage} source={require('./../../data/images/aim_icon_color.png')}/>
-                                    <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, ExerciseStyles.feedbackItemText]}>
+                                    <Text style={[{color: (appColor == Colors.DarkTheme) ? Colors.White : Colors.Black}, ExerciseStyles.feedbackItemText]}>
                                         {getSuccessRate()}%
                                     </Text>
                                 </View>
                             </View> 
 
-                            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White},
-                                          {borderColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.LightGrey : props.appSettings.themeColorOptions.background},                                
+                            <View style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White},
+                                          {borderColor: (appColor == Colors.DarkTheme) ? Colors.LightGrey : appColor},                                
                                           ExerciseStyles.feedbackContainerItem]}>                                
-                                <Text style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : props.appSettings.themeColorOptions.background},
-                                              {color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, 
+                                <Text style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.DarkThemeSecondary : appColor},
+                                              {color: (appColor == Colors.DarkTheme) ? Colors.White : Colors.Black}, 
                                               ExerciseStyles.feedbackItemHeading]}>
                                     {props.UiTranslations.exercise.timePassed}
                                 </Text>
-                                <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkGrey : Colors.White}, ExerciseStyles.feedbackContainerItemInner]}>
+                                <View style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.DarkGrey : Colors.White}, ExerciseStyles.feedbackContainerItemInner]}>
                                     <Image style={ExerciseStyles.feedbackItemImage} source={require('./../../data/images/timer_icon_color.png')}/>
-                                    <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, ExerciseStyles.feedbackItemText]}>
+                                    <Text style={[{color: (appColor == Colors.DarkTheme) ? Colors.White : Colors.Black}, ExerciseStyles.feedbackItemText]}>
                                         {getCompletionTime()}
                                     </Text>
                                 </View>
                             </View> 
 
-                            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White},
-                                          {borderColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.LightGrey : props.appSettings.themeColorOptions.background}, 
+                            <View style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White},
+                                          {borderColor: (appColor == Colors.DarkTheme) ? Colors.LightGrey : appColor}, 
                                           ExerciseStyles.feedbackContainerItem]}>                                
-                                <Text style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : props.appSettings.themeColorOptions.background},
-                                              {color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, 
+                                <Text style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.DarkThemeSecondary : appColor},
+                                              {color: (appColor == Colors.DarkTheme) ? Colors.White : Colors.Black}, 
                                               ExerciseStyles.feedbackItemHeading]}>
                                     {props.UiTranslations.exercise.collectedXp}
                                 </Text>
-                                <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkGrey : Colors.White}, ExerciseStyles.feedbackContainerItemInner]}>
+                                <View style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.DarkGrey : Colors.White}, ExerciseStyles.feedbackContainerItemInner]}>
                                     <Image style={ExerciseStyles.feedbackItemImage} source={require('./../../data/images/points_icon_star.png')}/>
-                                    <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, ExerciseStyles.feedbackItemText]}>
+                                    <Text style={[{color: (appColor == Colors.DarkTheme) ? Colors.White : Colors.Black}, ExerciseStyles.feedbackItemText]}>
                                         {getCollectedXP()}
                                     </Text>
                                 </View>                                
                             </View>
 
                         </View>
-                        <TouchableOpacity style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.LightGrey : props.appSettings.themeColorOptions.background}, ExerciseStyles.btnExit]}
+                        <TouchableOpacity style={[{backgroundColor: (appColor == Colors.DarkTheme) ? Colors.LightGrey : appColor}, ExerciseStyles.btnExit]}
                                         activeOpacity={0.5} onPress={() => handleBackButtonClick(true)}>
-                            <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.Black : Colors.White}, ExerciseStyles.btnExitText]}>{props.UiTranslations.exercise.continue}</Text>
+                            <Text style={[{color: (appColor == Colors.DarkTheme) ? Colors.Black : Colors.White}, ExerciseStyles.btnExitText]}>{props.UiTranslations.exercise.continue}</Text>
                         </TouchableOpacity>
                     </View>
                 }                

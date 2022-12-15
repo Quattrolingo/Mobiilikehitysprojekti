@@ -12,7 +12,7 @@ export default function ExerciseScrollView(props) {
     isOpen: false,
     parentName: null
   })
-  const [themeColor, setThemeColor] = useState(props.appSettings.themeColorOptions)
+  const [appColor, setThemeColor] = useState(props.appSettings.themeColorOptions)
 
   const getCompletedExercises = async () => {
     const exercises = await AsyncStorage.getItem('@completed_exercises')
@@ -32,7 +32,6 @@ export default function ExerciseScrollView(props) {
           count = count + 1
         }
       } catch(e) {
-        //console.log(e)
       }
     }
     return count
@@ -103,10 +102,10 @@ export default function ExerciseScrollView(props) {
   const renderSubtopic = ({ item, index }) => {
     const { data } = item
     return (
-      <View style={{backgroundColor: (themeColor.background == '#121212') ? Colors.DarkThemeSecondary : Colors.White}}>
-        <View style={[{backgroundColor: themeColor.background}, ESWStyles.topicHeader]}>
-          <Text style={[{color: (themeColor.background == '#121212') ? Colors.White : Colors.Brown}, ESWStyles.topicHeaderTitle]}>{item.id}</Text>
-          <Text style={[{color: (themeColor.background == '#121212') ? Colors.White : Colors.Brown}, ESWStyles.topicHeaderDescription]}>{item.description}</Text>
+      <View style={{backgroundColor: (appColor.background == '#121212') ? Colors.DarkThemeSecondary : Colors.White}}>
+        <View style={[{backgroundColor: appColor.background}, ESWStyles.topicHeader]}>
+          <Text style={[{color: (appColor.background == '#121212') ? Colors.White : Colors.Brown}, ESWStyles.topicHeaderTitle]}>{item.id}</Text>
+          <Text style={[{color: (appColor.background == '#121212') ? Colors.White : Colors.Brown}, ESWStyles.topicHeaderDescription]}>{item.description}</Text>
         </View>      
         {data.map((tier) => {
           const url = "https://raw.githubusercontent.com/Quattrolingo/Mobiilikehitysprojekti/main/data/images/" + tier.picture
@@ -119,7 +118,7 @@ export default function ExerciseScrollView(props) {
                     maxValue={tier.exercises.length}
                     initialValue={0}
                     radius={56}
-                    activeStrokeColor={(themeColor.background == '#121212') ? Colors.RicherMint : Colors.CircularProgressGreen}
+                    activeStrokeColor={(appColor.background == '#121212') ? Colors.RicherMint : Colors.CircularProgressGreen}
                     inActiveStrokeColor={"transparent"}
                     activeStrokeWidth={20}
                     rotation={180}
@@ -129,17 +128,17 @@ export default function ExerciseScrollView(props) {
                 </View>
                 <View style={[{backgroundColor: "transparent",
                                borderWidth: 4,
-                               borderColor: (themeColor.background == '#121212') ? Colors.DarkTheme : themeColor.background}, 
+                               borderColor: (appColor.background == '#121212') ? Colors.DarkTheme : appColor.background}, 
                                ESWStyles.subtopicItemImageContainer]}>
-                  <View style={[{borderColor: (themeColor.background == '#121212') ? Colors.DarkTheme : themeColor.background}, ESWStyles.subtopicImageInnerContainer]}>
+                  <View style={[{borderColor: (appColor.background == '#121212') ? Colors.DarkTheme : appColor.background}, ESWStyles.subtopicImageInnerContainer]}>
                     <Image
                     style={ESWStyles.subtopicItemImage}
                     source={{ uri: url }}
                     resizeMode="cover" />
                   </View>
                 </View>
-                <Text style={[{color: (themeColor.background == '#121212') ? Colors.White : Colors.Black},
-                              {backgroundColor: themeColor.background},
+                <Text style={[{color: (appColor.background == '#121212') ? Colors.White : Colors.Black},
+                              {backgroundColor: appColor.background},
                               ESWStyles.subtopicItemTitle]}>
                   {tier.name}
                 </Text>                
@@ -152,7 +151,7 @@ export default function ExerciseScrollView(props) {
                         <TouchableOpacity
                           activeOpacity={0.5}
                           key={itm.id}
-                          style={[{backgroundColor: (themeColor.background == '#121212') ? Colors.DarkGrey : Colors.White}, {borderColor: themeColor.background}, ESWStyles.singleExerciseBtn]}
+                          style={[{backgroundColor: (appColor.background == '#121212') ? Colors.DarkGrey : Colors.White}, {borderColor: appColor.background}, ESWStyles.singleExerciseBtn]}
                           onPress={() => props.setExercise(itm)} >
                           { getSingleExerciseNumber({itemID:itm.id, itemUniqID:itm.uniqueID}) }
                         </TouchableOpacity>
@@ -184,7 +183,7 @@ export default function ExerciseScrollView(props) {
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
         />
-      : <Text style={[{backgroundColor: themeColor.background}, ESWStyles.loadingMessage]}>{props.UiTranslations.home.loadingExerciseScrollViewData}</Text>
+      : <Text style={[{backgroundColor: appColor.background}, ESWStyles.loadingMessage]}>{props.UiTranslations.home.loadingExerciseScrollViewData}</Text>
       }
     </SafeAreaView>
   )

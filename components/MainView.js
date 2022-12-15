@@ -40,7 +40,12 @@ export default function MainView(props) {
               modifyAppSettings={props.modifyAppSettings}
               UiTranslations={props.UiTranslations}
               navBarVisibility={setNavBarVisible}
-              setCurrentView={setCurrentView}/>
+              setCurrentView={setCurrentView}
+              accountType={props.accountType}
+              modifyAccountType={props.modifyAccountType}
+              accountEmail={props.accountEmail}
+              modifyAccountEmail={props.modifyAccountEmail}
+              deleteAppData={props.deleteAppData}/>
   } else if(currentView == "Dictionary"){
     data = <Dictionary UiTranslations={props.UiTranslations} appSettings={props.appSettings}/>
   }

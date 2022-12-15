@@ -29,7 +29,19 @@
   
       },
       "profile": {
-          "heading": "Profiili"
+        "heading": "Profiili",
+        "youNeedAProfile": "Tarvitset profiilin käyttääksesi sovelluksen kaikkia ominaisuuksia",
+        "enterEmailHint": "sähköposti",
+        "enterEmail": "Mikä on sähköpostiosoitteesi?",
+        "createProfile": "Luo profiili",
+        "upgradeProfile": "Tilauksen päivitys",
+        "activationCode": "Syötä aktivointikoodi",
+        "enterCode": "000-000-000-000",
+        "enterActivationCode": "Syötä aktivointikoodi päivittääksesi sovelluksen PRO-versioon",
+        "incorrectCode": "Virheellinen aktivointikoodi",
+        "activationSuccessfulMessage": "Tuote aktivoitu",
+        "profileAdded": "Profiili lisätty",
+        "activationCodeHint": "VIHJE"
       },
       "settings": {
           "heading": "Asetukset",
@@ -46,7 +58,13 @@
           "noBtn": "EI",
           "userDataDeleted": "Tietosi poistettiin",
           "account": "Profiili",
-          "createAccount" : "LISÄÄ PROFIILI"
+          "noAccountFound": "Et ole luonut profiilia",
+          "email": "Sähköposti",
+          "createAccount": "LISÄÄ PROFIILI",
+          "editAccount": "PÄIVITÄ PRO-VERSIOON",
+          "accountType": "Tilityyppi",
+          "consumer": "kuluttaja",
+          "student": "opiskelija (pro)"
       },
       "dictionary": {
   

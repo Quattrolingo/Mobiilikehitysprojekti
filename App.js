@@ -9,7 +9,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function App() {
 
-  const [educationMode, setEducationMode] = useState(null)
+  const [accountType, setAccountType] = useState("consumer")
+  const [accountEmail, setAccountEmail] = useState("")
   const [exercise, setExercise] = useState(null)
   const [appSettings, setAppSettings] = useState({ themeColorOptions: { background: Colors.DarkYellow }, soundOn: true })
   const [UiTranslations, setUiTranslations] = useState(LanguageData.courseData.ui_translations)
@@ -45,9 +46,9 @@ export default function App() {
     } catch (e) {}    
   }
 
-
   useEffect(() => {
     getAppSettings()
+    getAccountType()
   }, [])
 
   useEffect(() => {
@@ -57,6 +58,57 @@ export default function App() {
       NavigationBar.setBackgroundColorAsync("white")
     }
   }, [appSettings.themeColorOptions.background])
+
+  const deleteAppData = async () => {
+    setLoaded(false)
+    try {
+      await AsyncStorage.setItem('@theme_backgroundColor', Colors.DarkYellow)
+      await AsyncStorage.removeItem('@quattrolingo_account_type')
+      await AsyncStorage.removeItem('@quattrolingo_account_email')      
+      await AsyncStorage.removeItem('@soundSettings')
+      await AsyncStorage.removeItem('@completed_exercises')
+      await AsyncStorage.removeItem('@Totalpoints')
+      await AsyncStorage.removeItem('@Firstfivepoints')
+      setAccountType("consumer")
+      setAccountEmail("")
+    } catch (e) {
+    }
+    setLoaded(true)
+  }
+
+  const getAccountType = async () => {
+    try{
+      const accountTypeData = await AsyncStorage.getItem('@quattrolingo_account_type')
+      const accountEmail = await AsyncStorage.getItem('@quattrolingo_account_email')
+      if(accountTypeData == null){
+        modifyAccountType("consumer")             
+      } else {
+        setAccountType(accountTypeData)
+      }
+      if(accountEmail == null){
+        modifyAccountEmail("")   
+      } else {
+        setAccountEmail(accountEmail)
+      }
+    } catch (e) {
+    }
+  }
+
+  const modifyAccountType = async (type) => {
+    try{
+      await AsyncStorage.setItem('@quattrolingo_account_type', type)
+      setAccountType(type)
+    } catch (e) {
+    }
+  }
+
+  const modifyAccountEmail = async (email) => {
+    try{
+      await AsyncStorage.setItem('@quattrolingo_account_email', email)
+      setAccountEmail(email)
+    } catch (e) {
+    }
+  }
 
   const exerciseCompleted = async () => {
     try {
@@ -105,7 +157,7 @@ export default function App() {
         <>
           <StatusBar
             barStyle={(appSettings.themeColorOptions.background == Colors.DarkTheme) ? 'light-content' : 'dark-content'}
-            backgroundColor={(appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : appSettings.themeColorOptions.background}/>
+            backgroundColor={appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.DarkTheme : exercise ? Colors.White : appSettings.themeColorOptions.background}/>
           {
             exercise ? 
             <Exercise
@@ -124,6 +176,11 @@ export default function App() {
               appSettings={appSettings}
               modifyAppSettings={setAppSettings}
               UiTranslations={UiTranslations}
+              accountType={accountType}
+              modifyAccountType={modifyAccountType}
+              accountEmail={accountEmail}
+              modifyAccountEmail={modifyAccountEmail}
+              deleteAppData={deleteAppData}
             />
           }
         </>
