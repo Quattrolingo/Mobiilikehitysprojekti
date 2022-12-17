@@ -21,7 +21,7 @@ export default function App() {
   const [UiTranslations, setUiTranslations] = useState(courseData.courseData.ui_translations)
   const [totalPoints, setTotalPoints] = useState(0)
 
-  const getAppSettings = async () => {
+  const getAppSettings = async () => { // Get app settings from async storage
     try {
       const theme_backgroundColor = await AsyncStorage.getItem('@theme_backgroundColor')
       const soundSettings = await AsyncStorage.getItem('@soundSettings')
@@ -50,7 +50,7 @@ export default function App() {
     } catch (e) {}    
   }
 
-  const getTotalpoints = async () => {
+  const getTotalpoints = async () => { // Get total points (gathered from exercises) from async storage
     try{
       const data = await AsyncStorage.getItem('@Totalpoints')
       if (data != null){
@@ -59,7 +59,7 @@ export default function App() {
     } catch (e) {}
   }
 
-  useEffect(() => {
+  useEffect(() => { // get various data from async storage on startup / page render
     getAppSettings()
     getAccountType()
     getActiveCourse()
@@ -70,11 +70,11 @@ export default function App() {
     modifyActiveCourse()
   }, [courseDataName])
 
-  useEffect(() => {
+  useEffect(() => { // useEffect to help update total points
     getTotalpoints()
   }, [exercise])
 
-  useEffect(() => {
+  useEffect(() => { // useEffect that controls Android NavigationBar styling
     if(appSettings.themeColorOptions.background == Colors.DarkTheme){
       NavigationBar.setBackgroundColorAsync(Colors.DarkTheme)
     } else {
@@ -82,7 +82,7 @@ export default function App() {
     }
   }, [appSettings.themeColorOptions.background])
 
-  const deleteAppData = async () => {
+  const deleteAppData = async () => { // Function to delete all app data from async storage
     setLoaded(false)
     try {
       await AsyncStorage.setItem('@theme_backgroundColor', Colors.DarkYellow)
@@ -101,7 +101,7 @@ export default function App() {
     setLoaded(true)
   }
 
-  const getActiveCourse = async () => {
+  const getActiveCourse = async () => { // Get active language course name (english or swedish as of December 2022)
     try{
       const course = await AsyncStorage.getItem('@activeCourseName')
       if(course != null){
@@ -111,14 +111,14 @@ export default function App() {
     }
   }
 
-  const modifyActiveCourse = async () => {
+  const modifyActiveCourse = async () => { // Saves new language course name to async storage
     try{
       await AsyncStorage.setItem('@activeCourseName', courseDataName)
     } catch (e) {
     }
   }
 
-  const getAccountType = async () => {
+  const getAccountType = async () => { // Get account type (consumer or student (PRO version))
     try{
       const accountTypeData = await AsyncStorage.getItem('@quattrolingo_account_type')
       const accountEmail = await AsyncStorage.getItem('@quattrolingo_account_email')
@@ -136,7 +136,7 @@ export default function App() {
     }
   }
 
-  const modifyAccountType = async (type) => {
+  const modifyAccountType = async (type) => { // Modify account type in async storage
     try{
       await AsyncStorage.setItem('@quattrolingo_account_type', type)
       setAccountType(type)
@@ -144,7 +144,7 @@ export default function App() {
     }
   }
 
-  const modifyAccountEmail = async (email) => {
+  const modifyAccountEmail = async (email) => { // Modify account email in async storage
     try{
       await AsyncStorage.setItem('@quattrolingo_account_email', email)
       setAccountEmail(email)
@@ -152,24 +152,24 @@ export default function App() {
     }
   }
 
-  const exerciseCompleted = async () => {
+  const exerciseCompleted = async () => { // Executed when an exercise is finished -> save points and completed exercise to async storage
     try {
       const previousExerciseData = await AsyncStorage.getItem('@completed_exercises')
       const lastFiveExercises = await AsyncStorage.getItem('@Firstfivepoints')
       const totalPoints = await AsyncStorage.getItem('@Totalpoints')      
 
-      if(totalPoints != null){      
+      if(totalPoints != null){ // If total points exist in storage -> sum previous points and last exercise's points
         try {
           let newTotalPoints = JSON.parse(totalPoints) + pointsFromLastExercise
           await AsyncStorage.setItem('@Totalpoints', JSON.stringify(newTotalPoints))            
         } catch (e) {}
-      } else {
+      } else { // If total points do not exist in storage, add last exercise's points
         try {
           await AsyncStorage.setItem('@Totalpoints', JSON.stringify(pointsFromLastExercise))
         } catch(e) {} 
       }
 
-      if(lastFiveExercises != null){      
+      if(lastFiveExercises != null){ // Update list of last 5 exercises
         try {
           let newLastFiveExercises = JSON.parse(lastFiveExercises)
           if(newLastFiveExercises.length == 5){
@@ -186,7 +186,7 @@ export default function App() {
         } catch(e) {} 
       }
 
-      if(previousExerciseData !== null) {
+      if(previousExerciseData !== null) { // Update list of all completed exercises
         let modifiablePreviousExerciseData = JSON.parse(previousExerciseData)
         if(modifiablePreviousExerciseData.includes(exercise.uniqueID)){
             // do nothing
