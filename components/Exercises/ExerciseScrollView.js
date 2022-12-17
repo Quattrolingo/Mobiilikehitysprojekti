@@ -287,6 +287,7 @@ export default function ExerciseScrollView(props) {
           </TouchableOpacity>
         }        
         { props.languageData ?
+        <View style={{marginBottom: 90}}>
           <FlatList
             ref={FlatListRef}
             data={props.languageData.sections}
@@ -294,6 +295,7 @@ export default function ExerciseScrollView(props) {
             keyExtractor={(item) => item.id}
             showsVerticalScrollIndicator={false}
           />
+        </View>
         : <Text style={[{backgroundColor: appColor.background}, ESWStyles.loadingMessage]}>{props.UiTranslations.home.loadingExerciseScrollViewData}</Text>
         }
       </Provider>
@@ -344,7 +346,7 @@ const ESWStyles = StyleSheet.create({
     backgroundColor: Colors.White,
     position: 'absolute',
     right: 20,
-    bottom: 60,
+    bottom: 70,
     width: 60,
     height: 60,
     display: 'flex',
