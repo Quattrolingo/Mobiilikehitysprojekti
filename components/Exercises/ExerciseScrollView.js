@@ -16,6 +16,7 @@ export default function ExerciseScrollView(props) {
   const [appColor, setThemeColor] = useState(props.appSettings.themeColorOptions)
   const [courseFlag, setCourseFlag] = useState([])
   const [dialogVisible, setDialogVisible] = useState(false)
+  const [flagSource, setFlagSource] = useState("https://raw.githubusercontent.com/Quattrolingo/Mobiilikehitysprojekti/main/data/images/" + props.languageData.courseData.courseFlag)
 
   const getCompletedExercises = async () => {
     const exercises = await AsyncStorage.getItem('@completed_exercises')
@@ -25,7 +26,6 @@ export default function ExerciseScrollView(props) {
       setCompletedExercises([])
     }
   }
-
   const getCircularProgressBarStatus = (exercises) => {
     let exerciseArray = exercises.map(item => item.uniqueID)
     let count = 0
@@ -42,6 +42,7 @@ export default function ExerciseScrollView(props) {
 
   useEffect(() => {
     getCompletedExercises()
+    setFlagSource("https://raw.githubusercontent.com/Quattrolingo/Mobiilikehitysprojekti/main/data/images/" + props.languageData.courseData.courseFlag)
   }, [props])
 
   useEffect(() => {
@@ -182,7 +183,7 @@ export default function ExerciseScrollView(props) {
                       getExerciseAvailabilityStyle(tier) == false && appColor.background == Colors.DarkTheme ?
                       <Image
                         style={ESWStyles.lockedSubtopicItemImage}
-                        source={courseFlag}
+                        source={require('../../data/images/lock_grey_background.png')}
                         resizeMode="cover" />
                       : getExerciseAvailabilityStyle(tier) == false ?
                       <Image
@@ -263,18 +264,10 @@ export default function ExerciseScrollView(props) {
                                           : appColor.background == Colors.DarkYellow ? "#DAA520"
                                           : appColor.background == Colors.LightPink ? "#fcbbc4" : "#6fbfbb"}, ESWStyles.courseHeader]}>
           <TouchableOpacity activeOpacity={0.5} style={[ESWStyles.courseFlag]} onPress={() => setDialogVisible(!dialogVisible)}>
-            {
-              courseFlag.map((index) => {
-                let flagSource = './../../data/images/' + props.languageData.courseData.courseFlag
-                return (
-                  <Image
-                    key={index}
-                    style={{height: 24, width: 41}}
-                    source={{ uri: flagSource }}
-                    resizeMode="cover"/>
-                )
-              })
-            }
+            <Image
+              style={{height: 24, width: 41}}
+              source={{ uri: flagSource }}
+              resizeMode="cover"/>
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.5} style={[ESWStyles.totalPointsContainer]} onPress={() => props.setCurrentView("Achievements")}>
             <Image

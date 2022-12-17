@@ -35,7 +35,8 @@ export default function Profile(props) {
             setCurrentView={props.setCurrentView}
             accountType={props.accountType}
             accountEmail={props.accountEmail}
-            deleteAppData={props.deleteAppData}/>
+            deleteAppData={props.deleteAppData}
+            setCourseDataName={props.setCourseDataName}/>
 
           : currentProfileView == "profile" ?
           <View style={{paddingTop: 55}}>
@@ -60,9 +61,15 @@ export default function Profile(props) {
                   </TouchableOpacity>
                 </View>                  
                 :
-                  <View>
-                    <Text>{props.accountEmail}</Text>
-                    <Text>{props.accountType}</Text>
+                  <View style={{position: "absolute", top: 20}}>
+                    <Text style={[{color: props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.LightGrey : props.appSettings.themeColorOptions.background}, ProfileStyles.defaultPageText]}>
+                      <Text style={{color: props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.White : Colors.DarkerGrey}}>{props.UiTranslations.settings.accountType}: </Text>
+                      {props.accountEmail}
+                    </Text>
+                    <Text style={[{color: props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.LightGrey : props.appSettings.themeColorOptions.background}, ProfileStyles.defaultPageText]}>
+                      <Text style={{color: props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.White : Colors.DarkerGrey}}>{props.UiTranslations.settings.accountType}: </Text>
+                      {props.accountType == "consumer" ? props.UiTranslations.settings.consumer : props.UiTranslations.settings.student}
+                    </Text>
                   </View>
               }
             </View>            
@@ -111,6 +118,10 @@ const ProfileStyles = StyleSheet.create({
   settingsIconContainer: {
     position: 'absolute',
     right: 20,
+  },
+  defaultPageText: {
+    fontSize: 20,
+    fontWeight: 'bold'
   },
   settingsIcon: {      
     height: 32,

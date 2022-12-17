@@ -62,10 +62,12 @@ export default function App() {
   useEffect(() => {
     getAppSettings()
     getAccountType()
+    getActiveCourse()
   }, [])
 
   useEffect(() => {
     setCourseData(courseDataName == "english" ? EnglishCourseData : SwedishCourseData)
+    modifyActiveCourse()
   }, [courseDataName])
 
   useEffect(() => {
@@ -90,11 +92,30 @@ export default function App() {
       await AsyncStorage.removeItem('@completed_exercises')
       await AsyncStorage.removeItem('@Totalpoints')
       await AsyncStorage.removeItem('@Firstfivepoints')
+      await AsyncStorage.removeItem('@activeCourseName')
       setAccountType("consumer")
       setAccountEmail("")
+      setCourseDataName("english")
     } catch (e) {
     }
     setLoaded(true)
+  }
+
+  const getActiveCourse = async () => {
+    try{
+      const course = await AsyncStorage.getItem('@activeCourseName')
+      if(course != null){
+        setCourseDataName(course)             
+      }
+    } catch (e) {
+    }
+  }
+
+  const modifyActiveCourse = async () => {
+    try{
+      await AsyncStorage.setItem('@activeCourseName', courseDataName)
+    } catch (e) {
+    }
   }
 
   const getAccountType = async () => {

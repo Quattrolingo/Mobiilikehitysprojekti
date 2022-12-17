@@ -158,7 +158,7 @@
                 {
                   "type": "translate_sentence_drag",
                   "task": "Käännä lause",
-                  "sentence": "De är glada.",
+                  "sentence": "He ovat iloisia.",
                   "words": [  
                     { "id": "1", "word": "De" },
                     { "id": "2", "word": "är" },
@@ -194,7 +194,7 @@
                 {
                   "type": "translate_sentence_drag",
                   "task": "Käännä lause",
-                  "sentence": "This is my phone. ",
+                  "sentence": "Tämä on minun puhelin. ",
                   "words": [  
                     { "id": "1", "word": "Det här" },
                     { "id": "2", "word": "Det där" },

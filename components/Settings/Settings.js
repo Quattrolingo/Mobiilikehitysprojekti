@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, ToastAndroid } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, ToastAndroid, Image } from 'react-native'
 import { useEffect, useState } from 'react'
 import { Dialog, DialogHeader, DialogContent, DialogActions, Button, Provider } from '@react-native-material/core'
 import Colors from '../../assets/Colors'
@@ -89,17 +89,36 @@ export default function Profile(props) {
 
   const changeLanguageDialog = () => {
     setDialogContent(<>
-      <DialogHeader title={props.UiTranslations.settings.languageCourse} />
-      <DialogContent>
-        <Text>nothing here ¯\_(ツ)_/¯</Text>
-      </DialogContent>
-      <DialogActions>
-        <Button title={props.UiTranslations.settings.cancel}
-          compact
-          variant="text"
-          color={props.appSettings.themeColorOptions.background}
-          onPress={() => {setDialogVisible(false), setDialogContent(null)}} />
-      </DialogActions>
+      <DialogHeader title={props.UiTranslations.settings.chooseLanguageCourse} />
+          <DialogContent>
+            <TouchableOpacity
+              activeOpacity={0.5}
+              style={[SettingsStyles.chooseLanguageDialogItem]}
+              onPress={() => {setDialogVisible(false), setDialogContent(null), props.setCourseDataName("english")}}>
+            <Image
+              style={{height: 30, width: 47, marginRight: 10}}
+              source={require('./../../data/images/course_flag_english.png')}
+              resizeMode="cover"/>
+            <Text style={{fontWeight: 'bold', fontSize: 18, color: Colors.Grey}}>Englanti</Text>
+          </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.5}
+              style={[SettingsStyles.chooseLanguageDialogItem]}
+              onPress={() => {setDialogVisible(false), setDialogContent(null), props.setCourseDataName("swedish")}}>
+            <Image
+              style={{height: 30, width: 47, marginRight: 10}}
+              source={require('./../../data/images/course_flag_swedish.png')}
+              resizeMode="cover"/>
+            <Text style={{fontWeight: 'bold', fontSize: 18, color: Colors.Grey}}>Ruotsi</Text>
+          </TouchableOpacity>
+          </DialogContent>
+          <DialogActions>
+            <Button title={props.UiTranslations.settings.cancel}
+              compact
+              variant="text"
+              color={props.appSettings.themeColorOptions.background}
+              onPress={() => {setDialogVisible(false), setDialogContent(null)}} />
+          </DialogActions>
     </>)
     setDialogVisible(!dialogVisible)
   }
@@ -190,7 +209,7 @@ export default function Profile(props) {
                     <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.Black}, SettingsStyles.settingsItemText]}>
                       {props.UiTranslations.settings.email}
                     </Text>
-                    <TouchableOpacity onPress={() => changeLanguageDialog()} activeOpacity={0.5}>
+                    <TouchableOpacity onPress={() => {}} activeOpacity={0.5}>
                       <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : props.appSettings.themeColorOptions.background},
                                     SettingsStyles.settingsItemValue]
                                   }>
@@ -277,6 +296,12 @@ const SettingsStyles = StyleSheet.create({
     height: 32,
     width: 32
   },
+  chooseLanguageDialogItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 10
+  },
   settingsSaveBtn: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -314,10 +339,14 @@ const SettingsStyles = StyleSheet.create({
     alignItems: 'center'
   },
   settingsItemText: {
-    fontSize: 20
+    fontSize: 20,
+    marginRight: 20
   },
   settingsItemValue: {
-    fontSize: 20
+    fontSize: 20,
+    maxWidth: 170,
+    overflow: "hidden",
+    maxHeight: 30
   },
   settingsThemeColorSquare: {
     width: 25,
