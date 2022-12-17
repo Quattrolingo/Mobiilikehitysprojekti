@@ -35,7 +35,10 @@ export default function MainView(props) {
               setExercise={props.setExercise}
               appSettings={props.appSettings}
               UiTranslations={props.UiTranslations}
-              accountType={props.accountType} />
+              accountType={props.accountType}
+              setCurrentView={setCurrentView}
+              totalPoints={props.totalPoints}
+              setCourseDataName={props.setCourseDataName} />
   } else if(currentView == "Achievements"){
     data = <Achievements
               UiTranslations={props.UiTranslations}
@@ -52,7 +55,8 @@ export default function MainView(props) {
               modifyAccountType={props.modifyAccountType}
               accountEmail={props.accountEmail}
               modifyAccountEmail={props.modifyAccountEmail}
-              deleteAppData={props.deleteAppData} />
+              deleteAppData={props.deleteAppData}
+              setCourseDataName={props.setCourseDataName} />
   } else if(currentView == "Dictionary"){
     data = <Dictionary
               UiTranslations={props.UiTranslations}

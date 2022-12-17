@@ -2,7 +2,8 @@ import { StyleSheet, View, StatusBar, ToastAndroid, Text, ActivityIndicator } fr
 import { useState, useEffect } from 'react'
 import MainView from './components/MainView'
 import Exercise from './components/Exercises/Exercise'
-import LanguageData from './data/translations/fin_eng.json'
+import EnglishCourseData from './data/translations/fin_eng.json'
+import SwedishCourseData from './data/translations/fin_swe.json'
 import * as NavigationBar from 'expo-navigation-bar'
 import Colors from './assets/Colors'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -13,9 +14,12 @@ export default function App() {
   const [accountEmail, setAccountEmail] = useState("")
   const [exercise, setExercise] = useState(null)
   const [appSettings, setAppSettings] = useState({ themeColorOptions: { background: Colors.DarkYellow }, soundOn: true })
-  const [UiTranslations, setUiTranslations] = useState(LanguageData.courseData.ui_translations)
   const [loaded, setLoaded] = useState(false)
   const [pointsFromLastExercise, setPointsFromLastExercise] = useState(0)
+  const [courseDataName, setCourseDataName] = useState("english")
+  const [courseData, setCourseData] = useState(courseDataName == "english" ? EnglishCourseData : SwedishCourseData)
+  const [UiTranslations, setUiTranslations] = useState(courseData.courseData.ui_translations)
+  const [totalPoints, setTotalPoints] = useState(0)
 
   const getAppSettings = async () => {
     try {
@@ -46,10 +50,27 @@ export default function App() {
     } catch (e) {}    
   }
 
+  const getTotalpoints = async () => {
+    try{
+      const data = await AsyncStorage.getItem('@Totalpoints')
+      if (data != null){
+        setTotalPoints(JSON.parse(data)) 
+      }
+    } catch (e) {}
+  }
+
   useEffect(() => {
     getAppSettings()
     getAccountType()
   }, [])
+
+  useEffect(() => {
+    setCourseData(courseDataName == "english" ? EnglishCourseData : SwedishCourseData)
+  }, [courseDataName])
+
+  useEffect(() => {
+    getTotalpoints()
+  }, [exercise])
 
   useEffect(() => {
     if(appSettings.themeColorOptions.background == Colors.DarkTheme){
@@ -186,7 +207,7 @@ export default function App() {
             <MainView
               exercise={exercise}
               setExercise={setExercise}
-              languageData={LanguageData}
+              languageData={courseData}
               appSettings={appSettings}
               modifyAppSettings={setAppSettings}
               UiTranslations={UiTranslations}
@@ -195,6 +216,8 @@ export default function App() {
               accountEmail={accountEmail}
               modifyAccountEmail={modifyAccountEmail}
               deleteAppData={deleteAppData}
+              totalPoints={totalPoints}
+              setCourseDataName={setCourseDataName}
             />
           }
         </>

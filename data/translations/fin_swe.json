@@ -1,0 +1,406 @@
+{
+  "courseData": {
+    "nativeCourseName": "suomi-ruotsi",
+    "foreignCourseName": "Finnish-Swedish",
+    "nativeLanguage": "Finnish",
+    "foreignLanguage": "Swedish",
+    "courseFlag": "course_flag_swedish.png",
+    "ui_translations": {
+      "exercise": {
+          "startingExercise": "Käynnistetään harjoitus",
+          "quitExerciseTitle": "Poistu harjoituksesta?",
+          "quitExerciseMessage": "Saavutuksiasi ei tallenneta..",
+          "quitExerciseBtn": "LOPETA HARJOITUS",
+          "stayInExerciseBtn": "JATKA HARJOITUSTA",
+          "checkAnswer": "TARKISTA VASTAUS",
+          "correct": "Oikein!",
+          "correct_and_meaning": "Oikein! Käännös:",
+          "continue": "JATKA",
+          "notQuite": "Ei aivan..",
+          "correctAnswer": "Oikea vastaus olisi: ",
+          "exerciseCompleted": "Harjoitus suoritettu!",
+          "successRate": "ONNISTUMISPROSENTTI",
+          "timePassed": "KÄYTETTY AIKA",
+          "collectedXp": "SAADUT PISTEET"
+      },
+      "home": {
+          "loadingExerciseScrollViewData": "Ladataan tietoja..."
+      },
+      "achievements": {
+  
+      },
+      "profile": {
+        "heading": "Profiili",
+        "youNeedAProfile": "Tarvitset profiilin käyttääksesi sovelluksen kaikkia ominaisuuksia",
+        "enterEmailHint": "sähköposti",
+        "enterEmail": "Mikä on sähköpostiosoitteesi?",
+        "createProfile": "Luo profiili",
+        "upgradeProfile": "Tilauksen päivitys",
+        "activationCode": "Syötä aktivointikoodi",
+        "enterCode": "000-000-000-000",
+        "enterActivationCode": "Syötä aktivointikoodi päivittääksesi sovelluksen PRO-versioon",
+        "incorrectCode": "Virheellinen aktivointikoodi",
+        "activationSuccessfulMessage": "Tuote aktivoitu",
+        "profileAdded": "Profiili lisätty",
+        "activationCodeHint": "VIHJE"
+      },
+      "settings": {
+          "heading": "Asetukset",
+          "save": "OK",
+          "general": "Yleiset",
+          "theme": "Teemaväri",
+          "languageCourse": "Kielikurssi",
+          "cancel": "PERUUTA",
+          "darkMode": "Tumma tila",
+          "deleteAppData": "KIRJAUDU ULOS",
+          "deleteAppDataDialogTitle": "Sovelluksen tietojen poistaminen",
+          "deleteAppDataDialogMessage": "Kaikki tietosi poistetaan sovelluksesta. Haluatko jatkaa?",
+          "yesBtn": "KYLLÄ",
+          "noBtn": "EI",
+          "userDataDeleted": "Tietosi poistettiin",
+          "account": "Profiili",
+          "noAccountFound": "Et ole luonut profiilia",
+          "email": "Sähköposti",
+          "createAccount": "LISÄÄ PROFIILI",
+          "editAccount": "PÄIVITÄ PRO-VERSIOON",
+          "accountType": "Tilityyppi",
+          "consumer": "kuluttaja",
+          "student": "opiskelija PRO"
+      },
+      "dictionary": {
+  
+      }
+    },
+    "sectionStructure": [
+      {
+        "tierUniqueID": "98yawsef897", "exercises": ["sdg97", "5thfgd"]
+      },
+      {
+        "tierUniqueID": "89ysd8h", "exercises": ["d5rthd"]
+      },
+      {
+        "tierUniqueID": "d6grffg", "exercises": ["90sdug09ue", "9009j54oi"]
+      },
+      {
+        "tierUniqueID": "df5fgfb", "exercises": ["9fd09345t"]
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "Perusteet",
+      "description": "Esittele itsesi, opi numeroita ",
+      "data": [
+        {
+          "tier": 1,
+          "uniqueID": "98yawsef897",
+          "name": "Persoonapronominit",
+          "levels": 2,
+          "lessons": 2,
+          "picture": "subtopic_icon_people.png",
+          "exercises": [
+            {
+              "id": "1",
+              "uniqueID": "sdg97",
+              "definition": {
+                "name": "Perusteet",
+                "picture": "subtopic_icon_people.png"
+              },
+              "questions": [
+                {
+                  "type": "select_missing_word",
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "Hej! * är Peter.",
+                  "meaning": "Hei! Minä olen Peter",
+                  "words": [  
+                    { "id": "1", "word": "Jag" },
+                    { "id": "2", "word": "Dig" }
+                  ],
+                  "answer": ["Jag"]
+                },
+                {
+                  "type": "select_missing_word",
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "* är Anders.",
+                  "meaning": "Sinä olet Anders",
+                  "words": [  
+                    { "id": "1", "word": "Dig" },
+                    { "id": "2", "word": "Du" },
+                    { "id": "3", "word": "Mig" }
+                  ],
+                  "answer": ["Du"]
+                },
+                {
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "Terve! Kuka sinä olet?",
+                  "words": [  
+                    { "id": "1", "word": "Hej" },
+                    { "id": "2", "word": "vem" },
+                    { "id": "3", "word": "är" },
+                    { "id": "4", "word": "du" },
+                    { "id": "5", "word": "ni" },
+                    { "id": "6", "word": "var" },
+                    { "id": "7", "word": "jag" }
+                  ],
+                  "answer": ["Hej", "vem" ,"är","du"]
+                },
+                {
+                  "type": "how_to_say",
+                  "task": "Kuinka sanotaan \"hän\" (miehestä)?",
+                  "sentence": "",
+                  "words": [  
+                    { "id": "1", "word": "Han" },
+                    { "id": "2", "word": "Hon" }
+                  ],
+                  "answer": ["Han"]
+                },
+                {
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "De är glada.",
+                  "words": [  
+                    { "id": "1", "word": "De" },
+                    { "id": "2", "word": "är" },
+                    { "id": "3", "word": "Vi" },
+                    { "id": "4", "word": "glada" },
+                    { "id": "5", "word": "var" },
+                    { "id": "6", "word": "Ni" },
+                    { "id": "7", "word": "Han" }
+                  ],
+                  "answer": ["De", "är", "glada"]
+                },
+                {
+                  "type": "how_to_say",
+                  "task": "Kuinka sanotaan \"hän\" (naisesta)?",
+                  "sentence": "",
+                  "words": [  
+                    { "id": "1", "word": "Han" },
+                    { "id": "2", "word": "Hon" },
+                    { "id": "3", "word": "De" }
+                  ],
+                  "answer": ["Hon"]
+                }
+              ]
+            },
+            {
+              "id": "2",
+              "uniqueID": "5thfgd",
+              "definition": {
+                "name": "Omistusmuodot",
+                "picture": "subtopic_icon_people.png"
+              },
+              "questions": [
+                {
+                  "type": "translate_sentence_drag",
+                  "task": "Käännä lause",
+                  "sentence": "This is my phone. ",
+                  "words": [  
+                    { "id": "1", "word": "Det här" },
+                    { "id": "2", "word": "Det där" },
+                    { "id": "3", "word": "är" },
+                    { "id": "4", "word": "var" },
+                    { "id": "5", "word": "dig" },
+                    { "id": "6", "word": "min" },
+                    { "id": "7", "word": "telefon" }
+                  ],
+                  "answer": ["Det här", "är" ,"min","telefon"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tier": 2,
+          "uniqueID": "89ysd8h",
+          "name": "Numerot",
+          "levels": 1,
+          "lessons": 1,
+          "picture": "subtopic_numbers.png",
+          "exercises": [
+            {
+              "id": "1",
+              "uniqueID": "d5rthd",
+              "definition": {
+                "name": "Numerot",
+                "picture": "subtopic_numbers.png"
+              },
+              "questions": [
+                {
+                  "type": "select_missing_word",
+                  "task": "Valitse puuttuva sana",
+                  "sentence": "Priset är * kronor",
+                  "meaning": "Hinta on sata kruunua",
+                  "words": [  
+                  { "id": "1", "word": "hundra" },
+                  { "id": "2", "word": "hund" },
+                  { "id": "3", "word": "hunted" }           
+                ],
+                "answer": ["hundra"]
+                },
+                {
+                  "type": "select_pairs",
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
+                      { "id": "1", "word": "yksi" },
+                      { "id": "2", "word": "kaksi" },
+                      { "id": "3", "word": "kolme" },
+                      { "id": "4", "word": "neljä" },
+                      { "id": "5", "word": "viisi" }
+                    ],
+                    "foreign": [
+                      { "id": "1", "word": "ett" },
+                      { "id": "2", "word": "två" },
+                      { "id": "3", "word": "tre" },
+                      { "id": "4", "word": "fyra" },
+                      { "id": "5", "word": "fem" }
+                    ]
+                  },
+                  "answer": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Eläimet",
+      "description": "Kerro lemmikeistäsi ja muista eläimistä",
+      "data": [
+        {
+          "tier": 1,
+          "uniqueID": "d6grffg",
+          "name": "Villieläimet",
+          "levels": 2,
+          "lessons": 2,
+          "picture": "subtopic_icon_wild_animals.png",
+          "exercises": [
+            {
+              "id": "1",
+              "uniqueID": "90sdug09ue",
+              "definition": {
+                "name": "Villieläimet",
+                "picture": "subtopic_icon_wild_animals.png"
+              },
+              "questions": [
+                {
+                  "type": "select_correct_word",
+                  "task": "Mikä näistä on \"karhu\"?",
+                  "sentence": "",
+                  "words": [  
+                    { "id": "1", "word": "björn" },
+                    { "id": "2", "word": "orm" },
+                    { "id": "3", "word": "lejon" },
+                    { "id": "4", "word": "krokodil" },
+                    { "id": "5", "word": "fisk" }
+                  ],
+                  "answer": ["björn"]
+                },
+                {
+                  "type": "select_pairs",
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
+                      { "id": "1", "word": "leijona" },
+                      { "id": "2", "word": "hirvi" },
+                      { "id": "3", "word": "apina" },
+                      { "id": "4", "word": "kettu" }
+                    ],
+                    "foreign": [
+                      { "id": "1", "word": "lejon" },
+                      { "id": "2", "word": "älg" },
+                      { "id": "3", "word": "apa" },
+                      { "id": "4", "word": "räv" }
+                    ]
+                  },
+                  "answer": null
+                }
+              ]
+            },
+            {
+              "id": "2",
+              "uniqueID": "9009j54oi",
+              "definition": {
+                "name": "Villieläimet 2",
+                "picture": "subtopic_icon_wild_animals.png"
+              },
+              "questions": [
+                {
+                  "type": "select_correct_word",
+                  "task": "Mikä näistä on \"susi\"?",
+                  "sentence": "",
+                  "words": [  
+                    { "id": "1", "word": "varg" },
+                    { "id": "2", "word": "örn" },
+                    { "id": "3", "word": "hök" },
+                    { "id": "4", "word": "räv" }
+                  ],
+                  "answer": ["varg"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tier": 2,
+          "name": "Kotieläimet",
+          "levels": 1,
+          "lessons": 1,
+          "picture": "subtopic_icon_domestic_animals.png", 
+          "uniqueID": "df5fgfb",
+          "exercises": [
+            {
+              "id": "1",
+              "uniqueID": "9fd09345t",
+              "definition": {
+                "name": "Kotieläimet",
+                "picture": "subtopic_icon_domestic_animals.png"
+              },
+              "questions": [
+                {
+                  "type": "select_correct_word",
+                  "task": "Mikä näistä on \"koira\"?",
+                  "sentence": "",
+                  "words": [  
+                    { "id": "1", "word": "hund" },
+                    { "id": "2", "word": "ko" },
+                    { "id": "3", "word": "katt" },
+                    { "id": "4", "word": "häst" },
+                    { "id": "5", "word": "gris" }
+                  ],
+                  "answer": ["hund"]
+                },
+                {
+                  "type": "select_pairs",
+                  "task": "Valitse parit",
+                  "sentence": "",
+                  "words": {  
+                    "native": [
+                      { "id": "1", "word": "koira" },
+                      { "id": "2", "word": "kissa" },
+                      { "id": "3", "word": "hevonen" },
+                      { "id": "4", "word": "kani" },
+                      { "id": "5", "word": "aasi" }
+                    ],
+                    "foreign": [
+                      { "id": "1", "word": "hund" },
+                      { "id": "2", "word": "katt" },
+                      { "id": "3", "word": "häst" },
+                      { "id": "4", "word": "kanin" },
+                      { "id": "5", "word": "åsna" }
+                    ]
+                  },
+                  "answer": null
+                }
+              ]
+            }
+          ]
+        }        
+      ]
+    }
+  ]
+}

@@ -4,6 +4,7 @@
     "foreignCourseName": "Finnish-English",
     "nativeLanguage": "Finnish",
     "foreignLanguage": "English",
+    "courseFlag": "course_flag_english.png",
     "ui_translations": {
       "exercise": {
           "startingExercise": "Käynnistetään harjoitus",
@@ -49,6 +50,7 @@
           "general": "Yleiset",
           "theme": "Teemaväri",
           "languageCourse": "Kielikurssi",
+          "chooseLanguageCourse": "Valitse Kielikurssi",
           "cancel": "PERUUTA",
           "darkMode": "Tumma tila",
           "deleteAppData": "KIRJAUDU ULOS",
@@ -81,10 +83,10 @@
         "tierUniqueID": "osdfok9032", "exercises": ["89eryu9he", "8ryudfg9he"]
       },
       {
-        "tierUniqueID": "a8sd9g798", "exercises": ["89eryu9he"]
+        "tierUniqueID": "a8sd9g798", "exercises": ["8dfh49he"]
       },
       {
-        "tierUniqueID": "34269hdsg", "exercises": ["89eryu9he"]
+        "tierUniqueID": "34269hdsg", "exercises": ["89eddfh"]
       },
       {
         "tierUniqueID": "asjfksdgf", "exercises": ["sdug043rh"]
@@ -160,8 +162,7 @@
                     { "id": "3", "word": "are" },
                     { "id": "4", "word": "you" },
                     { "id": "5", "word": "is" },
-                    { "id": "6", "word": "Where" },
-                    { "id": "7", "word": "were" }
+                    { "id": "6", "word": "were" }
                   ],
                   "answer": ["Hello", "who" ,"are","you"]
                 },
@@ -190,29 +191,16 @@
                 {
                   "type": "translate_sentence_drag",
                   "task": "Käännä lause",
-                  "sentence": "I am Rose.",
-                  "words": [  
-                    { "id": "1", "word": "I" },
-                    { "id": "2", "word": "am" },
-                    { "id": "3", "word": "Rose" }
-                  ],
-                  "answer": ["I", "am", "Rose"]
-                },
-                {
-                  "type": "translate_sentence_drag",
-                  "task": "Käännä lause",
-                  "sentence": "He ovat aina iloisia.",
+                  "sentence": "He ovat iloisia.",
                   "words": [  
                     { "id": "1", "word": "They" },
                     { "id": "2", "word": "are" },
                     { "id": "3", "word": "We" },
-                    { "id": "4", "word": "always" },
-                    { "id": "5", "word": "sometimes" },
-                    { "id": "6", "word": "happy" },
-                    { "id": "7", "word": "sad" },
-                    { "id": "8", "word": "is" }
+                    { "id": "4", "word": "happy" },
+                    { "id": "5", "word": "sad" },
+                    { "id": "6", "word": "is" }
                   ],
-                  "answer": ["They", "are", "always", "happy"]
+                  "answer": ["They", "are", "happy"]
                 },
                 {
                   "type": "how_to_say",
@@ -476,7 +464,7 @@
           "exercises": [
             {
               "id": "1",
-              "uniqueID": "89eryu9he",
+              "uniqueID": "8dfh49he",
               "definition": {
                 "name": "Kotieläimet",
                 "picture": "subtopic_icon_domestic_animals.png"
@@ -567,7 +555,7 @@
           "exercises": [
             {
               "id": "1",
-              "uniqueID": "89eryu9he",
+              "uniqueID": "89eddfh",
               "definition": {
                 "name": "Ruoka-ainekset",
                 "picture": "subtopic_icon_food.png"

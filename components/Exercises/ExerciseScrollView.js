@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import Colors from './../../assets/Colors'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import CircularProgressBar from 'react-native-circular-progress-indicator'
+import { Dialog, DialogHeader, DialogContent, DialogActions, Button, Provider } from '@react-native-material/core'
 
 export default function ExerciseScrollView(props) {
   
@@ -13,8 +14,8 @@ export default function ExerciseScrollView(props) {
     parentName: null
   })
   const [appColor, setThemeColor] = useState(props.appSettings.themeColorOptions)
-
-  //console.log((props.languageData.sections.map((itm) => itm.data.map((item) => item.uniqueID))).flat())
+  const [courseFlag, setCourseFlag] = useState([])
+  const [dialogVisible, setDialogVisible] = useState(false)
 
   const getCompletedExercises = async () => {
     const exercises = await AsyncStorage.getItem('@completed_exercises')
@@ -80,9 +81,6 @@ export default function ExerciseScrollView(props) {
   }
 
   const onPressExercise = (item) => { // execute when a subtopic exercise item is clicked (for example: "numbers" inside main topic "basics")
-    
-    //console.log(props.languageData.courseData.sectionStructure.findIndexOf(Object.keys()))
-    //console.log(Object.keys(props.languageData.courseData.sectionStructure).includes(item.uniqueID))
     if(item.exercises.length && item.exercises.length > 1){ // if item has more than one exercise, then show the sub-exercises
       if(x.parentName == item.name){
         // if the sub exercises of the clicked item are already visible, then hide the sub-exercises
@@ -140,7 +138,7 @@ export default function ExerciseScrollView(props) {
     } else {
       return true
     }
-  }
+  }  
 
   const renderSubtopic = ({ item }) => {
     const { data } = item
@@ -184,7 +182,7 @@ export default function ExerciseScrollView(props) {
                       getExerciseAvailabilityStyle(tier) == false && appColor.background == Colors.DarkTheme ?
                       <Image
                         style={ESWStyles.lockedSubtopicItemImage}
-                        source={require('../../data/images/lock_grey_background.png')}
+                        source={courseFlag}
                         resizeMode="cover" />
                       : getExerciseAvailabilityStyle(tier) == false ?
                       <Image
@@ -233,37 +231,127 @@ export default function ExerciseScrollView(props) {
 
   return (
     <SafeAreaView>
-      <TouchableOpacity activeOpacity={0.5} onPress={() => FlatListRef.current?.scrollToEnd()} style={ESWStyles.scrollToBottomBtn}>
-        <Image
-          style={{height: 50, width: 50}}
-          source={require('./../../data/images/black_white_arrow.png')}
-          resizeMode="cover"/>
-      </TouchableOpacity>
-      { props.languageData ?
-        <FlatList
-          ref={FlatListRef}
-          data={props.languageData.sections}
-          renderItem={renderSubtopic}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-        />
-      : <Text style={[{backgroundColor: appColor.background}, ESWStyles.loadingMessage]}>{props.UiTranslations.home.loadingExerciseScrollViewData}</Text>
-      }
+      <Provider>
+        <Dialog visible={dialogVisible} onDismiss={() => setDialogVisible(false)}>
+          <DialogHeader title={props.UiTranslations.settings.chooseLanguageCourse} />
+          <DialogContent>
+            <TouchableOpacity activeOpacity={0.5} style={[ESWStyles.chooseLanguageDialogItem]} onPress={() => {setDialogVisible(!dialogVisible); props.setCourseDataName("english")}}>
+            <Image
+              style={{height: 30, width: 47, marginRight: 10}}
+              source={require('./../../data/images/course_flag_english.png')}
+              resizeMode="cover"/>
+            <Text style={{fontWeight: 'bold', fontSize: 18, color: Colors.Grey}}>Englanti</Text>
+          </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.5} style={[ESWStyles.chooseLanguageDialogItem]} onPress={() => {setDialogVisible(!dialogVisible); props.setCourseDataName("swedish")}}>
+            <Image
+              style={{height: 30, width: 47, marginRight: 10}}
+              source={require('./../../data/images/course_flag_swedish.png')}
+              resizeMode="cover"/>
+            <Text style={{fontWeight: 'bold', fontSize: 18, color: Colors.Grey}}>Ruotsi</Text>
+          </TouchableOpacity>
+          </DialogContent>
+          <DialogActions>
+            <Button title={props.UiTranslations.settings.cancel}
+              compact
+              variant="text"
+              color={props.appSettings.themeColorOptions.background}
+              onPress={() => {setDialogVisible(false)}} />
+          </DialogActions>
+        </Dialog>      
+        <View style={[{backgroundColor: appColor.background == Colors.DarkTheme ? Colors.DarkTheme : appColor.background,
+                      borderBottomColor: appColor.background == Colors.DarkTheme ? Colors.DarkThemeSecondary
+                                          : appColor.background == Colors.DarkYellow ? "#DAA520"
+                                          : appColor.background == Colors.LightPink ? "#fcbbc4" : "#6fbfbb"}, ESWStyles.courseHeader]}>
+          <TouchableOpacity activeOpacity={0.5} style={[ESWStyles.courseFlag]} onPress={() => setDialogVisible(!dialogVisible)}>
+            {
+              courseFlag.map((index) => {
+                let flagSource = './../../data/images/' + props.languageData.courseData.courseFlag
+                return (
+                  <Image
+                    key={index}
+                    style={{height: 24, width: 41}}
+                    source={{ uri: flagSource }}
+                    resizeMode="cover"/>
+                )
+              })
+            }
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.5} style={[ESWStyles.totalPointsContainer]} onPress={() => props.setCurrentView("Achievements")}>
+            <Image
+              style={{height: 29, width: 28}}
+              source={require('./../../data/images/points_icon_star_bordered.png')}
+              resizeMode="cover"/>
+            <Text style={ESWStyles.totalPoints}>{props.totalPoints}</Text>
+          </TouchableOpacity>        
+        </View>
+        {
+          dialogVisible ? <></> :
+          <TouchableOpacity activeOpacity={0.5} onPress={() => FlatListRef.current?.scrollToEnd()} style={ESWStyles.scrollToBottomBtn}>
+            <Image
+              style={{height: 50, width: 50}}
+              source={require('./../../data/images/black_white_arrow.png')}
+              resizeMode="cover"/>
+          </TouchableOpacity>
+        }        
+        { props.languageData ?
+          <FlatList
+            ref={FlatListRef}
+            data={props.languageData.sections}
+            renderItem={renderSubtopic}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+          />
+        : <Text style={[{backgroundColor: appColor.background}, ESWStyles.loadingMessage]}>{props.UiTranslations.home.loadingExerciseScrollViewData}</Text>
+        }
+      </Provider>
     </SafeAreaView>
   )
 }
 
 const ESWStyles = StyleSheet.create({
+  courseHeader: {
+    height: 45,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingRight: 20,
+    paddingLeft: 20,
+    borderBottomWidth: 2,
+  },
+  courseFlag: {
+    borderWidth: 2,
+    borderRadius: 3,
+    borderColor: Colors.White
+  },
+  totalPointsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  totalPoints: {
+    marginLeft: 8,
+    fontWeight: 'bold',
+    fontSize: 22,
+    color: Colors.White
+  },
+  chooseLanguageDialogItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 10
+  },
   loadingMessage: {
     width: '100%',
     textAlign: 'center',
   },
   scrollToBottomBtn: {
-    zIndex: 100000,
+    zIndex: 1000,
     backgroundColor: Colors.White,
     position: 'absolute',
     right: 20,
-    bottom: 20,
+    bottom: 60,
     width: 60,
     height: 60,
     display: 'flex',
