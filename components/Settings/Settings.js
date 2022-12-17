@@ -8,6 +8,7 @@ export default function Profile(props) {
 
   const [dialogVisible, setDialogVisible] = useState(false) 
   const [dialogContent, setDialogContent] = useState(null)
+  let madebyMsg = "Made with <3 by Quattrolingo team"
 
   const setAppBackgroundcolor = async (param) => {
     try{
@@ -259,10 +260,11 @@ export default function Profile(props) {
               <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkGrey}, SettingsStyles.largeBtnText]}>
                 {props.UiTranslations.settings.deleteAppData}
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity>           
 
-          </View>          
-        </ScrollView>        
+          </View>
+        </ScrollView>
+        <Text style={{alignSelf: 'center', position: 'absolute', bottom: 0, color: Colors.Grey}}>{madebyMsg}</Text>
       </View>
     </Provider>
   )
