@@ -15,14 +15,15 @@ Icons used in this app are made by various artists from flaticon.com including:
 **Aficons studio** https://www.flaticon.com/authors/aficons-studio  
 **Culmbio** https://www.flaticon.com/authors/culmbio  
 **Darius Dan** https://www.flaticon.com/authors/darius-dan  
-**DInosoftLabs** https://www.flaticon.com/authors/dinosoftlabs
+**DinosoftLabs** https://www.flaticon.com/authors/dinosoftlabs
 **Eucalyp** https://www.flaticon.com/authors/eucalyp  
 **Flat Icons** https://www.flaticon.com/authors/flat-icons  
 **Freepik** https://www.flaticon.com/authors/freepik  
 **Hight Quality Icons** https://www.flaticon.com/authors/hight-quality-icons  
 **Icon.doit** https://www.flaticon.com/authors/icondoit  
 **Konkapp** https://www.flaticon.com/authors/konkapp  
-**Smashicons** https://www.flaticon.com/authors/smashicons  
+**Smashicons** https://www.flaticon.com/authors/smashicons 
+**Those Icons** https://www.flaticon.com/authors/those-icons
 **justicon** https://www.flaticon.com/authors/justicon  
 **monkik** https://www.flaticon.com/authors/monkik  
 **photo3idea_studio** https://www.flaticon.com/authors/photo3idea-studio  
