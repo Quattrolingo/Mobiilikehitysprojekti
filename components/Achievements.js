@@ -64,7 +64,7 @@ return (
         {
           first.map((item, index) => {
             return (
-            <View key={index} style={[{backgroundColor: appColor}, AchievementStyles.headline1]}>
+            <View key={index} style={[{backgroundColor: props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.DarkTheme : Colors.White}, AchievementStyles.headline1]}>
               <View style={AchievementStyles.inputWrap}>
               <Text style={[{color: textColor}, AchievementStyles.text1]}> {item.nimi}</Text>
               </View>

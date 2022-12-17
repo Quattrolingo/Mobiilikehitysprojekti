@@ -35,7 +35,7 @@ export default function UpgradeProfile(props) {
             "",
             "111-222-333-444",
             [
-                { text: "OK", onPress: () => console.log("OK Pressed") }
+                { text: "OK", onPress: () => {} }
             ]
         )
     }

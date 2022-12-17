@@ -69,7 +69,42 @@
       "dictionary": {
   
       }
-    }    
+    },
+    "sectionStructure": [
+      {
+        "tierUniqueID": "asjfk9032", "exercises": ["8932489he", "8ertute"]
+      },
+      {
+        "tierUniqueID": "asjfk9789", "exercises": ["34href89he"]
+      },
+      {
+        "tierUniqueID": "osdfok9032", "exercises": ["89eryu9he", "8ryudfg9he"]
+      },
+      {
+        "tierUniqueID": "a8sd9g798", "exercises": ["89eryu9he"]
+      },
+      {
+        "tierUniqueID": "34269hdsg", "exercises": ["89eryu9he"]
+      },
+      {
+        "tierUniqueID": "asjfksdgf", "exercises": ["sdug043rh"]
+      },
+      {
+        "tierUniqueID": "908ads097", "exercises": ["8sd8u7g87ue"]
+      },
+      {
+        "tierUniqueID": "9090dsfg", "exercises": ["dsw89usdhg"]
+      },
+      {
+        "tierUniqueID": "nmdjui2", "exercises": ["09d8safu890e"]
+      },
+      {
+        "tierUniqueID": "ksd98iy89", "exercises": ["sd09mwfdsh"]
+      },
+      {
+        "tierUniqueID": "1298d90s", "exercises": ["8dfhdfhe"]
+      }
+    ]
   },
   "sections": [
     {
@@ -305,8 +340,8 @@
           "tier": 1,
           "uniqueID": "osdfok9032",
           "name": "Villieläimet",
-          "levels": 1,
-          "lessons": 1,
+          "levels": 2,
+          "lessons": 2,
           "picture": "subtopic_icon_wild_animals.png",
           "exercises": [
             {

@@ -112,42 +112,56 @@ export default function App() {
 
   const exerciseCompleted = async () => {
     try {
-        const totalPoints = await AsyncStorage.getItem('@Totalpoints')
-        const previousExerciseData = await AsyncStorage.getItem('@completed_exercises')
+      const previousExerciseData = await AsyncStorage.getItem('@completed_exercises')
+      const lastFiveExercises = await AsyncStorage.getItem('@Firstfivepoints')
+      const totalPoints = await AsyncStorage.getItem('@Totalpoints')      
 
-        if(totalPoints != null){      
-          try {
-            let newTotalPoints = JSON.parse(totalPoints) + pointsFromLastExercise
-            await AsyncStorage.setItem('@Totalpoints', JSON.stringify(newTotalPoints))            
-          } catch (e) {}
-        } else {
-          try {
-            await AsyncStorage.setItem('@Totalpoints', JSON.stringify(pointsFromLastExercise))
-          } catch(e) {} 
-        }
+      if(totalPoints != null){      
+        try {
+          let newTotalPoints = JSON.parse(totalPoints) + pointsFromLastExercise
+          await AsyncStorage.setItem('@Totalpoints', JSON.stringify(newTotalPoints))            
+        } catch (e) {}
+      } else {
+        try {
+          await AsyncStorage.setItem('@Totalpoints', JSON.stringify(pointsFromLastExercise))
+        } catch(e) {} 
+      }
 
-        if(previousExerciseData !== null) {
-            let modifiablePreviousExerciseData = JSON.parse(previousExerciseData)
-            if(modifiablePreviousExerciseData.includes(exercise.uniqueID)){
-                // do nothing
-            } else {
-              modifiablePreviousExerciseData.push(exercise.uniqueID)
-              try {
-                  await AsyncStorage.setItem('@completed_exercises', JSON.stringify(modifiablePreviousExerciseData))
-              } catch(e) {
-                  ToastAndroid.show(e, ToastAndroid.SHORT)
-              }                    
-            }                
+      if(lastFiveExercises != null){      
+        try {
+          let newLastFiveExercises = JSON.parse(lastFiveExercises)
+          if(newLastFiveExercises.length == 5){
+            newLastFiveExercises.shift()
+            newLastFiveExercises.push({nimi: exercise.definition.name, pisteet: pointsFromLastExercise})
+          } else {
+            newLastFiveExercises.push({nimi: exercise.definition.name, pisteet: pointsFromLastExercise})
+          }
+          await AsyncStorage.setItem('@Firstfivepoints', JSON.stringify(newLastFiveExercises))            
+        } catch (e) {}
+      } else {
+        try {
+          await AsyncStorage.setItem('@Firstfivepoints', JSON.stringify([{nimi: exercise.definition.name, pisteet: pointsFromLastExercise}]))
+        } catch(e) {} 
+      }
+
+      if(previousExerciseData !== null) {
+        let modifiablePreviousExerciseData = JSON.parse(previousExerciseData)
+        if(modifiablePreviousExerciseData.includes(exercise.uniqueID)){
+            // do nothing
         } else {
-            try {
-                await AsyncStorage.setItem('@completed_exercises', JSON.stringify([exercise.uniqueID]))
-            } catch(e) {
-                ToastAndroid.show(e, ToastAndroid.SHORT)
-            }                
-        }            
-    } catch(e) {
-        ToastAndroid.show(e, ToastAndroid.SHORT)
-    }
+          modifiablePreviousExerciseData.push(exercise.uniqueID)
+          try {
+              await AsyncStorage.setItem('@completed_exercises', JSON.stringify(modifiablePreviousExerciseData))
+          } catch(e) {}                    
+        }                
+    } else {
+        try {
+            await AsyncStorage.setItem('@completed_exercises', JSON.stringify([exercise.uniqueID]))
+        } catch(e) {
+            ToastAndroid.show(e, ToastAndroid.SHORT)
+        }                
+      }            
+    } catch(e) {}
   }
 
   return (

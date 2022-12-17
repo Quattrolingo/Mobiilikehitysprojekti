@@ -14,6 +14,8 @@ export default function ExerciseScrollView(props) {
   })
   const [appColor, setThemeColor] = useState(props.appSettings.themeColorOptions)
 
+  //console.log((props.languageData.sections.map((itm) => itm.data.map((item) => item.uniqueID))).flat())
+
   const getCompletedExercises = async () => {
     const exercises = await AsyncStorage.getItem('@completed_exercises')
     if(exercises !== null){
@@ -78,6 +80,9 @@ export default function ExerciseScrollView(props) {
   }
 
   const onPressExercise = (item) => { // execute when a subtopic exercise item is clicked (for example: "numbers" inside main topic "basics")
+    
+    //console.log(props.languageData.courseData.sectionStructure.findIndexOf(Object.keys()))
+    //console.log(Object.keys(props.languageData.courseData.sectionStructure).includes(item.uniqueID))
     if(item.exercises.length && item.exercises.length > 1){ // if item has more than one exercise, then show the sub-exercises
       if(x.parentName == item.name){
         // if the sub exercises of the clicked item are already visible, then hide the sub-exercises
@@ -99,26 +104,64 @@ export default function ExerciseScrollView(props) {
     }    
   }
 
-  const renderSubtopic = ({ item, index }) => {
+  const validateExerciseAvailability = (item) => {
+    if(item.uniqueID != props.languageData.courseData.sectionStructure[0].tierUniqueID && props.accountType != "student"){
+      let amount = 0
+      let index = props.languageData.courseData.sectionStructure.findIndex(itm => itm.tierUniqueID == item.uniqueID)
+      for(let i = 0; i < props.languageData.courseData.sectionStructure[index - 1].exercises.length; i++){
+        if(completedExercises.includes(props.languageData.courseData.sectionStructure[index - 1].exercises[i])){
+          amount = amount + 1
+        }        
+      }
+      if(amount == props.languageData.courseData.sectionStructure[index - 1].exercises.length){
+        onPressExercise(item)
+      } else {
+        // Do nothing
+      }
+    } else {
+      onPressExercise(item)
+    }
+  }
+
+  const getExerciseAvailabilityStyle = (item) => {
+    if(item.uniqueID != props.languageData.courseData.sectionStructure[0].tierUniqueID  && props.accountType != "student"){
+      let amount = 0
+      let index = props.languageData.courseData.sectionStructure.findIndex(itm => itm.tierUniqueID == item.uniqueID)
+      for(let i = 0; i < props.languageData.courseData.sectionStructure[index - 1].exercises.length; i++){
+        if(completedExercises.includes(props.languageData.courseData.sectionStructure[index - 1].exercises[i])){
+          amount = amount + 1
+        }        
+      }
+      if(amount == props.languageData.courseData.sectionStructure[index - 1].exercises.length){
+        return true
+      } else {
+        return false
+      }
+    } else {
+      return true
+    }
+  }
+
+  const renderSubtopic = ({ item }) => {
     const { data } = item
     return (
-      <View style={{backgroundColor: (appColor.background == '#121212') ? Colors.DarkThemeSecondary : Colors.White}}>
+      <View style={{backgroundColor: (appColor.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}}>
         <View style={[{backgroundColor: appColor.background}, ESWStyles.topicHeader]}>
-          <Text style={[{color: (appColor.background == '#121212') ? Colors.White : Colors.Brown}, ESWStyles.topicHeaderTitle]}>{item.id}</Text>
-          <Text style={[{color: (appColor.background == '#121212') ? Colors.White : Colors.Brown}, ESWStyles.topicHeaderDescription]}>{item.description}</Text>
+          <Text style={[{color: (appColor.background == Colors.DarkTheme) ? Colors.White : Colors.Brown}, ESWStyles.topicHeaderTitle]}>{item.id}</Text>
+          <Text style={[{color: (appColor.background == Colors.DarkTheme) ? Colors.White : Colors.Brown}, ESWStyles.topicHeaderDescription]}>{item.description}</Text>
         </View>      
         {data.map((tier) => {
           const url = "https://raw.githubusercontent.com/Quattrolingo/Mobiilikehitysprojekti/main/data/images/" + tier.picture
           return (
             <View key={tier.tier} style={ESWStyles.subtopicsContainer}>
-              <TouchableOpacity onPress={() => onPressExercise(tier)} style={ESWStyles.subtopicItem} activeOpacity={0.5}>
+              <TouchableOpacity onPress={() => validateExerciseAvailability(tier)} style={ESWStyles.subtopicItem} activeOpacity={0.5}>
                 <View style={ESWStyles.circularProgressBar}>
                   <CircularProgressBar                   
                     value={getCircularProgressBarStatus(tier.exercises)}
                     maxValue={tier.exercises.length}
                     initialValue={0}
                     radius={56}
-                    activeStrokeColor={(appColor.background == '#121212') ? Colors.RicherMint : Colors.CircularProgressGreen}
+                    activeStrokeColor={(appColor.background == Colors.DarkTheme) ? Colors.RicherMint : Colors.CircularProgressGreen}
                     inActiveStrokeColor={"transparent"}
                     activeStrokeWidth={20}
                     rotation={180}
@@ -128,17 +171,38 @@ export default function ExerciseScrollView(props) {
                 </View>
                 <View style={[{backgroundColor: "transparent",
                                borderWidth: 4,
-                               borderColor: (appColor.background == '#121212') ? Colors.DarkTheme : appColor.background}, 
+                               borderColor: getExerciseAvailabilityStyle(tier) == false  &&  appColor.background == Colors.DarkTheme ? Colors.Grey
+                                                                                  : getExerciseAvailabilityStyle(tier) == false ? Colors.LightGrey
+                                                                                  : appColor.background == Colors.DarkTheme ? Colors.DarkTheme
+                                                                                  : appColor.background}, 
                                ESWStyles.subtopicItemImageContainer]}>
-                  <View style={[{borderColor: (appColor.background == '#121212') ? Colors.DarkTheme : appColor.background}, ESWStyles.subtopicImageInnerContainer]}>
-                    <Image
-                    style={ESWStyles.subtopicItemImage}
-                    source={{ uri: url }}
-                    resizeMode="cover" />
+                  <View style={[{borderColor: getExerciseAvailabilityStyle(tier) == false ? "transparent"
+                                                                                          : appColor.background == Colors.DarkTheme ? Colors.DarkTheme
+                                                                                          : appColor.background},
+                                ESWStyles.subtopicImageInnerContainer]}>
+                    {
+                      getExerciseAvailabilityStyle(tier) == false && appColor.background == Colors.DarkTheme ?
+                      <Image
+                        style={ESWStyles.lockedSubtopicItemImage}
+                        source={require('../../data/images/lock_grey_background.png')}
+                        resizeMode="cover" />
+                      : getExerciseAvailabilityStyle(tier) == false ?
+                      <Image
+                        style={ESWStyles.lockedSubtopicItemImage}
+                        source={require('../../data/images/lock_lightgrey_background.png')}
+                        resizeMode="cover" />
+                      :
+                      <Image
+                        style={ESWStyles.subtopicItemImage}
+                        source={{ uri: url }}
+                        resizeMode="cover" />
+                    }
                   </View>
                 </View>
-                <Text style={[{color: (appColor.background == '#121212') ? Colors.White : Colors.Black},
-                              {backgroundColor: appColor.background},
+                <Text style={[{color: (appColor.background == Colors.DarkTheme) ? Colors.White : Colors.Black},
+                              {backgroundColor: getExerciseAvailabilityStyle(tier) == false  &&  appColor.background == Colors.DarkTheme ? Colors.Grey
+                                                                                            : getExerciseAvailabilityStyle(tier) == false ? Colors.LightGrey
+                                                                                            : appColor.background},
                               ESWStyles.subtopicItemTitle]}>
                   {tier.name}
                 </Text>                
@@ -151,7 +215,7 @@ export default function ExerciseScrollView(props) {
                         <TouchableOpacity
                           activeOpacity={0.5}
                           key={itm.id}
-                          style={[{backgroundColor: (appColor.background == '#121212') ? Colors.DarkGrey : Colors.White}, {borderColor: appColor.background}, ESWStyles.singleExerciseBtn]}
+                          style={[{backgroundColor: (appColor.background == Colors.DarkTheme) ? Colors.DarkGrey : Colors.White}, {borderColor: appColor.background}, ESWStyles.singleExerciseBtn]}
                           onPress={() => props.setExercise(itm)} >
                           { getSingleExerciseNumber({itemID:itm.id, itemUniqID:itm.uniqueID}) }
                         </TouchableOpacity>
@@ -228,7 +292,7 @@ const ESWStyles = StyleSheet.create({
   },
   subtopicItem: {
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   circularProgressBar: {
     position: 'absolute',
@@ -251,6 +315,10 @@ const ESWStyles = StyleSheet.create({
   subtopicItemImage: {
     height: 80,
     width: 80,
+  },
+  lockedSubtopicItemImage: {
+    height: 86,
+    width: 86,
   },
   subtopicItemTitle: {
     marginTop: -15,
