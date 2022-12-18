@@ -42,6 +42,7 @@ export default StyleSheet.create({
       marginTop: 15,
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundColor: 'red,'
     },
     mainContainer: {
       flex: 1,
@@ -74,18 +75,24 @@ export default StyleSheet.create({
       paddingBottom: 25,
     },
     modal: {
-      //height: '100%',
-      marginTop: 150,
-      padding: 20,
-      backgroundColor: '#fcc201',
+      height: '80%',
+      display: 'flex',
+      marginTop: 80,
+      padding: 50,
+      //backgroundColor: '#fcc201',
       justifyContent: 'center',
       alignItems: 'center',
-      shadowColor: 'red',
+      shadowColor: 'black',
       shadowOffset: {
         width: 0,
         height: 2,
-      }
+      },
+      shadowOpacity: 0.4,
+      shadowRadius: 4,
+      elevation: 5,
     },
+
+
     close: {
       marginTop: 50,
       fontWeight: 'bold',
@@ -93,7 +100,6 @@ export default StyleSheet.create({
       padding: 10,
       paddingLeft: 20,
       paddingRight: 20,
-
     },
     push: {
       fontSize: 30,
