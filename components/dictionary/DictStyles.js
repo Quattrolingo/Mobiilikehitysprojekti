@@ -1,3 +1,4 @@
+import { Wrap } from "@react-native-material/core";
 import { StyleSheet } from "react-native";
 
 
@@ -40,7 +41,7 @@ export default StyleSheet.create({
 
 
     pushContainer: {
-      marginTop: 20,
+      marginTop: 15,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -48,7 +49,7 @@ export default StyleSheet.create({
       flex: 1,
       justifyContent: 'space-between',
       padding: 20,
-      margin: 5,
+      margin: 15,
     },
     topContainer: {
       flex: 0.3,
@@ -78,9 +79,9 @@ export default StyleSheet.create({
       paddingBottom: 25,
     },
     modal: {
-      marginTop: 100,
+      marginTop: 150,
       padding: 20,
-      backgroundColor: '#fafafa',
+      backgroundColor: '#fcc201',
       justifyContent: 'center',
       alignItems: 'center',
       shadowColor: 'red',
@@ -93,6 +94,11 @@ export default StyleSheet.create({
       marginTop: 50,
       color: '#333',
       fontWeight: 'bold',
+      backgroundColor: 'orange',
+      padding: 10,
+      paddingLeft: 20,
+      paddingRight: 20,
+
     },
     push: {
       fontSize: 30,
@@ -113,6 +119,15 @@ export default StyleSheet.create({
       borderRadius: 10,
       width: 170,
       height: 40,
+      textAlign: 'center',
+
+    },
+    resultTextHeadline: {
+      fontFamily: 'monospace',
+      fontSize: 25,
+      fontWeight: 'bold',
+      padding: 15,
+      marginHorizontal: 10,
       textAlign: 'center',
     },
 
