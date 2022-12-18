@@ -25,13 +25,15 @@ export default function Dictionary() {
     method: 'GET',
     headers: {
       'X-RapidAPI-Key': API_KEY,
-      'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+      'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     }
   };
 
 
   //random word function
-  
+
   function close() {
 
     setModalVisible(false);
@@ -69,7 +71,7 @@ export default function Dictionary() {
   }
 
 
- 
+
   /*
     useEffect(() => {
       const url = 'https://wordsapiv1.p.rapidapi.com/words/?random=true';
@@ -128,10 +130,13 @@ export default function Dictionary() {
           setSearchWordA(result.pronunciation.all);
           setSearchWordN(result.pronunciation.noun);
           setSearchWordV(result.pronunciation.verb);
+
         },
 
       )
   }, [modalVisible2])
+
+
 
 
   //examples function
@@ -150,10 +155,17 @@ export default function Dictionary() {
       .then(res => res.json())
       .then(
         (result) => {
-          setExample(result.examples[0]);
-          setExample2(result.examples[1]);
-          setExample3(result.examples[2]);
+          if (result.examples && result.examples.length > 0) {
+            setExample(result.examples[0]);
+            setExample2(result.examples[1]);
+            setExample3(result.examples[2]);
+          } else {
+            setExample("Sanalle ei löydy esimerkkilauseita")
+            setExample2("Sanalle ei löydy esimerkkilauseita")
+            setExample3("Sanalle ei löydy esimerkkilauseita")
+          }
         
+
         },
 
       )
@@ -182,10 +194,11 @@ export default function Dictionary() {
                 onRequestClose={close}
               >
                 <View style={StyleSheet.modal}>
-                  <Text>Satunnainen sana</Text>
-                  <Text>{word}</Text>
-                  <Text>Sanan määritelmä</Text>
-                  <Text>{definition}</Text>
+                  <Text style={StyleSheet.resultTextHeadline}>Satunnainen sana</Text>
+                  <Text style={StyleSheet.dictText}>{word}</Text>
+                  <Text></Text>
+                  <Text style={StyleSheet.resultTextHeadline}>Sanan määritelmä</Text>
+                  <Text style={StyleSheet.dictText}>{definition}</Text>
                   <Pressable onPress={close}>
 
                     <Text style={StyleSheet.close}>Sulje</Text>
@@ -202,21 +215,21 @@ export default function Dictionary() {
           <View style={StyleSheet.middleContainer}>
             <Text style={StyleSheet.random}>Ääntäminen</Text>
             <Text style={StyleSheet.dictText}>Opi ääntämään sanoja</Text>
-            <TextInput style={StyleSheet.textInPut} placeholder='Syötä tähän sana' value={searchWord} onChangeText={text => setSearchWord(text)} />
+            <TextInput style={StyleSheet.textInPut} placeholder='Enter a word' value={searchWord} onChangeText={text => setSearchWord(text)} />
             <View style={StyleSheet.pushContainer}>
               <Modal
                 visible={modalVisible2}
                 onRequestClose={close2}
               >
                 <View style={StyleSheet.modal}>
-                  <Text>Haettu sana</Text>
-                  <Text>{searchWord}</Text>
-                  <Text>Ääntäminen / yleinen</Text>
-                  <Text>{searchWordA}</Text>
-                  <Text>Ääntäminen / substantiivi</Text>
-                  <Text>{searchWordN}</Text>
-                  <Text>Ääntäminen / verbi</Text>
-                  <Text>{searchWordV}</Text>
+                  <Text style={StyleSheet.resultTextHeadline}>Haettu sana</Text>
+                  <Text style={StyleSheet.dictText}>{searchWord}</Text>
+                  <Text style={StyleSheet.resultTextHeadline}>Ääntäminen / yleinen</Text>
+                  <Text style={StyleSheet.dictText}>{searchWordA}</Text>
+                  <Text style={StyleSheet.resultTextHeadline}>Ääntäminen / substantiivi</Text>
+                  <Text style={StyleSheet.dictText}>{searchWordN}</Text>
+                  <Text style={StyleSheet.resultTextHeadline}>Ääntäminen / verbi</Text>
+                  <Text style={StyleSheet.dictText}>{searchWordV}</Text>
                   <Pressable onPress={() => {
                     setModalVisible2(false);
                   }}>
@@ -234,22 +247,22 @@ export default function Dictionary() {
           </View>
 
           <View style={StyleSheet.bottomContainer}>
-          <Text style={StyleSheet.random}>Esimerkit</Text>
+            <Text style={StyleSheet.random}>Esimerkit</Text>
             <Text style={StyleSheet.dictText}>Opi esimerkkilauseita</Text>
-            <TextInput style={StyleSheet.textInPut} placeholder='Syötä tähän sana' value={searchWord2} onChangeText={text => setSearchWord2(text)} />
+            <TextInput style={StyleSheet.textInPut} placeholder='Enter a word' value={searchWord2} onChangeText={text => setSearchWord2(text)} />
             <View style={StyleSheet.pushContainer}>
               <Modal
                 visible={modalVisible3}
                 onRequestClose={close3}
               >
                 <View style={StyleSheet.modal}>
-                  <Text>Haettu sana</Text>
-                  <Text>{searchWord2}</Text>
-                  <Text>Esimerkkilauseita</Text>
-                  <Text>{example}</Text>
-                  <Text>{example2}</Text>
-                  <Text>{example3}</Text>
-                 
+                  <Text style={StyleSheet.resultTextHeadline}>Haettu sana</Text>
+                  <Text style={StyleSheet.dictText}>{searchWord2}</Text>
+                  <Text style={StyleSheet.resultTextHeadline}>Esimerkkilauseita</Text>
+                  <Text style={StyleSheet.dictText}>1. {example}</Text>
+                  <Text style={StyleSheet.dictText}>2. {example2}</Text>
+                  <Text style={StyleSheet.dictText}>3. {example3}</Text>
+
                   <Pressable onPress={() => {
                     setModalVisible3(false);
                   }}>
@@ -267,7 +280,7 @@ export default function Dictionary() {
           </View>
 
 
-       
+
         </ScrollView>
       </View>
 
