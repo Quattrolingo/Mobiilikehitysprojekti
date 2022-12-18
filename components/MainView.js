@@ -30,9 +30,19 @@ export default function MainView(props) {
   }, [currentView])
 
   if(currentView == "ExerciseScrollView"){ // this if-else controls what is rendered depending on what view the user enters from the navigation bar
-    data = <ExerciseScrollView languageData={props.languageData} setExercise={props.setExercise} appSettings={props.appSettings} UiTranslations={props.UiTranslations} />
+    data = <ExerciseScrollView
+              languageData={props.languageData}
+              setExercise={props.setExercise}
+              appSettings={props.appSettings}
+              UiTranslations={props.UiTranslations}
+              accountType={props.accountType}
+              setCurrentView={setCurrentView}
+              totalPoints={props.totalPoints}
+              setCourseDataName={props.setCourseDataName} />
   } else if(currentView == "Achievements"){
-    data = <Achievements UiTranslations={props.UiTranslations} />
+    data = <Achievements
+              UiTranslations={props.UiTranslations}
+              appSettings={props.appSettings} />
   } else if(currentView == "Profile"){          
     data = <Profile 
               languageData={props.languageData.courseData}
@@ -40,9 +50,17 @@ export default function MainView(props) {
               modifyAppSettings={props.modifyAppSettings}
               UiTranslations={props.UiTranslations}
               navBarVisibility={setNavBarVisible}
-              setCurrentView={setCurrentView}/>
+              setCurrentView={setCurrentView}
+              accountType={props.accountType}
+              modifyAccountType={props.modifyAccountType}
+              accountEmail={props.accountEmail}
+              modifyAccountEmail={props.modifyAccountEmail}
+              deleteAppData={props.deleteAppData}
+              setCourseDataName={props.setCourseDataName} />
   } else if(currentView == "Dictionary"){
-    data = <Dictionary UiTranslations={props.UiTranslations} />
+    data = <Dictionary
+              UiTranslations={props.UiTranslations}
+              appSettings={props.appSettings} />
   }
 
   return(

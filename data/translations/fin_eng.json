@@ -4,6 +4,7 @@
     "foreignCourseName": "Finnish-English",
     "nativeLanguage": "Finnish",
     "foreignLanguage": "English",
+    "courseFlag": "course_flag_english.png",
     "ui_translations": {
       "exercise": {
           "startingExercise": "Käynnistetään harjoitus",
@@ -29,7 +30,19 @@
   
       },
       "profile": {
-          "heading": "Profiili"
+        "heading": "Profiili",
+        "youNeedAProfile": "Tarvitset profiilin käyttääksesi sovelluksen kaikkia ominaisuuksia",
+        "enterEmailHint": "sähköposti",
+        "enterEmail": "Mikä on sähköpostiosoitteesi?",
+        "createProfile": "Luo profiili",
+        "upgradeProfile": "Tilauksen päivitys",
+        "activationCode": "Syötä aktivointikoodi",
+        "enterCode": "000-000-000-000",
+        "enterActivationCode": "Syötä aktivointikoodi päivittääksesi sovelluksen PRO-versioon",
+        "incorrectCode": "Virheellinen aktivointikoodi",
+        "activationSuccessfulMessage": "Tuote aktivoitu",
+        "profileAdded": "Profiili lisätty",
+        "activationCodeHint": "VIHJE"
       },
       "settings": {
           "heading": "Asetukset",
@@ -37,6 +50,7 @@
           "general": "Yleiset",
           "theme": "Teemaväri",
           "languageCourse": "Kielikurssi",
+          "chooseLanguageCourse": "Valitse Kielikurssi",
           "cancel": "PERUUTA",
           "darkMode": "Tumma tila",
           "deleteAppData": "KIRJAUDU ULOS",
@@ -46,12 +60,53 @@
           "noBtn": "EI",
           "userDataDeleted": "Tietosi poistettiin",
           "account": "Profiili",
-          "createAccount" : "LISÄÄ PROFIILI"
+          "noAccountFound": "Et ole luonut profiilia",
+          "email": "Sähköposti",
+          "createAccount": "LISÄÄ PROFIILI",
+          "editAccount": "PÄIVITÄ PRO-VERSIOON",
+          "accountType": "Tilityyppi",
+          "consumer": "kuluttaja",
+          "student": "opiskelija (pro)"
       },
       "dictionary": {
   
       }
-    }    
+    },
+    "sectionStructure": [
+      {
+        "tierUniqueID": "asjfk9032", "exercises": ["8932489he", "8ertute"]
+      },
+      {
+        "tierUniqueID": "asjfk9789", "exercises": ["34href89he"]
+      },
+      {
+        "tierUniqueID": "osdfok9032", "exercises": ["89eryu9he", "8ryudfg9he"]
+      },
+      {
+        "tierUniqueID": "a8sd9g798", "exercises": ["8dfh49he"]
+      },
+      {
+        "tierUniqueID": "34269hdsg", "exercises": ["89eddfh"]
+      },
+      {
+        "tierUniqueID": "asjfksdgf", "exercises": ["sdug043rh"]
+      },
+      {
+        "tierUniqueID": "908ads097", "exercises": ["8sd8u7g87ue"]
+      },
+      {
+        "tierUniqueID": "9090dsfg", "exercises": ["dsw89usdhg"]
+      },
+      {
+        "tierUniqueID": "nmdjui2", "exercises": ["09d8safu890e"]
+      },
+      {
+        "tierUniqueID": "ksd98iy89", "exercises": ["sd09mwfdsh"]
+      },
+      {
+        "tierUniqueID": "1298d90s", "exercises": ["8dfhdfhe"]
+      }
+    ]
   },
   "sections": [
     {
@@ -107,8 +162,7 @@
                     { "id": "3", "word": "are" },
                     { "id": "4", "word": "you" },
                     { "id": "5", "word": "is" },
-                    { "id": "6", "word": "Where" },
-                    { "id": "7", "word": "were" }
+                    { "id": "6", "word": "were" }
                   ],
                   "answer": ["Hello", "who" ,"are","you"]
                 },
@@ -137,29 +191,16 @@
                 {
                   "type": "translate_sentence_drag",
                   "task": "Käännä lause",
-                  "sentence": "I am Rose.",
-                  "words": [  
-                    { "id": "1", "word": "I" },
-                    { "id": "2", "word": "am" },
-                    { "id": "3", "word": "Rose" }
-                  ],
-                  "answer": ["I", "am", "Rose"]
-                },
-                {
-                  "type": "translate_sentence_drag",
-                  "task": "Käännä lause",
-                  "sentence": "He ovat aina iloisia.",
+                  "sentence": "He ovat iloisia.",
                   "words": [  
                     { "id": "1", "word": "They" },
                     { "id": "2", "word": "are" },
                     { "id": "3", "word": "We" },
-                    { "id": "4", "word": "always" },
-                    { "id": "5", "word": "sometimes" },
-                    { "id": "6", "word": "happy" },
-                    { "id": "7", "word": "sad" },
-                    { "id": "8", "word": "is" }
+                    { "id": "4", "word": "happy" },
+                    { "id": "5", "word": "sad" },
+                    { "id": "6", "word": "is" }
                   ],
-                  "answer": ["They", "are", "always", "happy"]
+                  "answer": ["They", "are", "happy"]
                 },
                 {
                   "type": "how_to_say",
@@ -287,8 +328,8 @@
           "tier": 1,
           "uniqueID": "osdfok9032",
           "name": "Villieläimet",
-          "levels": 1,
-          "lessons": 1,
+          "levels": 2,
+          "lessons": 2,
           "picture": "subtopic_icon_wild_animals.png",
           "exercises": [
             {
@@ -423,7 +464,7 @@
           "exercises": [
             {
               "id": "1",
-              "uniqueID": "89eryu9he",
+              "uniqueID": "8dfh49he",
               "definition": {
                 "name": "Kotieläimet",
                 "picture": "subtopic_icon_domestic_animals.png"
@@ -514,7 +555,7 @@
           "exercises": [
             {
               "id": "1",
-              "uniqueID": "89eryu9he",
+              "uniqueID": "89eddfh",
               "definition": {
                 "name": "Ruoka-ainekset",
                 "picture": "subtopic_icon_food.png"

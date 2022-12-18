@@ -2,9 +2,10 @@ import { Button, Text, Pressable, View, Modal, TextInput, ScrollView } from 'rea
 import StyleSheet from './DictStyles';
 import { API_KEY } from '@env';
 import { useEffect, useState } from 'react';
+import Colors from '../../assets/Colors';
 
 
-export default function Dictionary() {
+export default function Dictionary(props) {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
@@ -19,8 +20,10 @@ export default function Dictionary() {
   const [example, setExample] = useState('');
   const [example2, setExample2] = useState('');
   const [example3, setExample3] = useState('');
-
-
+  const [appColor, setBackgroundColor] = useState(props.appSettings.themeColorOptions.background);
+  const [textColor, setTextColor] = useState(appColor == Colors.DarkTheme ? Colors.White : Colors.Black);
+  const [headlineColor, setHeadlineColor] = useState(appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : appColor == Colors.DarkYellow ? "orange" : appColor == Colors.LightPink ? "#fab691" : "#14acc9");
+  
   const options = {
     method: 'GET',
     headers: {
@@ -67,7 +70,7 @@ export default function Dictionary() {
         }, (error) => {
           console.log(error)
           setModalVisible(true);
-        })
+        }).catch(err=>err)
   }
 
 
@@ -133,7 +136,7 @@ export default function Dictionary() {
 
         },
 
-      )
+      ).catch(err=>err)
   }, [modalVisible2])
 
 
@@ -168,7 +171,7 @@ export default function Dictionary() {
 
         },
 
-      )
+      ).catch(err=>err)
   }, [modalVisible3])
 
 
@@ -179,61 +182,61 @@ export default function Dictionary() {
 
 
   return (
-    <View style={StyleSheet.dictContainer}>
+    <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkTheme : appColor}, StyleSheet.dictContainer]}>
 
-      <Text style={StyleSheet.headline}>Opi lisää sanastoa</Text>
+      <Text style={[{color: textColor, appColor: headlineColor}, StyleSheet.headline]}>Opi lisää sanastoa</Text>
 
       <View style={StyleSheet.mainContainer}>
         <ScrollView>
-          <View style={StyleSheet.topContainer}>
-            <Text style={StyleSheet.random}>Satunnainen sana</Text>
-            <Text style={StyleSheet.dictText}>Opi lisää sanoja ja niiden merkityksiä</Text>
+          <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : 'beige'}, StyleSheet.topContainer]}>
+            <Text style={[{color: textColor}, StyleSheet.random]}>Satunnainen sana</Text>
+            <Text style={[{color: textColor}, StyleSheet.dictText]}>Opi lisää sanoja ja niiden merkityksiä</Text>
             <View style={StyleSheet.pushContainer}>
               <Modal
                 visible={modalVisible}
                 onRequestClose={close}
               >
-                <View style={StyleSheet.modal}>
-                  <Text style={StyleSheet.resultTextHeadline}>Satunnainen sana</Text>
-                  <Text style={StyleSheet.dictText}>{word}</Text>
+                <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : '#fafafa'}, StyleSheet.modal]}>
+                  <Text style={[StyleSheet.resultTextHeadline, {color: textColor}]}>Satunnainen sana</Text>
+                  <Text style={[StyleSheet.dictText, {color: textColor}]}>{word}</Text>
                   <Text></Text>
-                  <Text style={StyleSheet.resultTextHeadline}>Sanan määritelmä</Text>
-                  <Text style={StyleSheet.dictText}>{definition}</Text>
+                  <Text style={[StyleSheet.resultTextHeadline, {color: textColor}]}>Sanan määritelmä</Text>
+                  <Text style={[StyleSheet.dictText, {color: textColor}]}>{definition}</Text>
                   <Pressable onPress={close}>
 
-                    <Text style={StyleSheet.close}>Sulje</Text>
+                    <Text style={[{color: textColor}, StyleSheet.close]}>Sulje</Text>
                   </Pressable>
                 </View>
               </Modal>
 
               <Pressable onPress={open}>
-                <Text style={StyleSheet.push}>PAINA TÄSTÄ</Text>
+                <Text style={[{color: textColor}, StyleSheet.push]}>PAINA TÄSTÄ</Text>
               </Pressable>
             </View>
           </View>
 
-          <View style={StyleSheet.middleContainer}>
-            <Text style={StyleSheet.random}>Ääntäminen</Text>
-            <Text style={StyleSheet.dictText}>Opi ääntämään sanoja</Text>
-            <TextInput style={StyleSheet.textInPut} placeholder='Enter a word' value={searchWord} onChangeText={text => setSearchWord(text)} />
+          <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : 'pink'},  StyleSheet.middleContainer]}>
+            <Text style={[{color: textColor}, StyleSheet.random]}>Ääntäminen</Text>
+            <Text style={[{color: textColor}, StyleSheet.dictText]}>Opi ääntämään sanoja</Text>
+            <TextInput style={[{color: textColor, borderColor: textColor}, StyleSheet.textInPut]} placeholder='Enter a word' placeholderTextColor={textColor} value={searchWord} onChangeText={text => setSearchWord(text)} />
             <View style={StyleSheet.pushContainer}>
               <Modal
                 visible={modalVisible2}
                 onRequestClose={close2}
               >
-                <View style={StyleSheet.modal}>
-                  <Text style={StyleSheet.resultTextHeadline}>Haettu sana</Text>
-                  <Text style={StyleSheet.dictText}>{searchWord}</Text>
-                  <Text style={StyleSheet.resultTextHeadline}>Ääntäminen / yleinen</Text>
-                  <Text style={StyleSheet.dictText}>{searchWordA}</Text>
-                  <Text style={StyleSheet.resultTextHeadline}>Ääntäminen / substantiivi</Text>
-                  <Text style={StyleSheet.dictText}>{searchWordN}</Text>
-                  <Text style={StyleSheet.resultTextHeadline}>Ääntäminen / verbi</Text>
-                  <Text style={StyleSheet.dictText}>{searchWordV}</Text>
+                <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : '#fafafa'}, StyleSheet.modal]}>
+                  <Text style={[StyleSheet.resultTextHeadline, {color: textColor}]}>Haettu sana</Text>
+                  <Text style={[StyleSheet.dictText, {color: textColor}]}>{searchWord}</Text>
+                  <Text style={[StyleSheet.resultTextHeadline, {color: textColor}]}>Ääntäminen / yleinen</Text>
+                  <Text style={[StyleSheet.dictText, {color: textColor}]}>{searchWordA}</Text>
+                  <Text style={[StyleSheet.resultTextHeadline, {color: textColor}]}>Ääntäminen / substantiivi</Text>
+                  <Text style={[StyleSheet.dictText, {color: textColor}]}>{searchWordN}</Text>
+                  <Text style={[StyleSheet.resultTextHeadline, {color: textColor}]}>Ääntäminen / verbi</Text>
+                  <Text style={[StyleSheet.dictText, {color: textColor}]}>{searchWordV}</Text>
                   <Pressable onPress={() => {
                     setModalVisible2(false);
                   }}>
-                    <Text style={StyleSheet.close}>Sulje</Text>
+                    <Text style={[{color: textColor}, StyleSheet.close]}>Sulje</Text>
                   </Pressable>
                 </View>
               </Modal>
@@ -241,32 +244,32 @@ export default function Dictionary() {
               <Pressable onPress={() => {
                 setModalVisible2(true);
               }}>
-                <Text style={StyleSheet.push}>PAINA TÄSTÄ</Text>
+                <Text style={[{color: textColor}, StyleSheet.push]}>PAINA TÄSTÄ</Text>
               </Pressable>
             </View>
           </View>
 
-          <View style={StyleSheet.bottomContainer}>
-            <Text style={StyleSheet.random}>Esimerkit</Text>
-            <Text style={StyleSheet.dictText}>Opi esimerkkilauseita</Text>
-            <TextInput style={StyleSheet.textInPut} placeholder='Enter a word' value={searchWord2} onChangeText={text => setSearchWord2(text)} />
+          <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : 'peachpuff'}, StyleSheet.bottomContainer]}>
+            <Text style={[{color: textColor}, StyleSheet.random]}>Esimerkit</Text>
+            <Text style={[{color: textColor}, StyleSheet.dictText]}>Opi esimerkkilauseita</Text>
+            <TextInput style={[{color: textColor, borderColor: textColor}, StyleSheet.textInPut]} placeholder='Enter a word' placeholderTextColor={textColor} value={searchWord2} onChangeText={text => setSearchWord2(text)} />
             <View style={StyleSheet.pushContainer}>
               <Modal
                 visible={modalVisible3}
                 onRequestClose={close3}
               >
-                <View style={StyleSheet.modal}>
-                  <Text style={StyleSheet.resultTextHeadline}>Haettu sana</Text>
-                  <Text style={StyleSheet.dictText}>{searchWord2}</Text>
-                  <Text style={StyleSheet.resultTextHeadline}>Esimerkkilauseita</Text>
-                  <Text style={StyleSheet.dictText}>1. {example}</Text>
-                  <Text style={StyleSheet.dictText}>2. {example2}</Text>
-                  <Text style={StyleSheet.dictText}>3. {example3}</Text>
+                <View style={[{backgroundColor: appColor == Colors.DarkTheme ? Colors.DarkThemeSecondary : '#fafafa'}, StyleSheet.modal]}>
+                  <Text style={[{color: textColor}, StyleSheet.resultTextHeadline]}>Haettu sana</Text>
+                  <Text style={[{color: textColor}, StyleSheet.dictText]}>{searchWord2}</Text>
+                  <Text style={[{color: textColor}, StyleSheet.resultTextHeadline]}>Esimerkkilauseita</Text>
+                  <Text style={[{color: textColor}, StyleSheet.dictText]}>1. {example}</Text>
+                  <Text style={[{color: textColor}, StyleSheet.dictText]}>2. {example2}</Text>
+                  <Text style={[{color: textColor}, StyleSheet.dictText]}>3. {example3}</Text>
 
                   <Pressable onPress={() => {
                     setModalVisible3(false);
                   }}>
-                    <Text style={StyleSheet.close}>Sulje</Text>
+                    <Text style={[{color: textColor}, StyleSheet.close]}>Sulje</Text>
                   </Pressable>
                 </View>
               </Modal>
@@ -274,7 +277,7 @@ export default function Dictionary() {
               <Pressable onPress={() => {
                 setModalVisible3(true);
               }}>
-                <Text style={StyleSheet.push}>PAINA TÄSTÄ</Text>
+                <Text style={[{color: textColor}, StyleSheet.push]}>PAINA TÄSTÄ</Text>
               </Pressable>
             </View>
           </View>

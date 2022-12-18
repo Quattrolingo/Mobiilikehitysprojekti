@@ -5,8 +5,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
     dictContainer: {
       flex: 1,
-      width: "100%",
-      backgroundColor: '#fcc201',   
+      width: "100%",  
       alignItems: 'center',
     },
     headline: {
@@ -14,7 +13,6 @@ export default StyleSheet.create({
       fontSize: 35,
       fontWeight: 'bold',
       fontFamily: 'monospace',
-      backgroundColor: "orange",
     },
     dictText: {
       fontFamily: 'monospace',
@@ -53,7 +51,6 @@ export default StyleSheet.create({
     },
     topContainer: {
       flex: 0.3,
-      backgroundColor: 'beige',
       borderWidth: 2,
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
@@ -63,7 +60,6 @@ export default StyleSheet.create({
     },
     middleContainer: {
       flex: 0.3,
-      backgroundColor: "pink",
       borderWidth: 2,
       alignItems: 'center',
       paddingBottom: 25,
@@ -71,7 +67,6 @@ export default StyleSheet.create({
     },
     bottomContainer: {
       flex: 0.3,
-      backgroundColor: "peachpuff",
       borderWidth: 2,
       borderBottomLeftRadius: 20,
       borderBottomRightRadius: 20,
@@ -79,6 +74,7 @@ export default StyleSheet.create({
       paddingBottom: 25,
     },
     modal: {
+      //height: '100%',
       marginTop: 150,
       padding: 20,
       backgroundColor: '#fcc201',
@@ -92,7 +88,6 @@ export default StyleSheet.create({
     },
     close: {
       marginTop: 50,
-      color: '#333',
       fontWeight: 'bold',
       backgroundColor: 'orange',
       padding: 10,
@@ -114,7 +109,6 @@ export default StyleSheet.create({
       padding: 5,
     },
     textInPut: {
-      borderColor: 'black',
       borderWidth: 1,
       borderRadius: 10,
       width: 170,

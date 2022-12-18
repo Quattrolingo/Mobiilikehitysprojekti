@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, StatusBar } from 'react-native'
 import { useEffect, useState } from 'react'
 import { Provider } from '@react-native-material/core'
 import Settings from './../Settings/Settings'
 import CreateProfile from './CreateProfile'
+import UpgradeProfile from './UpgradeProfile'
 import Colors from '../../assets/Colors'
 
 export default function Profile(props) {
@@ -19,6 +20,7 @@ export default function Profile(props) {
   
   return (
     <Provider>
+      <StatusBar backgroundColor={props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.DarkTheme : Colors.White}/>
       <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, ProfileStyles.container]}>
         {
           currentProfileView == "settings" ? 
@@ -30,10 +32,15 @@ export default function Profile(props) {
             navBarVisibility={props.navBarVisibility}
             setCurrentProfileView={setCurrentProfileView}
             currentProfileView={currentProfileView}
-            setCurrentView={props.setCurrentView} />
+            setCurrentView={props.setCurrentView}
+            accountType={props.accountType}
+            accountEmail={props.accountEmail}
+            deleteAppData={props.deleteAppData}
+            setCourseDataName={props.setCourseDataName}/>
+
           : currentProfileView == "profile" ?
           <View style={{paddingTop: 55}}>
-            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkTheme : Colors.White}, ProfileStyles.header]}>
+            <View style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkThemeSecondary : Colors.White}, ProfileStyles.header]}>
               <Text style={[{color: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.White : Colors.DarkerGrey}, ProfileStyles.headerText]}>
                 {props.UiTranslations.profile.heading}
               </Text>
@@ -41,12 +48,48 @@ export default function Profile(props) {
                 <Image style={ProfileStyles.settingsIcon} source={require('./../../data/images/settings_icon.png')} />
               </TouchableOpacity>
             </View>
-            <Text>This is PROFILE</Text>
+            <View style={ProfileStyles.profileContainer}>
+              {
+                props.accountEmail.length < 1 ?
+                <View style={{width: '90%'}}>
+                  <Text style={[{color: props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.White : Colors.Black}, ProfileStyles.youNeedAProfile]}>{props.UiTranslations.profile.youNeedAProfile}</Text>
+                  <TouchableOpacity  activeOpacity={0.5}
+                                     onPress={() => setCurrentProfileView("createProfile")}
+                                     style={[{backgroundColor: (props.appSettings.themeColorOptions.background == Colors.DarkTheme) ? Colors.DarkGrey : props.appSettings.themeColorOptions.background},
+                                            ProfileStyles.largeBtn]}>
+                    <Text style={ProfileStyles.largeBtnText}>{props.UiTranslations.settings.createAccount}</Text>
+                  </TouchableOpacity>
+                </View>                  
+                :
+                  <View style={{position: "absolute", top: 20}}>
+                    <Text style={[{color: props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.LightGrey : props.appSettings.themeColorOptions.background}, ProfileStyles.defaultPageText]}>
+                      <Text style={{color: props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.White : Colors.DarkerGrey}}>{props.UiTranslations.settings.accountType}: </Text>
+                      {props.accountEmail}
+                    </Text>
+                    <Text style={[{color: props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.LightGrey : props.appSettings.themeColorOptions.background}, ProfileStyles.defaultPageText]}>
+                      <Text style={{color: props.appSettings.themeColorOptions.background == Colors.DarkTheme ? Colors.White : Colors.DarkerGrey}}>{props.UiTranslations.settings.accountType}: </Text>
+                      {props.accountType == "consumer" ? props.UiTranslations.settings.consumer : props.UiTranslations.settings.student}
+                    </Text>
+                  </View>
+              }
+            </View>            
           </View> 
-          : 
-          <View style={{paddingTop: 55}}>
-            <Text>This is CREATE PROFILE</Text>
-          </View> 
+
+          : currentProfileView == "createProfile" ?
+          <CreateProfile
+            appSettings={props.appSettings}
+            UiTranslations={props.UiTranslations}
+            setCurrentProfileView={setCurrentProfileView}  
+            modifyAccountEmail={props.modifyAccountEmail} />
+
+          :
+          
+          <UpgradeProfile
+            appSettings={props.appSettings}
+            UiTranslations={props.UiTranslations}
+            setCurrentProfileView={setCurrentProfileView}
+            accountType={props.accountType}          
+            modifyAccountType={props.modifyAccountType} />
         }        
       </View>
     </Provider>
@@ -75,6 +118,10 @@ const ProfileStyles = StyleSheet.create({
   settingsIconContainer: {
     position: 'absolute',
     right: 20,
+  },
+  defaultPageText: {
+    fontSize: 20,
+    fontWeight: 'bold'
   },
   settingsIcon: {      
     height: 32,
@@ -138,5 +185,29 @@ const ProfileStyles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap'
+  },
+  profileContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%'
+  },
+  youNeedAProfile: {
+    textAlign: 'center',
+    fontSize: 17,
+  },
+  largeBtn: {
+    marginTop: 40,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,      
+    borderRadius: 15,
+    width: '100%'
+  },
+  largeBtnText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: Colors.White
   }
 })
