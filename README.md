@@ -1,7 +1,7 @@
 ## Mobiilikehitysprojekti
 
 **Language learning app created using expo-create-app**  
-Language courses available at the moment: Finnish-English
+Language courses available at the moment: Finnish-English, Finnish-Swedish
 
 <br>
 
