@@ -55,6 +55,8 @@ export default function App() {
       const data = await AsyncStorage.getItem('@Totalpoints')
       if (data != null){
         setTotalPoints(JSON.parse(data)) 
+      } else {
+        setTotalPoints(0)
       }
     } catch (e) {}
   }
@@ -96,6 +98,8 @@ export default function App() {
       setAccountType("consumer")
       setAccountEmail("")
       setCourseDataName("english")
+      setTotalPoints(0)
+      setPointsFromLastExercise(0)
     } catch (e) {
     }
     setLoaded(true)
