@@ -28,6 +28,3 @@ Icons used in this app are made by various artists from flaticon.com including:
 **monkik** https://www.flaticon.com/authors/monkik  
 **photo3idea_studio** https://www.flaticon.com/authors/photo3idea-studio  
 **surang** https://www.flaticon.com/authors/surang  
-
-
-
